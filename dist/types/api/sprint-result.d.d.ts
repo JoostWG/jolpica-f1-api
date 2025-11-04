@@ -1,4 +1,4 @@
-import { FastestLapApiData, FinishingTimeApiData, SuccessResponse } from './common.d.js';
+import { SuccessResponse, FinishingTimeApiData, FastestLapApiData } from './common.d.js';
 import { ConstructorApiData } from './constructor.d.js';
 import { DriverApiData } from './driver.d.js';
 import { RaceApiData } from './race.d.js';

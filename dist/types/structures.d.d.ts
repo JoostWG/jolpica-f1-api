@@ -160,25 +160,4 @@ interface TeamStanding {
     team: Team;
 }
 
-export type {
-    AverageSpeed,
-    Circuit,
-    Driver,
-    DriverStanding,
-    FastestLap,
-    FastestLapTime,
-    FinishingTime,
-    Lap,
-    Location,
-    PitStop,
-    QualifyingResult,
-    Race,
-    Result,
-    Season,
-    SessionDateTime,
-    SprintResult,
-    Status,
-    Team,
-    TeamStanding,
-    Timing,
-};
+export type { AverageSpeed, Circuit, Driver, DriverStanding, FastestLap, FastestLapTime, FinishingTime, Lap, Location, PitStop, QualifyingResult, Race, Result, Season, SessionDateTime, SprintResult, Status, Team, TeamStanding, Timing };

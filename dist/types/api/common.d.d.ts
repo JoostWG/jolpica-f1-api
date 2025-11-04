@@ -47,13 +47,4 @@ interface BadRequestResponse {
     detail: string;
 }
 
-export type {
-    AverageSpeedApiData,
-    BadRequestResponse,
-    FastestLapApiData,
-    FastestLapTimeApiData,
-    FinishingTimeApiData,
-    MRData,
-    Pagination,
-    SuccessResponse,
-};
+export type { AverageSpeedApiData, BadRequestResponse, FastestLapApiData, FastestLapTimeApiData, FinishingTimeApiData, MRData, Pagination, SuccessResponse };

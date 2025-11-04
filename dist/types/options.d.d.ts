@@ -38,15 +38,4 @@ interface FinishPositionOption {
     finishPosition?: number;
 }
 
-export type {
-    CircuitOption,
-    DriverOption,
-    FastestRankOption,
-    FinishPositionOption,
-    GridPositionOption,
-    LapOption,
-    PitStopOption,
-    RoundOption,
-    SeasonOption,
-    TeamOption,
-};
+export type { CircuitOption, DriverOption, FastestRankOption, FinishPositionOption, GridPositionOption, LapOption, PitStopOption, RoundOption, SeasonOption, TeamOption };
