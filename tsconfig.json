@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "rootDir": "./src",
+        "target": "ES2020",
+        "module": "ESNext",
+        "declaration": true,
+        "outDir": "./dist",
+        "verbatimModuleSyntax": true,
+        "moduleResolution": "Node",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": false
+    },
+    "include": ["src"]
+}
