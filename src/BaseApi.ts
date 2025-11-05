@@ -1,36 +1,38 @@
-import axios, { AxiosHeaders, type AxiosInstance, type AxiosResponse } from 'axios';
+import axios, {
+    AxiosHeaders,
+    type AxiosInstance,
+    type AxiosRequestConfig,
+    type AxiosResponse,
+    type CreateAxiosDefaults,
+} from 'axios';
 import { BadRequest, HttpError, NotFound } from './errors';
 import type { ApiCache, BadRequestResponse, Pagination, SuccessResponse } from './types';
 
-/**
- * Minimal API implementation. Please use `Api` instead
- *
- * ```ts
- * const api = new BaseApi();
- *
- * const racesResponse = await api.get<RacesResponse>('/drivers/hamilton/races', { limit: 10 });
- *
- * const races = racesResponse.MRData.RaceTable.Races;
- *
- * for (const race of races) {
- *     console.log(`${race.season} ${race.raceName}`);
- * }
- * ```
- */
+export interface BaseApiConstructorOptions {
+    cache?: ApiCache;
+    config: Omit<CreateAxiosDefaults, 'baseUrl'>;
+}
 
 export class BaseApi {
     private readonly axios: AxiosInstance;
+    private readonly cache?: ApiCache;
 
-    public constructor(private readonly cache?: ApiCache) {
+    public constructor({ cache, config }: BaseApiConstructorOptions) {
         this.axios = axios.create({
             baseURL: 'https://api.jolpi.ca/ergast/f1',
-            headers: new AxiosHeaders().setContentType('application/json'),
+            ...config,
         });
+
+        this.cache = cache;
     }
 
     // Multiple
 
-    public async get<T extends SuccessResponse>(path: string, pagination?: Pagination): Promise<T> {
+    public async get<T extends SuccessResponse>(
+        path: string,
+        pagination?: Pagination,
+        config?: AxiosRequestConfig,
+    ): Promise<T> {
         if (this.cache) {
             const data = await this.cache.get<T>(path, pagination);
 
@@ -40,7 +42,9 @@ export class BaseApi {
         }
 
         const response = await this.axios.get<T | BadRequestResponse>(`${path}.json`, {
+            headers: new AxiosHeaders().setContentType('application/json'),
             params: pagination,
+            ...config,
         });
 
         if (response.status === 404) {

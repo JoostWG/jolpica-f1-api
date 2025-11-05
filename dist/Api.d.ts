@@ -1,5 +1,5 @@
 import { StatusType } from './enums/StatusType.js';
-import { BaseApi } from './BaseApi.js';
+import { BaseApi, BaseApiConstructorOptions } from './BaseApi.js';
 import { CircuitsResponse } from './types/api/circuit.d.js';
 import { Pagination } from './types/api/common.d.js';
 import { ConstructorsResponse } from './types/api/constructor.d.js';
@@ -14,9 +14,10 @@ import { ResultsResponse } from './types/api/result.d.js';
 import { SeasonsResponse } from './types/api/season.d.js';
 import { SprintResultsResponse } from './types/api/sprint-result.d.js';
 import { StatusesResponse } from './types/api/status.d.js';
-import { ApiCache } from './types/ApiCache.d.js';
 import { SeasonOption, RoundOption, CircuitOption, DriverOption, TeamOption, LapOption, PitStopOption, FastestRankOption, GridPositionOption, FinishPositionOption } from './types/options.d.js';
 import { Circuit, DriverStanding, Driver, Lap, PitStop, QualifyingResult, Race, Result, Season, SprintResult, TeamStanding, Team } from './types/structures.d.js';
+import './types/ApiCache.d.js';
+import 'axios';
 
 type SimpleApiOptions = SeasonOption & RoundOption & CircuitOption & DriverOption & TeamOption & LapOption & PitStopOption & FastestRankOption & GridPositionOption & FinishPositionOption & StatusOption;
 interface StatusOption {
@@ -47,7 +48,7 @@ interface Response<T> {
 }
 declare class Api extends BaseApi {
     private readonly data;
-    constructor(cache: ApiCache);
+    constructor(options: BaseApiConstructorOptions);
     getCircuits(options?: SeasonOption & RoundOption & DriverOption & FastestRankOption & GridPositionOption & FinishPositionOption & StatusOption & TeamOption, pagination?: Pagination): Promise<Response<Circuit[]>>;
     getDriverStandings(options: Required<SeasonOption> & RoundOption & DriverOption, pagination?: Pagination): Promise<Response<DriverStanding[]>>;
     getDrivers(options?: SeasonOption & RoundOption & CircuitOption & FastestRankOption & GridPositionOption & FinishPositionOption & StatusOption & TeamOption, pagination?: Pagination): Promise<Response<Driver[]>>;

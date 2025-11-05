@@ -1,5 +1,5 @@
 export { Api, Response, ResponsesMap, SimpleApiOptions, StatusOption } from './Api.js';
-export { BaseApi } from './BaseApi.js';
+export { BaseApi, BaseApiConstructorOptions } from './BaseApi.js';
 export { StatusType } from './enums/StatusType.js';
 export { CircuitApiData, CircuitsResponse, LocationApiData } from './types/api/circuit.d.js';
 export { AverageSpeedApiData, BadRequestResponse, FastestLapApiData, FastestLapTimeApiData, FinishingTimeApiData, MRData, Pagination, SuccessResponse } from './types/api/common.d.js';
@@ -18,3 +18,4 @@ export { StatusApiData, StatusesResponse } from './types/api/status.d.js';
 export { ApiCache } from './types/ApiCache.d.js';
 export { CircuitOption, DriverOption, FastestRankOption, FinishPositionOption, GridPositionOption, LapOption, PitStopOption, RoundOption, SeasonOption, TeamOption } from './types/options.d.js';
 export { AverageSpeed, Circuit, Driver, DriverStanding, FastestLap, FastestLapTime, FinishingTime, Lap, Location, PitStop, QualifyingResult, Race, Result, Season, SessionDateTime, SprintResult, Status, Team, TeamStanding, Timing } from './types/structures.d.js';
+import 'axios';

@@ -1,9 +1,7 @@
-import type { StatusType } from './enums';
-
-import { BaseApi } from './BaseApi';
+import { BaseApi, type BaseApiConstructorOptions } from './BaseApi';
 import { Data } from './Data';
+import type { StatusType } from './enums';
 import type {
-    ApiCache,
     Circuit,
     CircuitOption,
     CircuitsResponse,
@@ -87,8 +85,8 @@ export interface Response<T> {
 export class Api extends BaseApi {
     private readonly data: Data;
 
-    public constructor(cache: ApiCache) {
-        super(cache);
+    public constructor(options: BaseApiConstructorOptions) {
+        super(options);
 
         this.data = new Data();
     }
