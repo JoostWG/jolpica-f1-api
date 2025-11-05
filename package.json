@@ -6,7 +6,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "tsup src/index.ts --watch ./src --dts",
-        "build": "tsup ./src --dts --clean",
+        "build": "tsup ./src --dts --clean --minify --minify-whitespace --minify-identifiers --minify-syntax",
         "lint": "eslint . --fix",
         "format": "dprint fmt",
         "quality": "npm run lint & npm run format"
