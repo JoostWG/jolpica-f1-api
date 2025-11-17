@@ -14,12 +14,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # required so we can push changes
+          fetch-depth: 0
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Run your command
+      - name: Build
         run: npm run build
 
       - name: Configure Git
