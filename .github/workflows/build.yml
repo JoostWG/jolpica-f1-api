@@ -4,7 +4,6 @@ name: Build and Push to Branch
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:
 
 permissions:
   contents: write
