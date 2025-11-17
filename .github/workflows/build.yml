@@ -1,9 +1,7 @@
 # ChatGPT
 name: Build and Push to Branch
 
-on:
-  push:
-    branches: [ main ]
+on: [push]
 
 permissions:
   contents: write
