@@ -4,7 +4,7 @@ import { ApiCache } from './types/ApiCache.d.js';
 
 interface BaseApiConstructorOptions {
     cache?: ApiCache;
-    config: Omit<CreateAxiosDefaults, 'baseUrl'>;
+    config?: Omit<CreateAxiosDefaults, 'baseUrl'>;
 }
 declare class BaseApi {
     private readonly axios;

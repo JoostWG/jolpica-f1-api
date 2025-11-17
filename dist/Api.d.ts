@@ -1,5 +1,5 @@
-import { StatusType } from './enums/StatusType.js';
 import { BaseApi, BaseApiConstructorOptions } from './BaseApi.js';
+import { StatusType } from './enums/StatusType.js';
 import { CircuitsResponse } from './types/api/circuit.d.js';
 import { Pagination } from './types/api/common.d.js';
 import { ConstructorsResponse } from './types/api/constructor.d.js';
