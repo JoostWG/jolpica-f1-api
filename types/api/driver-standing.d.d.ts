@@ -1,0 +1,22 @@
+import { SuccessResponse } from './common.d.js';
+import { ConstructorApiData } from './constructor.d.js';
+import { DriverApiData } from './driver.d.js';
+
+interface DriverStandingApiData {
+    position?: string;
+    positionText: string;
+    points: string;
+    wins: string;
+    Driver: DriverApiData;
+    Constructors: ConstructorApiData[];
+}
+
+type DriverStandingsResponse = SuccessResponse<{
+    StandingsTable: {
+        StandingsLists: {
+            DriverStandings: DriverStandingApiData[];
+        }[];
+    };
+}>;
+
+export type { DriverStandingApiData, DriverStandingsResponse };
