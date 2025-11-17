@@ -10,7 +10,7 @@ import type { ApiCache, BadRequestResponse, Pagination, SuccessResponse } from '
 
 export interface BaseApiConstructorOptions {
     cache?: ApiCache;
-    config: Omit<CreateAxiosDefaults, 'baseUrl'>;
+    config?: Omit<CreateAxiosDefaults, 'baseUrl'>;
 }
 
 export class BaseApi {
