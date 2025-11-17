@@ -16,7 +16,7 @@ jobs:
         run: npm ci
 
       - name: Run your command
-        run: nom run build
+        run: npm run build
 
       - name: Configure Git
         run: |
