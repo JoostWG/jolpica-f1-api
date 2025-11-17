@@ -26,7 +26,7 @@ jobs:
         run: |
           rm -rf ../build-output
           mkdir ../build-output
-          cp -r build/* ../build-output  # adjust build/ if needed
+          cp -r dist/* ../build-output  # adjust build/ if needed
 
       - name: Switch to build branch (create if missing)
         run: |
