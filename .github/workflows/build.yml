@@ -1,11 +1,9 @@
 name: Build
 
-on:
-  push:
-    branches: [ main ]
+on: [push]
 
 jobs:
-  update:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,10 +12,11 @@ jobs:
         with:
           fetch-depth: 0   # required so we can push changes
 
+      - name: Install dependencies
+        run: npm ci
+
       - name: Run your command
-        run: |
-          # Replace this with your own command
-          ./your-script.sh
+        run: nom run build
 
       - name: Configure Git
         run: |
