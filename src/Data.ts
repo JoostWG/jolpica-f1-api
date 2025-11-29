@@ -74,7 +74,9 @@ export class Data {
             rank: Number(data.rank),
             lap: Number(data.lap),
             time: this.createFastestLapTime(data.Time),
-            averageSpeed: this.createAverageSpeed(data.AverageSpeed),
+            averageSpeed: data.AverageSpeed !== undefined
+                ? this.createAverageSpeed(data.AverageSpeed)
+                : null,
         };
     }
 
