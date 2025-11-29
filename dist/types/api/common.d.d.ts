@@ -16,7 +16,7 @@ interface FastestLapApiData {
     rank: string;
     lap: string;
     Time: FastestLapTimeApiData;
-    AverageSpeed: AverageSpeedApiData;
+    AverageSpeed?: AverageSpeedApiData;
 }
 
 interface Pagination {

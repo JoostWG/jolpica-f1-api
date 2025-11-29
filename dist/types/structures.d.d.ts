@@ -16,7 +16,7 @@ interface FastestLap {
     rank: number;
     lap: number;
     time: FastestLapTime;
-    averageSpeed: AverageSpeed;
+    averageSpeed: AverageSpeed | null;
 }
 
 interface FastestLapTime {
