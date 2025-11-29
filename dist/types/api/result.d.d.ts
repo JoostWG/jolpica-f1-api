@@ -14,7 +14,7 @@ interface ResultApiData {
     grid?: string;
     laps?: string;
     status?: string;
-    FastestLap: FastestLapApiData;
+    FastestLap?: FastestLapApiData;
     Time?: FinishingTimeApiData;
 }
 

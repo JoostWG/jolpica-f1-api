@@ -116,7 +116,7 @@ interface Result {
     grid: number | null;
     laps: number | null;
     status: string | null;
-    fastestLap: FastestLap;
+    fastestLap: FastestLap | null;
     finishingTime: FinishingTime | null;
 }
 

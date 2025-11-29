@@ -198,7 +198,9 @@ export class Data {
             grid: data.grid !== undefined ? Number(data.grid) : null,
             laps: data.laps !== undefined ? Number(data.laps) : null,
             status: data.status ?? null,
-            fastestLap: this.createFastestLap(data.FastestLap),
+            fastestLap: data.FastestLap !== undefined
+                ? this.createFastestLap(data.FastestLap)
+                : null,
             finishingTime: data.Time !== undefined ? this.createFinishingTime(data.Time) : null,
         };
     }
