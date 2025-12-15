@@ -50,7 +50,7 @@ export class BaseApi {
         });
 
         if (response.status === 404) {
-            throw new NotFound();
+            throw new NotFound(response);
         }
 
         if (this.responseIsBadRequest(response)) {
