@@ -85,7 +85,7 @@ export interface Response<T> {
 export class Api extends BaseApi {
     private readonly data: Data;
 
-    public constructor(options: BaseApiConstructorOptions) {
+    public constructor(options: BaseApiConstructorOptions = {}) {
         super(options);
 
         this.data = new Data();
