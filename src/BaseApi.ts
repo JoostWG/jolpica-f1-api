@@ -44,7 +44,7 @@ export class BaseApi {
         }
 
         const response = await this.axios.get<T | BadRequestResponse>(`${path}.json`, {
-            headers: new AxiosHeaders().setContentType('application/json'),
+            headers: new AxiosHeaders().setAccept('application/json'),
             params: pagination,
             ...config,
         });
