@@ -58,8 +58,14 @@ export class Data {
         };
     }
 
-    public createDriverStanding(data: DriverStandingApiData): DriverStanding {
+    public createDriverStanding(
+        data: DriverStandingApiData,
+        season: string,
+        round: string,
+    ): DriverStanding {
         return {
+            season,
+            round: Number(round),
             position: data.position !== undefined ? Number(data.position) : null,
             positionText: data.positionText,
             points: Number(data.points),
@@ -106,10 +112,11 @@ export class Data {
         };
     }
 
-    public createLap(data: LapApiData): Lap {
+    public createLap(data: LapApiData, raceData: RaceApiData): Lap {
         return {
             number: Number(data.number),
             timings: data.Timings.map(this.createTiming.bind(this)),
+            race: this.createRace(raceData),
         };
     }
 
@@ -130,17 +137,21 @@ export class Data {
         };
     }
 
-    public createPitStop(data: PitStopApiData): PitStop {
+    public createPitStop(data: PitStopApiData, raceData: RaceApiData): PitStop {
         return {
             driverId: data.driverId,
             lap: data.lap !== undefined ? Number(data.lap) : null,
             stop: data.stop !== undefined ? Number(data.stop) : null,
             time: data.time ?? null,
             duration: data.duration !== undefined ? Number(data.duration) : null,
+            race: this.createRace(raceData),
         };
     }
 
-    public createQualifyingResult(data: QualifyingResultApiData): QualifyingResult {
+    public createQualifyingResult(
+        data: QualifyingResultApiData,
+        raceData: RaceApiData,
+    ): QualifyingResult {
         return {
             number: Number(data.number),
             position: data.position !== undefined ? Number(data.position) : null,
@@ -149,6 +160,7 @@ export class Data {
             q1: data.Q1 ?? null,
             q2: data.Q2 ?? null,
             q3: data.Q3 ?? null,
+            race: this.createRace(raceData),
         };
     }
 
@@ -185,7 +197,7 @@ export class Data {
         };
     }
 
-    public createResult(data: ResultApiData): Result {
+    public createResult(data: ResultApiData, raceData: RaceApiData): Result {
         return {
             number: Number(data.number),
             position: data.position,
@@ -202,6 +214,7 @@ export class Data {
                 ? this.createFastestLap(data.FastestLap)
                 : null,
             finishingTime: data.Time !== undefined ? this.createFinishingTime(data.Time) : null,
+            race: this.createRace(raceData),
         };
     }
 
@@ -219,7 +232,7 @@ export class Data {
         };
     }
 
-    public createSprintResult(data: SprintResultApiData): SprintResult {
+    public createSprintResult(data: SprintResultApiData, raceData: RaceApiData): SprintResult {
         return {
             number: Number(data.number),
             position: data.position,
@@ -236,6 +249,7 @@ export class Data {
             fastestLap: data.FastestLap !== undefined
                 ? this.createFastestLap(data.FastestLap)
                 : null,
+            race: this.createRace(raceData),
         };
     }
 
@@ -247,8 +261,14 @@ export class Data {
         };
     }
 
-    public createTeamStanding(data: ConstructorStandingApiData): TeamStanding {
+    public createTeamStanding(
+        data: ConstructorStandingApiData,
+        season: string,
+        round: string,
+    ): TeamStanding {
         return {
+            season,
+            round: Number(round),
             position: data.position ?? null,
             positionText: data.positionText,
             points: Number(data.points),

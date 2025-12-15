@@ -4,7 +4,7 @@
     "description": "API wrapper for the Jolpica F1 API",
     "main": "./dist/index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "ts-node src/test/index.ts",
         "dev": "tsup src/index.ts --watch ./src --dts",
         "build": "tsup ./src --dts --clean --minify --minify-whitespace --minify-identifiers --minify-syntax",
         "lint": "eslint . --fix",
@@ -23,6 +23,7 @@
         "dprint": "^0.50.2",
         "eslint": "^9.39.1",
         "eslint-plugin-check-file": "^3.3.1",
+        "ts-node": "^10.9.2",
         "tsup": "^8.5.0",
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.46.3"

@@ -1,6 +1,5 @@
 import { BaseApi, type BaseApiConstructorOptions } from './BaseApi';
 import { Data } from './Data';
-import type { StatusType } from './enums';
 import type {
     Circuit,
     CircuitOption,
@@ -34,6 +33,7 @@ import type {
     SeasonsResponse,
     SprintResult,
     SprintResultsResponse,
+    StatusOption,
     StatusesResponse,
     Team,
     TeamOption,
@@ -52,10 +52,6 @@ export type SimpleApiOptions =
     & GridPositionOption
     & FinishPositionOption
     & StatusOption;
-
-export interface StatusOption {
-    status?: StatusType;
-}
 
 export interface ResponsesMap {
     circuits: CircuitsResponse;
@@ -85,7 +81,7 @@ export interface Response<T> {
 export class Api extends BaseApi {
     private readonly data: Data;
 
-    public constructor(options: BaseApiConstructorOptions) {
+    public constructor(options: BaseApiConstructorOptions = {}) {
         super(options);
 
         this.data = new Data();
@@ -117,15 +113,16 @@ export class Api extends BaseApi {
     ): Promise<Response<DriverStanding[]>> {
         return await this.getWithOptions(
             'driverstandings',
-            (data) => {
-                if (data.StandingsTable.StandingsLists.length <= 0) {
-                    return [];
-                }
-
-                return data.StandingsTable.StandingsLists[0].DriverStandings.map(
-                    this.data.createDriverStanding.bind(this.data),
-                );
-            },
+            (data) =>
+                data.StandingsTable.StandingsLists.flatMap((standingsList) =>
+                    standingsList.DriverStandings.map((standingsData) =>
+                        this.data.createDriverStanding(
+                            standingsData,
+                            standingsList.season,
+                            standingsList.round,
+                        )
+                    )
+                ),
             options,
             pagination,
         );
@@ -162,13 +159,10 @@ export class Api extends BaseApi {
     ): Promise<Response<Lap[]>> {
         return await this.getWithOptions(
             'laps',
-            (data) => {
-                if (data.RaceTable.Races.length <= 0) {
-                    return [];
-                }
-
-                return data.RaceTable.Races[0].Laps.map(this.data.createLap.bind(this.data));
-            },
+            (data) =>
+                data.RaceTable.Races.flatMap((raceData) =>
+                    raceData.Laps.map((lapData) => this.data.createLap(lapData, raceData))
+                ),
             options,
             pagination,
         );
@@ -185,15 +179,12 @@ export class Api extends BaseApi {
     ): Promise<Response<PitStop[]>> {
         return await this.getWithOptions(
             'pitstops',
-            (data) => {
-                if (data.RaceTable.Races.length <= 0) {
-                    return [];
-                }
-
-                return data.RaceTable.Races[0].PitStops.map(
-                    this.data.createPitStop.bind(this.data),
-                );
-            },
+            (data) =>
+                data.RaceTable.Races.flatMap((raceData) =>
+                    raceData.PitStops.map((pitStopData) =>
+                        this.data.createPitStop(pitStopData, raceData)
+                    )
+                ),
             options,
             pagination,
         );
@@ -213,15 +204,12 @@ export class Api extends BaseApi {
     ): Promise<Response<QualifyingResult[]>> {
         return await this.getWithOptions(
             'qualifying',
-            (data) => {
-                if (data.RaceTable.Races.length <= 0) {
-                    return [];
-                }
-
-                return data.RaceTable.Races[0].QualifyingResults.map(
-                    this.data.createQualifyingResult.bind(this.data),
-                );
-            },
+            (data) =>
+                data.RaceTable.Races.flatMap((raceData) =>
+                    raceData.QualifyingResults.map((resultData) =>
+                        this.data.createQualifyingResult(resultData, raceData)
+                    )
+                ),
             options,
             pagination,
         );
@@ -261,13 +249,12 @@ export class Api extends BaseApi {
     ): Promise<Response<Result[]>> {
         return await this.getWithOptions(
             'results',
-            (data) => {
-                if (data.RaceTable.Races.length <= 0) {
-                    return [];
-                }
-
-                return data.RaceTable.Races[0].Results.map(this.data.createResult.bind(this.data));
-            },
+            (data) =>
+                data.RaceTable.Races.flatMap((raceData) =>
+                    raceData.Results.map((resultData) =>
+                        this.data.createResult(resultData, raceData)
+                    )
+                ),
             options,
             pagination,
         );
@@ -301,15 +288,12 @@ export class Api extends BaseApi {
     ): Promise<Response<SprintResult[]>> {
         return await this.getWithOptions(
             'sprint',
-            (data) => {
-                if (data.RaceTable.Races.length <= 0) {
-                    return [];
-                }
-
-                return data.RaceTable.Races[0].SprintResults.map(
-                    this.data.createSprintResult.bind(this.data),
-                );
-            },
+            (data) =>
+                data.RaceTable.Races.flatMap((raceData) =>
+                    raceData.SprintResults.map((resultData) =>
+                        this.data.createSprintResult(resultData, raceData)
+                    )
+                ),
             options,
             pagination,
         );
@@ -321,15 +305,16 @@ export class Api extends BaseApi {
     ): Promise<Response<TeamStanding[]>> {
         return await this.getWithOptions(
             'constructorstandings',
-            (data) => {
-                if (data.StandingsTable.StandingsLists.length <= 0) {
-                    return [];
-                }
-
-                return data.StandingsTable.StandingsLists[0].ConstructorStandings.map(
-                    this.data.createTeamStanding.bind(this.data),
-                );
-            },
+            (data) =>
+                data.StandingsTable.StandingsLists.flatMap((standingsList) =>
+                    standingsList.ConstructorStandings.map((standingsData) =>
+                        this.data.createTeamStanding(
+                            standingsData,
+                            standingsList.season,
+                            standingsList.round,
+                        )
+                    )
+                ),
             options,
             pagination,
         );

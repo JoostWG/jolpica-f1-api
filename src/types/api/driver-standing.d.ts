@@ -14,6 +14,8 @@ export interface DriverStandingApiData {
 export type DriverStandingsResponse = SuccessResponse<{
     StandingsTable: {
         StandingsLists: {
+            season: string;
+            round: string;
             DriverStandings: DriverStandingApiData[];
         }[];
     };

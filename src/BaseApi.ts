@@ -20,6 +20,8 @@ export class BaseApi {
     public constructor({ cache, config }: BaseApiConstructorOptions) {
         this.axios = axios.create({
             baseURL: 'https://api.jolpi.ca/ergast/f1',
+            validateStatus: (status) =>
+                (status >= 200 && status <= 299) || (status >= 400 && status <= 499),
             ...config,
         });
 
@@ -42,13 +44,13 @@ export class BaseApi {
         }
 
         const response = await this.axios.get<T | BadRequestResponse>(`${path}.json`, {
-            headers: new AxiosHeaders().setContentType('application/json'),
+            headers: new AxiosHeaders().setAccept('application/json'),
             params: pagination,
             ...config,
         });
 
         if (response.status === 404) {
-            throw new NotFound();
+            throw new NotFound(response);
         }
 
         if (this.responseIsBadRequest(response)) {
