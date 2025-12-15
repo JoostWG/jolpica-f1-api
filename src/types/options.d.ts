@@ -1,3 +1,9 @@
+import type { StatusType } from '../enums';
+
+export interface StatusOption {
+    status?: StatusType;
+}
+
 export interface SeasonOption {
     season?: 'current' | (string & {});
 }

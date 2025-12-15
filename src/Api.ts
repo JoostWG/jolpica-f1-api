@@ -1,6 +1,5 @@
 import { BaseApi, type BaseApiConstructorOptions } from './BaseApi';
 import { Data } from './Data';
-import type { StatusType } from './enums';
 import type {
     Circuit,
     CircuitOption,
@@ -34,6 +33,7 @@ import type {
     SeasonsResponse,
     SprintResult,
     SprintResultsResponse,
+    StatusOption,
     StatusesResponse,
     Team,
     TeamOption,
@@ -52,10 +52,6 @@ export type SimpleApiOptions =
     & GridPositionOption
     & FinishPositionOption
     & StatusOption;
-
-export interface StatusOption {
-    status?: StatusType;
-}
 
 export interface ResponsesMap {
     circuits: CircuitsResponse;
