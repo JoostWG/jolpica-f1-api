@@ -20,6 +20,8 @@ export class BaseApi {
     public constructor({ cache, config }: BaseApiConstructorOptions) {
         this.axios = axios.create({
             baseURL: 'https://api.jolpi.ca/ergast/f1',
+            validateStatus: (status) =>
+                (status >= 200 && status <= 299) || (status >= 400 && status <= 499),
             ...config,
         });
 
