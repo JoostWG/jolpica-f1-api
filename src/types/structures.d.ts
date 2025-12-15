@@ -58,6 +58,8 @@ export interface Driver {
 }
 
 export interface DriverStanding {
+    season: string;
+    round: number;
     position: number | null;
     positionText: string;
     points: number;
@@ -69,6 +71,7 @@ export interface DriverStanding {
 export interface Lap {
     number: number;
     timings: Timing[];
+    race: Race;
 }
 
 export interface PitStop {
@@ -77,6 +80,7 @@ export interface PitStop {
     stop: number | null;
     time: string | null;
     duration: number | null;
+    race: Race;
 }
 
 export interface QualifyingResult {
@@ -87,6 +91,7 @@ export interface QualifyingResult {
     q1: string | null;
     q2: string | null;
     q3: string | null;
+    race: Race;
 }
 
 export interface Race {
@@ -118,6 +123,7 @@ export interface Result {
     status: string | null;
     fastestLap: FastestLap | null;
     finishingTime: FinishingTime | null;
+    race: Race;
 }
 
 export interface Season {
@@ -137,6 +143,7 @@ export interface SprintResult {
     status: string | null;
     finishingTime: FinishingTime | null;
     fastestLap: FastestLap | null;
+    race: Race;
 }
 
 export interface Status {
@@ -153,6 +160,8 @@ export interface Team {
 }
 
 export interface TeamStanding {
+    season: string;
+    round: number;
     position: string | null;
     positionText: string;
     points: number;

@@ -12,6 +12,8 @@ export interface ConstructorStandingApiData {
 export type ConstructorStandingsResponse = SuccessResponse<{
     StandingsTable: {
         StandingsLists: {
+            season: string;
+            round: string;
             ConstructorStandings: ConstructorStandingApiData[];
         }[];
     };
