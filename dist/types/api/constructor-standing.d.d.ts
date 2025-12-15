@@ -12,6 +12,8 @@ interface ConstructorStandingApiData {
 type ConstructorStandingsResponse = SuccessResponse<{
     StandingsTable: {
         StandingsLists: {
+            season: string;
+            round: string;
             ConstructorStandings: ConstructorStandingApiData[];
         }[];
     };

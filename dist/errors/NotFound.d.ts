@@ -1,7 +1,9 @@
+import { AxiosResponse } from 'axios';
 import { HttpError } from './HttpError.js';
 
 declare class NotFound extends HttpError {
-    constructor(message?: string);
+    readonly response: AxiosResponse;
+    constructor(response: AxiosResponse, message?: string);
 }
 
 export { NotFound };

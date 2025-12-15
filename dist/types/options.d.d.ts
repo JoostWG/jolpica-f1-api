@@ -1,3 +1,9 @@
+import { StatusType } from '../enums/StatusType.js';
+
+interface StatusOption {
+    status?: StatusType;
+}
+
 interface SeasonOption {
     season?: 'current' | (string & {});
 }
@@ -38,4 +44,4 @@ interface FinishPositionOption {
     finishPosition?: number;
 }
 
-export type { CircuitOption, DriverOption, FastestRankOption, FinishPositionOption, GridPositionOption, LapOption, PitStopOption, RoundOption, SeasonOption, TeamOption };
+export type { CircuitOption, DriverOption, FastestRankOption, FinishPositionOption, GridPositionOption, LapOption, PitStopOption, RoundOption, SeasonOption, StatusOption, TeamOption };

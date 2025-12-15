@@ -18,23 +18,23 @@ import './enums/StatusType.js';
 declare class Data {
     createAverageSpeed(data: AverageSpeedApiData): AverageSpeed;
     createCircuit(data: CircuitApiData): Circuit;
-    createDriverStanding(data: DriverStandingApiData): DriverStanding;
+    createDriverStanding(data: DriverStandingApiData, season: string, round: string): DriverStanding;
     createFastestLap(data: FastestLapApiData): FastestLap;
     createDriver(data: DriverApiData): Driver;
     createFastestLapTime(data: FastestLapTimeApiData): FastestLapTime;
     createFinishingTime(data: FinishingTimeApiData): FinishingTime;
-    createLap(data: LapApiData): Lap;
+    createLap(data: LapApiData, raceData: RaceApiData): Lap;
     createTiming(data: TimingApiData): Timing;
     createLocation(data: LocationApiData): Location;
-    createPitStop(data: PitStopApiData): PitStop;
-    createQualifyingResult(data: QualifyingResultApiData): QualifyingResult;
+    createPitStop(data: PitStopApiData, raceData: RaceApiData): PitStop;
+    createQualifyingResult(data: QualifyingResultApiData, raceData: RaceApiData): QualifyingResult;
     createRace(data: RaceApiData): Race;
-    createResult(data: ResultApiData): Result;
+    createResult(data: ResultApiData, raceData: RaceApiData): Result;
     createSeason(data: SeasonApiData): Season;
     createSessionDateTime(data: DateTimeApiData): SessionDateTime;
-    createSprintResult(data: SprintResultApiData): SprintResult;
+    createSprintResult(data: SprintResultApiData, raceData: RaceApiData): SprintResult;
     createStatus(data: StatusApiData): Status;
-    createTeamStanding(data: ConstructorStandingApiData): TeamStanding;
+    createTeamStanding(data: ConstructorStandingApiData, season: string, round: string): TeamStanding;
     createTeam(data: ConstructorApiData): Team;
 }
 

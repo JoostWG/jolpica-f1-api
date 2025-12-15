@@ -14,6 +14,8 @@ interface DriverStandingApiData {
 type DriverStandingsResponse = SuccessResponse<{
     StandingsTable: {
         StandingsLists: {
+            season: string;
+            round: string;
             DriverStandings: DriverStandingApiData[];
         }[];
     };

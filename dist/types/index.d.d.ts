@@ -13,6 +13,6 @@ export { SeasonApiData, SeasonsResponse } from './api/season.d.js';
 export { SprintResultApiData, SprintResultsResponse } from './api/sprint-result.d.js';
 export { StatusApiData, StatusesResponse } from './api/status.d.js';
 export { ApiCache } from './ApiCache.d.js';
-export { CircuitOption, DriverOption, FastestRankOption, FinishPositionOption, GridPositionOption, LapOption, PitStopOption, RoundOption, SeasonOption, TeamOption } from './options.d.js';
+export { CircuitOption, DriverOption, FastestRankOption, FinishPositionOption, GridPositionOption, LapOption, PitStopOption, RoundOption, SeasonOption, StatusOption, TeamOption } from './options.d.js';
 export { AverageSpeed, Circuit, Driver, DriverStanding, FastestLap, FastestLapTime, FinishingTime, Lap, Location, PitStop, QualifyingResult, Race, Result, Season, SessionDateTime, SprintResult, Status, Team, TeamStanding, Timing } from './structures.d.js';
 import '../enums/StatusType.js';

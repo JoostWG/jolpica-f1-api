@@ -58,6 +58,8 @@ interface Driver {
 }
 
 interface DriverStanding {
+    season: string;
+    round: number;
     position: number | null;
     positionText: string;
     points: number;
@@ -69,6 +71,7 @@ interface DriverStanding {
 interface Lap {
     number: number;
     timings: Timing[];
+    race: Race;
 }
 
 interface PitStop {
@@ -77,6 +80,7 @@ interface PitStop {
     stop: number | null;
     time: string | null;
     duration: number | null;
+    race: Race;
 }
 
 interface QualifyingResult {
@@ -87,6 +91,7 @@ interface QualifyingResult {
     q1: string | null;
     q2: string | null;
     q3: string | null;
+    race: Race;
 }
 
 interface Race {
@@ -118,6 +123,7 @@ interface Result {
     status: string | null;
     fastestLap: FastestLap | null;
     finishingTime: FinishingTime | null;
+    race: Race;
 }
 
 interface Season {
@@ -137,6 +143,7 @@ interface SprintResult {
     status: string | null;
     finishingTime: FinishingTime | null;
     fastestLap: FastestLap | null;
+    race: Race;
 }
 
 interface Status {
@@ -153,6 +160,8 @@ interface Team {
 }
 
 interface TeamStanding {
+    season: string;
+    round: number;
     position: string | null;
     positionText: string;
     points: number;

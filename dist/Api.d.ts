@@ -1,5 +1,4 @@
 import { BaseApi, BaseApiConstructorOptions } from './BaseApi.js';
-import { StatusType } from './enums/StatusType.js';
 import { CircuitsResponse } from './types/api/circuit.d.js';
 import { Pagination } from './types/api/common.d.js';
 import { ConstructorsResponse } from './types/api/constructor.d.js';
@@ -14,15 +13,13 @@ import { ResultsResponse } from './types/api/result.d.js';
 import { SeasonsResponse } from './types/api/season.d.js';
 import { SprintResultsResponse } from './types/api/sprint-result.d.js';
 import { StatusesResponse } from './types/api/status.d.js';
-import { SeasonOption, RoundOption, CircuitOption, DriverOption, TeamOption, LapOption, PitStopOption, FastestRankOption, GridPositionOption, FinishPositionOption } from './types/options.d.js';
+import { SeasonOption, RoundOption, CircuitOption, DriverOption, TeamOption, LapOption, PitStopOption, FastestRankOption, GridPositionOption, FinishPositionOption, StatusOption } from './types/options.d.js';
 import { Circuit, DriverStanding, Driver, Lap, PitStop, QualifyingResult, Race, Result, Season, SprintResult, TeamStanding, Team } from './types/structures.d.js';
-import './types/ApiCache.d.js';
 import 'axios';
+import './types/ApiCache.d.js';
+import './enums/StatusType.js';
 
 type SimpleApiOptions = SeasonOption & RoundOption & CircuitOption & DriverOption & TeamOption & LapOption & PitStopOption & FastestRankOption & GridPositionOption & FinishPositionOption & StatusOption;
-interface StatusOption {
-    status?: StatusType;
-}
 interface ResponsesMap {
     circuits: CircuitsResponse;
     constructorstandings: ConstructorStandingsResponse;
@@ -48,7 +45,7 @@ interface Response<T> {
 }
 declare class Api extends BaseApi {
     private readonly data;
-    constructor(options: BaseApiConstructorOptions);
+    constructor(options?: BaseApiConstructorOptions);
     getCircuits(options?: SeasonOption & RoundOption & DriverOption & FastestRankOption & GridPositionOption & FinishPositionOption & StatusOption & TeamOption, pagination?: Pagination): Promise<Response<Circuit[]>>;
     getDriverStandings(options: Required<SeasonOption> & RoundOption & DriverOption, pagination?: Pagination): Promise<Response<DriverStanding[]>>;
     getDrivers(options?: SeasonOption & RoundOption & CircuitOption & FastestRankOption & GridPositionOption & FinishPositionOption & StatusOption & TeamOption, pagination?: Pagination): Promise<Response<Driver[]>>;
@@ -65,4 +62,4 @@ declare class Api extends BaseApi {
     private getPath;
 }
 
-export { Api, type Response, type ResponsesMap, type SimpleApiOptions, type StatusOption };
+export { Api, type Response, type ResponsesMap, type SimpleApiOptions };
