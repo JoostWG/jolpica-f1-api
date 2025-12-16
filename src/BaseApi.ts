@@ -17,7 +17,7 @@ export class BaseApi {
     private readonly axios: AxiosInstance;
     private readonly cache?: ApiCache;
 
-    public constructor({ cache, config }: BaseApiConstructorOptions) {
+    public constructor({ cache, config }: BaseApiConstructorOptions = {}) {
         this.axios = axios.create({
             baseURL: 'https://api.jolpi.ca/ergast/f1',
             validateStatus: (status) =>
