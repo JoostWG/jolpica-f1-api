@@ -1,5 +1,5 @@
 import './BaseApi.js';
-export { A as Api } from './Api-9NGl5mbN.js';
+export { A as Api } from './Api-B36ZyRrQ.js';
 import './types/options.d.js';
 import 'axios';
 import './types/api/common.d.js';

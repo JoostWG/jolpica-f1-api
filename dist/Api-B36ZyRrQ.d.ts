@@ -15,8 +15,8 @@ declare class PendingRequest<TResource extends keyof ResponsesMap, TStructure ex
     protected readonly api: Api;
     readonly resource: TResource;
     readonly options: SimpleApiOptions;
-    protected readonly transform: (data: ResponsesMap[typeof resource]['MRData']) => TStructure[];
-    constructor(api: Api, resource: TResource, options: SimpleApiOptions, transform: (data: ResponsesMap[typeof resource]['MRData']) => TStructure[]);
+    protected readonly transform: (data: ResponsesMap[TResource]['MRData']) => TStructure[];
+    constructor(api: Api, resource: TResource, options: SimpleApiOptions, transform: (data: ResponsesMap[TResource]['MRData']) => TStructure[]);
     get(pagination?: Pagination): Promise<Response<TStructure[]>>;
     getOne(pagination?: Pick<Pagination, 'offset'>): Promise<TStructure | null>;
     private getPath;

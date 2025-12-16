@@ -1,4 +1,4 @@
-export { A as Api, P as PendingRequest } from './Api-9NGl5mbN.js';
+export { A as Api, P as PendingRequest } from './Api-B36ZyRrQ.js';
 export { BaseApi, BaseApiConstructorOptions } from './BaseApi.js';
 export { StatusType } from './enums/StatusType.js';
 export { BadRequest } from './errors/BadRequest.js';
