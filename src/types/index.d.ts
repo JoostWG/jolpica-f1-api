@@ -1,4 +1,19 @@
 import type {
+    Circuit,
+    Driver,
+    DriverStanding,
+    Lap,
+    PitStop,
+    QualifyingResult,
+    Race,
+    Result,
+    Season,
+    SprintResult,
+    Status,
+    Team,
+    TeamStanding,
+} from '../structures';
+import type {
     CircuitsResponse,
     ConstructorStandingsResponse,
     ConstructorsResponse,
@@ -26,26 +41,10 @@ import type {
     StatusOption,
     TeamOption,
 } from './options';
-import type {
-    Circuit,
-    Driver,
-    DriverStanding,
-    Lap,
-    PitStop,
-    QualifyingResult,
-    Race,
-    Result,
-    Season,
-    SprintResult,
-    Status,
-    Team,
-    TeamStanding,
-} from './structures';
 
 export type * from './api';
 export type * from './ApiCache';
 export type * from './options';
-export type * from './structures';
 
 export interface ResponsesMap {
     circuits: CircuitsResponse;

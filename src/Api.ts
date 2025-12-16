@@ -1,6 +1,19 @@
-import { BaseApi, type BaseApiConstructorOptions } from './BaseApi';
-import { Data } from './Data';
+import { BaseApi } from './BaseApi';
 import { PendingRequest } from './PendingRequest';
+import {
+    Circuit,
+    Driver,
+    DriverStanding,
+    Lap,
+    PitStop,
+    QualifyingResult,
+    Race,
+    Result,
+    Season,
+    SprintResult,
+    Team,
+    TeamStanding,
+} from './structures';
 import type {
     CircuitOption,
     DriverOption,
@@ -19,14 +32,6 @@ import type {
 } from './types';
 
 export class Api extends BaseApi {
-    private readonly data: Data;
-
-    public constructor(options: BaseApiConstructorOptions = {}) {
-        super(options);
-
-        this.data = new Data();
-    }
-
     public circuits(
         options?:
             & SeasonOption
@@ -40,7 +45,7 @@ export class Api extends BaseApi {
     ): PendingRequest<'circuits'> {
         return this.makePendingRequest(
             'circuits',
-            (data) => data.CircuitTable.Circuits.map(this.data.createCircuit.bind(this.data)),
+            (data) => data.CircuitTable.Circuits.map((circuitData) => new Circuit(circuitData)),
             options,
         );
     }
@@ -55,11 +60,7 @@ export class Api extends BaseApi {
             (data) =>
                 data.StandingsTable.StandingsLists.flatMap((standingsList) =>
                     standingsList.DriverStandings.map((standingsData) =>
-                        this.data.createDriverStanding(
-                            standingsData,
-                            standingsList.season,
-                            standingsList.round,
-                        )
+                        new DriverStanding(standingsData, standingsList.season, standingsList.round)
                     )
                 ),
         );
@@ -78,7 +79,7 @@ export class Api extends BaseApi {
     ): PendingRequest<'drivers'> {
         return this.makePendingRequest(
             'drivers',
-            (data) => data.DriverTable.Drivers.map(this.data.createDriver.bind(this.data)),
+            (data) => data.DriverTable.Drivers.map((driverData) => new Driver(driverData)),
             options,
         );
     }
@@ -95,7 +96,7 @@ export class Api extends BaseApi {
             'laps',
             (data) =>
                 data.RaceTable.Races.flatMap((raceData) =>
-                    raceData.Laps.map((lapData) => this.data.createLap(lapData, raceData))
+                    raceData.Laps.map((lapData) => new Lap(lapData, raceData))
                 ),
             options,
         );
@@ -113,9 +114,7 @@ export class Api extends BaseApi {
             'pitstops',
             (data) =>
                 data.RaceTable.Races.flatMap((raceData) =>
-                    raceData.PitStops.map((pitStopData) =>
-                        this.data.createPitStop(pitStopData, raceData)
-                    )
+                    raceData.PitStops.map((pitStopData) => new PitStop(pitStopData, raceData))
                 ),
             options,
         );
@@ -137,7 +136,7 @@ export class Api extends BaseApi {
             (data) =>
                 data.RaceTable.Races.flatMap((raceData) =>
                     raceData.QualifyingResults.map((resultData) =>
-                        this.data.createQualifyingResult(resultData, raceData)
+                        new QualifyingResult(resultData, raceData)
                     )
                 ),
             options,
@@ -157,7 +156,7 @@ export class Api extends BaseApi {
     ): PendingRequest<'races'> {
         return this.makePendingRequest(
             'races',
-            (data) => data.RaceTable.Races.map(this.data.createRace.bind(this.data)),
+            (data) => data.RaceTable.Races.map((raceData) => new Race(raceData)),
             options,
         );
     }
@@ -177,9 +176,7 @@ export class Api extends BaseApi {
             'results',
             (data) =>
                 data.RaceTable.Races.flatMap((raceData) =>
-                    raceData.Results.map((resultData) =>
-                        this.data.createResult(resultData, raceData)
-                    )
+                    raceData.Results.map((resultData) => new Result(resultData, raceData))
                 ),
             options,
         );
@@ -195,7 +192,7 @@ export class Api extends BaseApi {
     ): PendingRequest<'seasons'> {
         return this.makePendingRequest(
             'seasons',
-            (data) => data.SeasonTable.Seasons.map(this.data.createSeason.bind(this.data)),
+            (data) => data.SeasonTable.Seasons.map((seasonData) => new Season(seasonData)),
             options,
         );
     }
@@ -213,7 +210,7 @@ export class Api extends BaseApi {
             (data) =>
                 data.RaceTable.Races.flatMap((raceData) =>
                     raceData.SprintResults.map((resultData) =>
-                        this.data.createSprintResult(resultData, raceData)
+                        new SprintResult(resultData, raceData)
                     )
                 ),
             options,
@@ -228,7 +225,7 @@ export class Api extends BaseApi {
             (data) =>
                 data.StandingsTable.StandingsLists.flatMap((standingsList) =>
                     standingsList.ConstructorStandings.map((standingsData) =>
-                        this.data.createTeamStanding(
+                        new TeamStanding(
                             standingsData,
                             standingsList.season,
                             standingsList.round,
@@ -251,7 +248,7 @@ export class Api extends BaseApi {
     ): PendingRequest<'constructors'> {
         return this.makePendingRequest(
             'constructors',
-            (data) => data.ConstructorTable.Constructors.map(this.data.createTeam.bind(this.data)),
+            (data) => data.ConstructorTable.Constructors.map((teamData) => new Team(teamData)),
             options,
         );
     }
