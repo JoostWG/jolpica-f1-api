@@ -19,9 +19,7 @@ export class PendingRequest<
         protected readonly api: Api,
         public readonly resource: TResource,
         public readonly options: SimpleApiOptions,
-        protected readonly transform: (
-            data: ResponsesMap[typeof resource]['MRData'],
-        ) => TStructure[],
+        protected readonly transform: (data: ResponsesMap[TResource]['MRData']) => TStructure[],
     ) {
         //
     }
