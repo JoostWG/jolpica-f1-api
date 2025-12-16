@@ -64,7 +64,7 @@ export class BaseApi {
         const data = response.data as T;
 
         if (this.cache) {
-            await this.cache.set(data, path, pagination);
+            await this.cache.set(data, response.headers['Cache-Control'], path, pagination);
         }
 
         return data;
