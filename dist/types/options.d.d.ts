@@ -5,7 +5,7 @@ interface StatusOption {
 }
 
 interface SeasonOption {
-    season?: 'current' | (string & {});
+    season?: 'current' | (number & {});
 }
 
 interface RoundOption {

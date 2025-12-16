@@ -9,7 +9,7 @@ interface BaseApiConstructorOptions {
 declare class BaseApi {
     private readonly axios;
     private readonly cache?;
-    constructor({ cache, config }: BaseApiConstructorOptions);
+    constructor({ cache, config }?: BaseApiConstructorOptions);
     get<T extends SuccessResponse>(path: string, pagination?: Pagination, config?: AxiosRequestConfig): Promise<T>;
     private responseIsBadRequest;
 }
