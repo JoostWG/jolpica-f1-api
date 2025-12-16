@@ -17,7 +17,7 @@ export class BaseApi {
     private readonly axios: AxiosInstance;
     private readonly cache?: ApiCache;
 
-    public constructor({ cache, config }: BaseApiConstructorOptions) {
+    public constructor({ cache, config }: BaseApiConstructorOptions = {}) {
         this.axios = axios.create({
             baseURL: 'https://api.jolpi.ca/ergast/f1',
             validateStatus: (status) =>
@@ -64,7 +64,7 @@ export class BaseApi {
         const data = response.data as T;
 
         if (this.cache) {
-            await this.cache.set(data, path, pagination);
+            await this.cache.set(data, response.headers['Cache-Control'], path, pagination);
         }
 
         return data;
