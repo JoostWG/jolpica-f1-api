@@ -1,5 +1,5 @@
 import type { Api } from './Api';
-import type { Pagination, ResponsesMap, SimpleApiOptions } from './types';
+import type { Pagination, ResponsesMap, SimpleApiOptions, StructuresMap } from './types';
 
 interface Response<T> {
     meta: {
@@ -10,18 +10,23 @@ interface Response<T> {
     data: T;
 }
 
-export class PendingRequest<TResource extends keyof ResponsesMap, TModel> {
+export class PendingRequest<
+    TResource extends keyof ResponsesMap,
+    TStructure extends StructuresMap[TResource] = StructuresMap[TResource],
+> {
     // eslint-disable-next-line @typescript-eslint/max-params
     public constructor(
         protected readonly api: Api,
         public readonly resource: TResource,
         public readonly options: SimpleApiOptions,
-        protected readonly transform: (data: ResponsesMap[typeof resource]['MRData']) => TModel[],
+        protected readonly transform: (
+            data: ResponsesMap[typeof resource]['MRData'],
+        ) => TStructure[],
     ) {
         //
     }
 
-    public async get(pagination?: Pagination): Promise<Response<TModel[]>> {
+    public async get(pagination?: Pagination): Promise<Response<TStructure[]>> {
         const response = await this.api.get<ResponsesMap[TResource]>(
             this.getPath(`/${this.resource}`, this.options),
             pagination,
@@ -37,10 +42,10 @@ export class PendingRequest<TResource extends keyof ResponsesMap, TModel> {
         };
     }
 
-    public async getOne(pagination?: Pick<Pagination, 'offset'>): Promise<TModel | null> {
-        const { data: [model] } = await this.get({ limit: 1, ...pagination ?? {} });
+    public async getOne(pagination?: Pick<Pagination, 'offset'>): Promise<TStructure | null> {
+        const { data } = await this.get({ limit: 1, ...pagination ?? {} });
 
-        return model ?? null;
+        return data.length > 0 ? data[0] : null;
     }
 
     private getPath(basePath: string, options: SimpleApiOptions): string {

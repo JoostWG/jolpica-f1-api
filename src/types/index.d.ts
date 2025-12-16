@@ -26,6 +26,21 @@ import type {
     StatusOption,
     TeamOption,
 } from './options';
+import type {
+    Circuit,
+    Driver,
+    DriverStanding,
+    Lap,
+    PitStop,
+    QualifyingResult,
+    Race,
+    Result,
+    Season,
+    SprintResult,
+    Status,
+    Team,
+    TeamStanding,
+} from './structures';
 
 export type * from './api';
 export type * from './ApiCache';
@@ -46,6 +61,22 @@ export interface ResponsesMap {
     seasons: SeasonsResponse;
     sprint: SprintResultsResponse;
     status: StatusesResponse;
+}
+
+export interface StructuresMap {
+    circuits: Circuit;
+    constructorstandings: TeamStanding;
+    constructors: Team;
+    driverstandings: DriverStanding;
+    drivers: Driver;
+    laps: Lap;
+    pitstops: PitStop;
+    qualifying: QualifyingResult;
+    races: Race;
+    results: Result;
+    seasons: Season;
+    sprint: SprintResult;
+    status: Status;
 }
 
 export type SimpleApiOptions =

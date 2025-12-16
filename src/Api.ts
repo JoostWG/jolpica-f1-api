@@ -2,31 +2,20 @@ import { BaseApi, type BaseApiConstructorOptions } from './BaseApi';
 import { Data } from './Data';
 import { PendingRequest } from './PendingRequest';
 import type {
-    Circuit,
     CircuitOption,
-    Driver,
     DriverOption,
-    DriverStanding,
     FastestRankOption,
     FinishPositionOption,
     GridPositionOption,
-    Lap,
     LapOption,
-    PitStop,
     PitStopOption,
-    QualifyingResult,
-    Race,
     ResponsesMap,
-    Result,
     RoundOption,
-    Season,
     SeasonOption,
     SimpleApiOptions,
-    SprintResult,
     StatusOption,
-    Team,
+    StructuresMap,
     TeamOption,
-    TeamStanding,
 } from './types';
 
 export class Api extends BaseApi {
@@ -48,7 +37,7 @@ export class Api extends BaseApi {
             & FinishPositionOption
             & StatusOption
             & TeamOption,
-    ): PendingRequest<'circuits', Circuit> {
+    ): PendingRequest<'circuits'> {
         return this.makePendingRequest(
             'circuits',
             (data) => data.CircuitTable.Circuits.map(this.data.createCircuit.bind(this.data)),
@@ -58,7 +47,7 @@ export class Api extends BaseApi {
 
     public driverStandings(
         options: Required<SeasonOption> & RoundOption & DriverOption,
-    ): PendingRequest<'driverstandings', DriverStanding> {
+    ): PendingRequest<'driverstandings'> {
         return new PendingRequest(
             this,
             'driverstandings',
@@ -86,7 +75,7 @@ export class Api extends BaseApi {
             & FinishPositionOption
             & StatusOption
             & TeamOption,
-    ): PendingRequest<'drivers', Driver> {
+    ): PendingRequest<'drivers'> {
         return this.makePendingRequest(
             'drivers',
             (data) => data.DriverTable.Drivers.map(this.data.createDriver.bind(this.data)),
@@ -101,7 +90,7 @@ export class Api extends BaseApi {
             & DriverOption
             & LapOption
             & TeamOption,
-    ): PendingRequest<'laps', Lap> {
+    ): PendingRequest<'laps'> {
         return this.makePendingRequest(
             'laps',
             (data) =>
@@ -119,7 +108,7 @@ export class Api extends BaseApi {
             & DriverOption
             & LapOption
             & PitStopOption,
-    ): PendingRequest<'pitstops', PitStop> {
+    ): PendingRequest<'pitstops'> {
         return this.makePendingRequest(
             'pitstops',
             (data) =>
@@ -142,7 +131,7 @@ export class Api extends BaseApi {
             & FastestRankOption
             & StatusOption
             & TeamOption,
-    ): PendingRequest<'qualifying', QualifyingResult> {
+    ): PendingRequest<'qualifying'> {
         return this.makePendingRequest(
             'qualifying',
             (data) =>
@@ -165,7 +154,7 @@ export class Api extends BaseApi {
             & GridPositionOption
             & StatusOption
             & TeamOption,
-    ): PendingRequest<'races', Race> {
+    ): PendingRequest<'races'> {
         return this.makePendingRequest(
             'races',
             (data) => data.RaceTable.Races.map(this.data.createRace.bind(this.data)),
@@ -183,7 +172,7 @@ export class Api extends BaseApi {
             & GridPositionOption
             & StatusOption
             & TeamOption,
-    ): PendingRequest<'results', Result> {
+    ): PendingRequest<'results'> {
         return this.makePendingRequest(
             'results',
             (data) =>
@@ -203,7 +192,7 @@ export class Api extends BaseApi {
             & GridPositionOption
             & StatusOption
             & TeamOption,
-    ): PendingRequest<'seasons', Season> {
+    ): PendingRequest<'seasons'> {
         return this.makePendingRequest(
             'seasons',
             (data) => data.SeasonTable.Seasons.map(this.data.createSeason.bind(this.data)),
@@ -218,7 +207,7 @@ export class Api extends BaseApi {
             & GridPositionOption
             & StatusOption
             & TeamOption,
-    ): PendingRequest<'sprint', SprintResult> {
+    ): PendingRequest<'sprint'> {
         return this.makePendingRequest(
             'sprint',
             (data) =>
@@ -233,7 +222,7 @@ export class Api extends BaseApi {
 
     public teamStandings(
         options: Required<SeasonOption> & RoundOption & TeamOption,
-    ): PendingRequest<'constructorstandings', TeamStanding> {
+    ): PendingRequest<'constructorstandings'> {
         return this.makePendingRequest(
             'constructorstandings',
             (data) =>
@@ -259,7 +248,7 @@ export class Api extends BaseApi {
             & GridPositionOption
             & FinishPositionOption
             & StatusOption,
-    ): PendingRequest<'constructors', Team> {
+    ): PendingRequest<'constructors'> {
         return this.makePendingRequest(
             'constructors',
             (data) => data.ConstructorTable.Constructors.map(this.data.createTeam.bind(this.data)),
@@ -267,11 +256,11 @@ export class Api extends BaseApi {
         );
     }
 
-    private makePendingRequest<TResource extends keyof ResponsesMap, TReturn>(
+    private makePendingRequest<TResource extends keyof ResponsesMap>(
         resource: TResource,
-        transform: (data: ResponsesMap[TResource]['MRData']) => TReturn[],
+        transform: (data: ResponsesMap[TResource]['MRData']) => StructuresMap[TResource][],
         options?: SimpleApiOptions,
-    ): PendingRequest<TResource, TReturn> {
+    ): PendingRequest<TResource> {
         return new PendingRequest(this, resource, options ?? {}, transform);
     }
 }
