@@ -1,82 +1,33 @@
 import { BaseApi, type BaseApiConstructorOptions } from './BaseApi';
 import { Data } from './Data';
+import { PendingRequest } from './PendingRequest';
 import type {
     Circuit,
     CircuitOption,
-    CircuitsResponse,
-    ConstructorStandingsResponse,
-    ConstructorsResponse,
     Driver,
     DriverOption,
     DriverStanding,
-    DriverStandingsResponse,
-    DriversResponse,
     FastestRankOption,
     FinishPositionOption,
     GridPositionOption,
     Lap,
     LapOption,
-    LapsResponse,
-    Pagination,
     PitStop,
     PitStopOption,
-    PitStopsResponse,
     QualifyingResult,
-    QualifyingResultsResponse,
     Race,
-    RacesResponse,
+    ResponsesMap,
     Result,
-    ResultsResponse,
     RoundOption,
     Season,
     SeasonOption,
-    SeasonsResponse,
+    SimpleApiOptions,
     SprintResult,
-    SprintResultsResponse,
     StatusOption,
-    StatusesResponse,
     Team,
     TeamOption,
     TeamStanding,
 } from './types';
-
-export type SimpleApiOptions =
-    & SeasonOption
-    & RoundOption
-    & CircuitOption
-    & DriverOption
-    & TeamOption
-    & LapOption
-    & PitStopOption
-    & FastestRankOption
-    & GridPositionOption
-    & FinishPositionOption
-    & StatusOption;
-
-export interface ResponsesMap {
-    circuits: CircuitsResponse;
-    constructorstandings: ConstructorStandingsResponse;
-    constructors: ConstructorsResponse;
-    driverstandings: DriverStandingsResponse;
-    drivers: DriversResponse;
-    laps: LapsResponse;
-    pitstops: PitStopsResponse;
-    qualifying: QualifyingResultsResponse;
-    races: RacesResponse;
-    results: ResultsResponse;
-    seasons: SeasonsResponse;
-    sprint: SprintResultsResponse;
-    status: StatusesResponse;
-}
-
-export interface Response<T> {
-    meta: {
-        limit: number;
-        offset: number;
-        total: number;
-    };
-    data: T;
-}
 
 export class Api extends BaseApi {
     private readonly data: Data;
@@ -87,7 +38,7 @@ export class Api extends BaseApi {
         this.data = new Data();
     }
 
-    public async getCircuits(
+    public circuits(
         options?:
             & SeasonOption
             & RoundOption
@@ -97,22 +48,21 @@ export class Api extends BaseApi {
             & FinishPositionOption
             & StatusOption
             & TeamOption,
-        pagination?: Pagination,
-    ): Promise<Response<Circuit[]>> {
-        return await this.getWithOptions(
+    ): PendingRequest<'circuits', Circuit> {
+        return this.makePendingRequest(
             'circuits',
             (data) => data.CircuitTable.Circuits.map(this.data.createCircuit.bind(this.data)),
             options,
-            pagination,
         );
     }
 
-    public async getDriverStandings(
+    public driverStandings(
         options: Required<SeasonOption> & RoundOption & DriverOption,
-        pagination?: Pagination,
-    ): Promise<Response<DriverStanding[]>> {
-        return await this.getWithOptions(
+    ): PendingRequest<'driverstandings', DriverStanding> {
+        return new PendingRequest(
+            this,
             'driverstandings',
+            options,
             (data) =>
                 data.StandingsTable.StandingsLists.flatMap((standingsList) =>
                     standingsList.DriverStandings.map((standingsData) =>
@@ -123,12 +73,10 @@ export class Api extends BaseApi {
                         )
                     )
                 ),
-            options,
-            pagination,
         );
     }
 
-    public async getDrivers(
+    public drivers(
         options?:
             & SeasonOption
             & RoundOption
@@ -138,46 +86,41 @@ export class Api extends BaseApi {
             & FinishPositionOption
             & StatusOption
             & TeamOption,
-        pagination?: Pagination,
-    ): Promise<Response<Driver[]>> {
-        return await this.getWithOptions(
+    ): PendingRequest<'drivers', Driver> {
+        return this.makePendingRequest(
             'drivers',
             (data) => data.DriverTable.Drivers.map(this.data.createDriver.bind(this.data)),
             options,
-            pagination,
         );
     }
 
-    public async getLaps(
+    public laps(
         options:
             & Required<SeasonOption>
             & Required<RoundOption>
             & DriverOption
             & LapOption
             & TeamOption,
-        pagination?: Pagination,
-    ): Promise<Response<Lap[]>> {
-        return await this.getWithOptions(
+    ): PendingRequest<'laps', Lap> {
+        return this.makePendingRequest(
             'laps',
             (data) =>
                 data.RaceTable.Races.flatMap((raceData) =>
                     raceData.Laps.map((lapData) => this.data.createLap(lapData, raceData))
                 ),
             options,
-            pagination,
         );
     }
 
-    public async getPitStops(
+    public pitStops(
         options:
             & Required<SeasonOption>
             & Required<RoundOption>
             & DriverOption
             & LapOption
             & PitStopOption,
-        pagination?: Pagination,
-    ): Promise<Response<PitStop[]>> {
-        return await this.getWithOptions(
+    ): PendingRequest<'pitstops', PitStop> {
+        return this.makePendingRequest(
             'pitstops',
             (data) =>
                 data.RaceTable.Races.flatMap((raceData) =>
@@ -186,11 +129,10 @@ export class Api extends BaseApi {
                     )
                 ),
             options,
-            pagination,
         );
     }
 
-    public async getQualifyingResults(
+    public qualifyingResults(
         options?:
             & SeasonOption
             & RoundOption
@@ -200,9 +142,8 @@ export class Api extends BaseApi {
             & FastestRankOption
             & StatusOption
             & TeamOption,
-        pagination?: Pagination,
-    ): Promise<Response<QualifyingResult[]>> {
-        return await this.getWithOptions(
+    ): PendingRequest<'qualifying', QualifyingResult> {
+        return this.makePendingRequest(
             'qualifying',
             (data) =>
                 data.RaceTable.Races.flatMap((raceData) =>
@@ -211,11 +152,10 @@ export class Api extends BaseApi {
                     )
                 ),
             options,
-            pagination,
         );
     }
 
-    public async getRaces(
+    public races(
         options?:
             & SeasonOption
             & RoundOption
@@ -225,17 +165,15 @@ export class Api extends BaseApi {
             & GridPositionOption
             & StatusOption
             & TeamOption,
-        pagination?: Pagination,
-    ): Promise<Response<Race[]>> {
-        return await this.getWithOptions(
+    ): PendingRequest<'races', Race> {
+        return this.makePendingRequest(
             'races',
             (data) => data.RaceTable.Races.map(this.data.createRace.bind(this.data)),
             options,
-            pagination,
         );
     }
 
-    public async getResults(
+    public results(
         options?:
             & SeasonOption
             & RoundOption
@@ -245,9 +183,8 @@ export class Api extends BaseApi {
             & GridPositionOption
             & StatusOption
             & TeamOption,
-        pagination?: Pagination,
-    ): Promise<Response<Result[]>> {
-        return await this.getWithOptions(
+    ): PendingRequest<'results', Result> {
+        return this.makePendingRequest(
             'results',
             (data) =>
                 data.RaceTable.Races.flatMap((raceData) =>
@@ -256,37 +193,33 @@ export class Api extends BaseApi {
                     )
                 ),
             options,
-            pagination,
         );
     }
 
-    public async getSeasons(
+    public seasons(
         options?:
             & CircuitOption
             & DriverOption
             & GridPositionOption
             & StatusOption
             & TeamOption,
-        pagination?: Pagination,
-    ): Promise<Response<Season[]>> {
-        return await this.getWithOptions(
+    ): PendingRequest<'seasons', Season> {
+        return this.makePendingRequest(
             'seasons',
             (data) => data.SeasonTable.Seasons.map(this.data.createSeason.bind(this.data)),
             options,
-            pagination,
         );
     }
 
-    public async getSprintResults(
+    public sprintResults(
         options?:
             & CircuitOption
             & DriverOption
             & GridPositionOption
             & StatusOption
             & TeamOption,
-        pagination?: Pagination,
-    ): Promise<Response<SprintResult[]>> {
-        return await this.getWithOptions(
+    ): PendingRequest<'sprint', SprintResult> {
+        return this.makePendingRequest(
             'sprint',
             (data) =>
                 data.RaceTable.Races.flatMap((raceData) =>
@@ -295,15 +228,13 @@ export class Api extends BaseApi {
                     )
                 ),
             options,
-            pagination,
         );
     }
 
-    public async getTeamStandings(
+    public teamStandings(
         options: Required<SeasonOption> & RoundOption & TeamOption,
-        pagination?: Pagination,
-    ): Promise<Response<TeamStanding[]>> {
-        return await this.getWithOptions(
+    ): PendingRequest<'constructorstandings', TeamStanding> {
+        return this.makePendingRequest(
             'constructorstandings',
             (data) =>
                 data.StandingsTable.StandingsLists.flatMap((standingsList) =>
@@ -316,11 +247,10 @@ export class Api extends BaseApi {
                     )
                 ),
             options,
-            pagination,
         );
     }
 
-    public async getTeams(
+    public teams(
         options?:
             & SeasonOption
             & RoundOption
@@ -329,89 +259,19 @@ export class Api extends BaseApi {
             & GridPositionOption
             & FinishPositionOption
             & StatusOption,
-        pagination?: Pagination,
-    ): Promise<Response<Team[]>> {
-        return await this.getWithOptions(
+    ): PendingRequest<'constructors', Team> {
+        return this.makePendingRequest(
             'constructors',
             (data) => data.ConstructorTable.Constructors.map(this.data.createTeam.bind(this.data)),
             options,
-            pagination,
         );
     }
 
-    // eslint-disable-next-line @typescript-eslint/max-params
-    private async getWithOptions<K extends keyof ResponsesMap, R>(
-        path: K,
-        transform: (data: ResponsesMap[K]['MRData']) => R,
+    private makePendingRequest<TResource extends keyof ResponsesMap, TReturn>(
+        resource: TResource,
+        transform: (data: ResponsesMap[TResource]['MRData']) => TReturn[],
         options?: SimpleApiOptions,
-        pagination?: Pagination,
-    ): Promise<Response<R>> {
-        const response = await this.get<ResponsesMap[K]>(
-            this.getPath(`/${path}`, options ?? {}),
-            pagination,
-        );
-
-        return {
-            meta: {
-                limit: Number(response.MRData.limit),
-                offset: Number(response.MRData.offset),
-                total: Number(response.MRData.total),
-            },
-            data: transform(response.MRData),
-        };
-    }
-
-    private getPath(basePath: string, options: SimpleApiOptions): string {
-        const path: string[] = [];
-
-        if (options.season) {
-            path.push(options.season);
-
-            if (options.round) {
-                path.push(String(options.round));
-            }
-        }
-
-        if (options.circuit) {
-            path.push('circuits', options.circuit);
-        }
-
-        if (options.driver) {
-            path.push('drivers', options.driver);
-        }
-
-        if (options.team) {
-            path.push('constructors', options.team);
-        }
-
-        if (options.lap) {
-            path.push('laps', String(options.lap));
-        }
-
-        if (options.pitStopNumber) {
-            path.push('pitstops', String(options.pitStopNumber));
-        }
-
-        if (options.fastestRank) {
-            path.push('fastest', String(options.fastestRank));
-        }
-
-        if (options.gridPosition) {
-            path.push('grid', String(options.gridPosition));
-        }
-
-        if (options.finishPosition) {
-            path.push('results', String(options.finishPosition));
-        }
-
-        if (options.status) {
-            path.push('status', options.status);
-        }
-
-        if (path.length === 0) {
-            return basePath;
-        }
-
-        return `/${path.join('/')}${basePath}`;
+    ): PendingRequest<TResource, TReturn> {
+        return new PendingRequest(this, resource, options ?? {}, transform);
     }
 }
