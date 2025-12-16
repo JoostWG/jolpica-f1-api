@@ -47,7 +47,7 @@ export class PendingRequest<TResource extends keyof ResponsesMap, TModel> {
         const path: string[] = [];
 
         if (options.season) {
-            path.push(options.season);
+            path.push(String(options.season));
 
             if (options.round) {
                 path.push(String(options.round));

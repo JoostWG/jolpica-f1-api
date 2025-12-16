@@ -58,7 +58,7 @@ export interface Driver {
 }
 
 export interface DriverStanding {
-    season: string;
+    season: number;
     round: number;
     position: number | null;
     positionText: string;
@@ -95,7 +95,7 @@ export interface QualifyingResult {
 }
 
 export interface Race {
-    season: string;
+    season: number;
     round: number;
     wikiUrl: string | null;
     name: string;
@@ -160,7 +160,7 @@ export interface Team {
 }
 
 export interface TeamStanding {
-    season: string;
+    season: number;
     round: number;
     position: string | null;
     positionText: string;

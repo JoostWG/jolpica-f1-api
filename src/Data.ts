@@ -64,7 +64,7 @@ export class Data {
         round: string,
     ): DriverStanding {
         return {
-            season,
+            season: Number(season),
             round: Number(round),
             position: data.position !== undefined ? Number(data.position) : null,
             positionText: data.positionText,
@@ -166,7 +166,7 @@ export class Data {
 
     public createRace(data: RaceApiData): Race {
         return {
-            season: data.season,
+            season: Number(data.season),
             round: Number(data.round),
             wikiUrl: data.url ?? null,
             name: data.raceName,
@@ -267,7 +267,7 @@ export class Data {
         round: string,
     ): TeamStanding {
         return {
-            season,
+            season: Number(season),
             round: Number(round),
             position: data.position ?? null,
             positionText: data.positionText,
