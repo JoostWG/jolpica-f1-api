@@ -93,6 +93,18 @@ export class PendingRequest<
             path.push('status', options.status);
         }
 
+        if (options.driverStanding) {
+            path.push('driverstandings', String(options.driverStanding));
+        }
+
+        if (options.qualifying) {
+            path.push('qualifying', String(options.qualifying));
+        }
+
+        if (options.teamStanding) {
+            path.push('constructorstandings', String(options.teamStanding));
+        }
+
         if (path.length === 0) {
             return basePath;
         }

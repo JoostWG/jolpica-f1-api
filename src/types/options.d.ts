@@ -44,6 +44,18 @@ export interface FinishPositionOption {
     finishPosition?: number;
 }
 
+export interface DriverStandingOption {
+    driverStanding?: number;
+}
+
+export interface QualifyingResultOption {
+    qualifying?: number;
+}
+
+export interface TeamStandingOption {
+    teamStanding?: number;
+}
+
 export type CircuitOptions =
     & SeasonOption
     & RoundOption
@@ -52,9 +64,14 @@ export type CircuitOptions =
     & GridPositionOption
     & FinishPositionOption
     & StatusOption
-    & TeamOption;
+    & TeamOption
+    & CircuitOption;
 
-export type DriverStandingOptions = Required<SeasonOption> & RoundOption & DriverOption;
+export type DriverStandingOptions =
+    & Required<SeasonOption>
+    & RoundOption
+    & DriverOption
+    & DriverStandingOption;
 
 export type DriverOptions =
     & SeasonOption
@@ -64,7 +81,8 @@ export type DriverOptions =
     & GridPositionOption
     & FinishPositionOption
     & StatusOption
-    & TeamOption;
+    & TeamOption
+    & DriverOption;
 
 export type LapOptions =
     & Required<SeasonOption>
@@ -88,7 +106,8 @@ export type QualifyingResultOptions =
     & GridPositionOption
     & FastestRankOption
     & StatusOption
-    & TeamOption;
+    & TeamOption
+    & QualifyingResultOption;
 
 export type RaceOptions =
     & SeasonOption
@@ -108,7 +127,8 @@ export type ResultOptions =
     & FastestRankOption
     & GridPositionOption
     & StatusOption
-    & TeamOption;
+    & TeamOption
+    & FinishPositionOption;
 
 export type SeasonOptions =
     & CircuitOption
@@ -124,7 +144,11 @@ export type SprintResultOptions =
     & StatusOption
     & TeamOption;
 
-export type TeamStandingOptions = Required<SeasonOption> & RoundOption & TeamOption;
+export type TeamStandingOptions =
+    & Required<SeasonOption>
+    & RoundOption
+    & TeamOption
+    & TeamStandingOption;
 
 export type TeamOptions =
     & SeasonOption

@@ -31,15 +31,18 @@ import type {
 import type {
     CircuitOption,
     DriverOption,
+    DriverStandingOption,
     FastestRankOption,
     FinishPositionOption,
     GridPositionOption,
     LapOption,
     PitStopOption,
+    QualifyingResultOption,
     RoundOption,
     SeasonOption,
     StatusOption,
     TeamOption,
+    TeamStandingOption,
 } from './options';
 
 export type * from './api';
@@ -94,4 +97,7 @@ export type AllApiOptions =
     & FastestRankOption
     & GridPositionOption
     & FinishPositionOption
-    & StatusOption;
+    & StatusOption
+    & DriverStandingOption
+    & QualifyingResultOption
+    & TeamStandingOption;
