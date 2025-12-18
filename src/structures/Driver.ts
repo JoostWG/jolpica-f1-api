@@ -1,5 +1,18 @@
 import type { Api } from '../Api';
-import type { DriverApiData } from '../types';
+import type { PendingRequest } from '../PendingRequest';
+import type {
+    CircuitOptions,
+    DriverApiData,
+    DriverStandingOptions,
+    LapOptions,
+    PitStopOptions,
+    QualifyingResultOptions,
+    RaceOptions,
+    ResultOptions,
+    SeasonOptions,
+    SprintResultOptions,
+    TeamOptions,
+} from '../types';
 
 export class Driver {
     public readonly id: string;
@@ -42,5 +55,53 @@ export class Driver {
         }
 
         return age;
+    }
+
+    public circuits(options?: Omit<CircuitOptions, 'driver'>): PendingRequest<'circuits'> {
+        return this.api.circuits(this.getOptions(options));
+    }
+
+    public driverStandings(
+        options: Omit<DriverStandingOptions, 'driver'>,
+    ): PendingRequest<'driverstandings'> {
+        return this.api.driverStandings(this.getOptions(options));
+    }
+
+    public laps(options: Omit<LapOptions, 'driver'>): PendingRequest<'laps'> {
+        return this.api.laps(this.getOptions(options));
+    }
+
+    public pitStops(options: Omit<PitStopOptions, 'driver'>): PendingRequest<'pitstops'> {
+        return this.api.pitStops(this.getOptions(options));
+    }
+
+    public qualifyingResults(
+        options?: Omit<QualifyingResultOptions, 'driver'>,
+    ): PendingRequest<'qualifying'> {
+        return this.api.qualifyingResults(this.getOptions(options));
+    }
+
+    public races(options?: Omit<RaceOptions, 'driver'>): PendingRequest<'races'> {
+        return this.api.races(this.getOptions(options));
+    }
+
+    public results(options?: Omit<ResultOptions, 'driver'>): PendingRequest<'results'> {
+        return this.api.results(this.getOptions(options));
+    }
+
+    public seasons(options?: Omit<SeasonOptions, 'driver'>): PendingRequest<'seasons'> {
+        return this.api.seasons(this.getOptions(options));
+    }
+
+    public sprintResults(options?: Omit<SprintResultOptions, 'driver'>): PendingRequest<'sprint'> {
+        return this.api.sprintResults(this.getOptions(options));
+    }
+
+    public teams(options?: TeamOptions): PendingRequest<'constructors'> {
+        return this.api.teams(this.getOptions(options));
+    }
+
+    private getOptions<T>(options: T): T & { driver: string } {
+        return { driver: this.id, ...options };
     }
 }
