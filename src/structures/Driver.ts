@@ -20,4 +20,26 @@ export class Driver {
         this.number = data.permanentNumber !== undefined ? Number(data.permanentNumber) : null;
         this.code = data.code ?? null;
     }
+
+    public get name(): string {
+        return `${this.firstName} ${this.lastName}`;
+    }
+
+    public get age(): number {
+        return this.ageAt(new Date());
+    }
+
+    public ageAt(date: Date): number {
+        const age = date.getFullYear() - this.dateOfBirth.getFullYear();
+
+        if (this.dateOfBirth.getMonth() > date.getMonth()) {
+            return age - 1;
+        }
+
+        if (this.dateOfBirth.getDate() > date.getDate()) {
+            return age - 1;
+        }
+
+        return age;
+    }
 }
