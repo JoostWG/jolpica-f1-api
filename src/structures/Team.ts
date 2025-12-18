@@ -1,3 +1,4 @@
+import type { Api } from '../Api';
 import type { ConstructorApiData } from '../types';
 
 export class Team {
@@ -6,7 +7,7 @@ export class Team {
     public readonly name: string;
     public readonly nationality: string | null;
 
-    public constructor(data: ConstructorApiData) {
+    public constructor(data: ConstructorApiData, protected readonly api: Api) {
         this.id = data.constructorId ?? null;
         this.wikiUrl = data.url ?? null;
         this.name = data.name;

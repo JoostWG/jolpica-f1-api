@@ -1,3 +1,4 @@
+import type { Api } from '../Api';
 import type { DriverStandingApiData } from '../types';
 import { Driver } from './Driver';
 import { Team } from './Team';
@@ -12,14 +13,20 @@ export class DriverStanding {
     public readonly driver: Driver;
     public readonly teams: readonly Team[];
 
-    public constructor(data: DriverStandingApiData, season: string, round: string) {
+    // eslint-disable-next-line @typescript-eslint/max-params
+    public constructor(
+        data: DriverStandingApiData,
+        season: string,
+        round: string,
+        protected readonly api: Api,
+    ) {
         this.season = Number(season);
         this.round = Number(round);
         this.position = data.position !== undefined ? Number(data.position) : null;
         this.positionText = data.positionText;
         this.points = Number(data.points);
         this.wins = Number(data.wins);
-        this.driver = new Driver(data.Driver);
-        this.teams = data.Constructors.map((teamData) => new Team(teamData));
+        this.driver = new Driver(data.Driver, this.api);
+        this.teams = data.Constructors.map((teamData) => new Team(teamData, this.api));
     }
 }

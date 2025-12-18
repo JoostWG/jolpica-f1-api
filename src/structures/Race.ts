@@ -1,3 +1,4 @@
+import type { Api } from '../Api';
 import type { RaceApiData } from '../types';
 import { Circuit } from './Circuit';
 import { SessionDateTime } from './SessionDateTime';
@@ -18,12 +19,12 @@ export class Race {
     public readonly sprintQualifying: SessionDateTime | null;
     public readonly sprintShootout: SessionDateTime | null;
 
-    public constructor(data: RaceApiData) {
+    public constructor(data: RaceApiData, protected readonly api: Api) {
         this.season = Number(data.season);
         this.round = Number(data.round);
         this.wikiUrl = data.url ?? null;
         this.name = data.raceName;
-        this.circuit = new Circuit(data.Circuit);
+        this.circuit = new Circuit(data.Circuit, this.api);
         this.date = data.date;
         this.time = data.time ?? null;
         this.firstPractice = data.FirstPractice !== undefined

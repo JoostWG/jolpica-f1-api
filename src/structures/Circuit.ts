@@ -1,3 +1,4 @@
+import type { Api } from '../Api';
 import type { CircuitApiData } from '../types';
 import { Location } from './Location';
 
@@ -7,7 +8,7 @@ export class Circuit {
     public readonly name: string;
     public readonly location: Location;
 
-    public constructor(data: CircuitApiData) {
+    public constructor(data: CircuitApiData, protected readonly api: Api) {
         this.id = data.circuitId;
         this.wikiUrl = data.url;
         this.name = data.circuitName;

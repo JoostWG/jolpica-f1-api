@@ -1,3 +1,4 @@
+import type { Api } from '../Api';
 import type { ConstructorStandingApiData } from '../types';
 import { Team } from './Team';
 
@@ -10,13 +11,19 @@ export class TeamStanding {
     public readonly wins: number;
     public readonly team: Team;
 
-    public constructor(data: ConstructorStandingApiData, season: string, round: string) {
+    // eslint-disable-next-line @typescript-eslint/max-params
+    public constructor(
+        data: ConstructorStandingApiData,
+        season: string,
+        round: string,
+        protected readonly api: Api,
+    ) {
         this.season = Number(season);
         this.round = Number(round);
         this.position = data.position ?? null;
         this.positionText = data.positionText;
         this.points = Number(data.points);
         this.wins = Number(data.wins);
-        this.team = new Team(data.Constructor);
+        this.team = new Team(data.Constructor, this.api);
     }
 }

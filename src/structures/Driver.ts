@@ -1,3 +1,4 @@
+import type { Api } from '../Api';
 import type { DriverApiData } from '../types';
 
 export class Driver {
@@ -10,7 +11,7 @@ export class Driver {
     public readonly number: number | null;
     public readonly code: string | null;
 
-    public constructor(data: DriverApiData) {
+    public constructor(data: DriverApiData, protected readonly api: Api) {
         this.id = data.driverId;
         this.wikiUrl = data.url;
         this.firstName = data.givenName;
