@@ -43,3 +43,94 @@ export interface GridPositionOption {
 export interface FinishPositionOption {
     finishPosition?: number;
 }
+
+export type CircuitOptions =
+    & SeasonOption
+    & RoundOption
+    & DriverOption
+    & FastestRankOption
+    & GridPositionOption
+    & FinishPositionOption
+    & StatusOption
+    & TeamOption;
+
+export type DriverStandingOptions = Required<SeasonOption> & RoundOption & DriverOption;
+
+export type DriverOptions =
+    & SeasonOption
+    & RoundOption
+    & CircuitOption
+    & FastestRankOption
+    & GridPositionOption
+    & FinishPositionOption
+    & StatusOption
+    & TeamOption;
+
+export type LapOptions =
+    & Required<SeasonOption>
+    & Required<RoundOption>
+    & DriverOption
+    & LapOption
+    & TeamOption;
+
+export type PitStopOptions =
+    & Required<SeasonOption>
+    & Required<RoundOption>
+    & DriverOption
+    & LapOption
+    & PitStopOption;
+
+export type QualifyingResultOptions =
+    & SeasonOption
+    & RoundOption
+    & CircuitOption
+    & DriverOption
+    & GridPositionOption
+    & FastestRankOption
+    & StatusOption
+    & TeamOption;
+
+export type RaceOptions =
+    & SeasonOption
+    & RoundOption
+    & CircuitOption
+    & DriverOption
+    & FinishPositionOption
+    & GridPositionOption
+    & StatusOption
+    & TeamOption;
+
+export type ResultOptions =
+    & SeasonOption
+    & RoundOption
+    & CircuitOption
+    & DriverOption
+    & FastestRankOption
+    & GridPositionOption
+    & StatusOption
+    & TeamOption;
+
+export type SeasonOptions =
+    & CircuitOption
+    & DriverOption
+    & GridPositionOption
+    & StatusOption
+    & TeamOption;
+
+export type SprintResultOptions =
+    & CircuitOption
+    & DriverOption
+    & GridPositionOption
+    & StatusOption
+    & TeamOption;
+
+export type TeamStandingOptions = Required<SeasonOption> & RoundOption & TeamOption;
+
+export type TeamOptions =
+    & SeasonOption
+    & RoundOption
+    & CircuitOption
+    & FastestRankOption
+    & GridPositionOption
+    & FinishPositionOption
+    & StatusOption;
