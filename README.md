@@ -1,5 +1,13 @@
 # Jolpica F1 API Wrapper
 
+## Installation
+
+```
+npm install https://github.com/JoostWG/jolpica-f1-api
+```
+
+## Examples
+
 ### Example 1
 
 ```ts
