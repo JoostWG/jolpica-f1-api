@@ -7,7 +7,7 @@
         "test": "ts-node src/test/index.ts",
         "dev": "tsup src/index.ts --watch ./src --dts",
         "build": "tsup ./src --dts --clean --minify --minify-whitespace --minify-identifiers --minify-syntax",
-        "lint": "eslint . --fix",
+        "lint": "eslint . --fix --cache",
         "format": "dprint fmt",
         "type-check": "tsc --noEmit",
         "quality": "concurrently -n ESLint,dprint,TypeScript -c #3178C6,#4D5564,#4B32C3 \"npm run lint\" \"npm run format\" \"npm run type-check\" "
