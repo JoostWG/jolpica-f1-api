@@ -48,4 +48,8 @@ export class Race {
             ? new SessionDateTime(data.SprintShootout)
             : null;
     }
+
+    public get dateTime(): Date {
+        return new Date(this.time !== null ? `${this.date}T${this.time}` : this.date);
+    }
 }
