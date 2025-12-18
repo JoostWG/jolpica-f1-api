@@ -7,11 +7,11 @@ import { Api } from 'jolpica-f1-api';
 
 const api = new Api();
 
-const { data: races } = await api
-    .races({ driver: 'perez', finishPosition: 1 })
+const { data: results } = await api
+    .results({ driver: 'perez', finishPosition: 1 })
     .get();
 
-for (const race of races) {
+for (const { race } of results) {
     console.log(`${race.season} ${race.name}`);
 }
 ```
@@ -38,6 +38,8 @@ console.log(`Total: ${meta.total}`);
 
 for (const driver of drivers) {
     console.log(`${driver.firstName} ${driver.lastName}`);
+    // Or
+    console.log(driver.name);
 }
 ```
 
