@@ -1,5 +1,5 @@
 /**
- * @see {@link https://github.com/jolpica/jolpica-f1/blob/main/docs/endpoints/status.md|Documentation}
+ * @see [Documentation](https://github.com/jolpica/jolpica-f1/blob/main/docs/endpoints/status.md)
  */
 export enum StatusType {
     Finished = '1',
