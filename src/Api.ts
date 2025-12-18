@@ -15,6 +15,7 @@ import {
     TeamStanding,
 } from './structures';
 import type {
+    AllApiOptions,
     CircuitOptions,
     DriverOptions,
     DriverStandingOptions,
@@ -25,7 +26,6 @@ import type {
     ResponsesMap,
     ResultOptions,
     SeasonOptions,
-    SimpleApiOptions,
     SprintResultOptions,
     StructuresMap,
     TeamOptions,
@@ -166,7 +166,7 @@ export class Api extends BaseApi {
     private makePendingRequest<TResource extends keyof ResponsesMap>(
         resource: TResource,
         transform: (data: ResponsesMap[TResource]['MRData']) => StructuresMap[TResource][],
-        options?: SimpleApiOptions,
+        options?: AllApiOptions,
     ): PendingRequest<TResource> {
         return new PendingRequest(this, resource, options ?? {}, transform);
     }

@@ -78,7 +78,12 @@ export interface StructuresMap {
     status: Status;
 }
 
-export type SimpleApiOptions =
+/**
+ * @deprecated Use {@link AllApiOptions} instead
+ */
+export type SimpleApiOptions = AllApiOptions;
+
+export type AllApiOptions =
     & SeasonOption
     & RoundOption
     & CircuitOption

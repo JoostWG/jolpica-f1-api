@@ -1,5 +1,5 @@
 import type { Api } from './Api';
-import type { Pagination, ResponsesMap, SimpleApiOptions, StructuresMap } from './types';
+import type { AllApiOptions, Pagination, ResponsesMap, StructuresMap } from './types';
 
 interface Response<T> {
     meta: {
@@ -18,7 +18,7 @@ export class PendingRequest<
     public constructor(
         protected readonly api: Api,
         public readonly resource: TResource,
-        public readonly options: SimpleApiOptions,
+        public readonly options: AllApiOptions,
         protected readonly transform: (data: ResponsesMap[TResource]['MRData']) => TStructure[],
     ) {
         //
@@ -46,7 +46,7 @@ export class PendingRequest<
         return data.length > 0 ? data[0] : null;
     }
 
-    private getPath(basePath: string, options: SimpleApiOptions): string {
+    private getPath(basePath: string, options: AllApiOptions): string {
         const path: string[] = [];
 
         if (options.season) {
