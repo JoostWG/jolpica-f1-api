@@ -10,7 +10,8 @@
         "lint": "eslint . --fix --cache",
         "format": "dprint fmt",
         "type-check": "tsc --noEmit",
-        "quality": "concurrently -n ESLint,dprint,TypeScript -c #3178C6,#4D5564,#4B32C3 \"npm run lint\" \"npm run format\" \"npm run type-check\" "
+        "quality": "concurrently -n ESLint,dprint,TypeScript -c #3178C6,#4D5564,#4B32C3 \"npm run lint\" \"npm run format\" \"npm run type-check\" ",
+        "typedoc": "typedoc src/index.ts"
     },
     "author": "",
     "license": "MIT",
@@ -25,6 +26,7 @@
         "eslint-plugin-check-file": "^3.3.1",
         "ts-node": "^10.9.2",
         "tsup": "^8.5.0",
+        "typedoc": "^0.28.15",
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.46.3"
     },
