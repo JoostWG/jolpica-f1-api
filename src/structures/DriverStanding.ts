@@ -13,7 +13,6 @@ export class DriverStanding {
     public readonly driver: Driver;
     public readonly teams: readonly Team[];
 
-    // eslint-disable-next-line @typescript-eslint/max-params
     public constructor(
         data: DriverStandingApiData,
         season: string,

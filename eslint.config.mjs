@@ -113,6 +113,7 @@ export default defineConfig(
                     allowExpressions: true,
                 },
             ],
+            '@typescript-eslint/max-params': ['error', { max: 4 }],
             // Below is all disabled
             '@typescript-eslint/no-unnecessary-type-parameters': 'off',
             '@typescript-eslint/prefer-regexp-exec': 'off',

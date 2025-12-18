@@ -14,7 +14,6 @@ export class PendingRequest<
     TResource extends keyof ResponsesMap,
     TStructure extends StructuresMap[TResource] = StructuresMap[TResource],
 > {
-    // eslint-disable-next-line @typescript-eslint/max-params
     public constructor(
         protected readonly api: Api,
         public readonly resource: TResource,
