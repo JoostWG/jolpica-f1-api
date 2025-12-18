@@ -40,4 +40,8 @@ export class Result {
             : null;
         this.race = new Race(raceData, this.api);
     }
+
+    public get driverAge(): number {
+        return this.driver.ageAt(this.race.dateTime);
+    }
 }
