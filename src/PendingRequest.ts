@@ -10,6 +10,9 @@ interface Response<T> {
     data: T;
 }
 
+/**
+ * @since 2.0.0
+ */
 export class PendingRequest<
     TResource extends keyof ResponsesMap,
     TStructure extends StructuresMap[TResource] = StructuresMap[TResource],
