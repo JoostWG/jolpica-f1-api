@@ -12,7 +12,7 @@ import type {
     Status,
     Team,
     TeamStanding,
-} from '../structures';
+} from '../models';
 import type {
     CircuitsResponse,
     ConstructorStandingsResponse,

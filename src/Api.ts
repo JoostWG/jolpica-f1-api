@@ -1,5 +1,4 @@
 import { BaseApi } from './BaseApi';
-import { PendingRequest } from './PendingRequest';
 import {
     Circuit,
     Driver,
@@ -13,7 +12,8 @@ import {
     SprintResult,
     Team,
     TeamStanding,
-} from './structures';
+} from './models';
+import { PendingRequest } from './PendingRequest';
 import type {
     AllApiOptions,
     CircuitOptions,
