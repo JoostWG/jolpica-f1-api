@@ -4,6 +4,9 @@ import { DriverApiData } from './driver.d.js';
 import { RaceApiData } from './race.d.js';
 import './circuit.d.js';
 
+/**
+ * @category Api data
+ */
 interface SprintResultApiData {
     number: string;
     position: string;
@@ -18,6 +21,9 @@ interface SprintResultApiData {
     FastestLap?: FastestLapApiData;
 }
 
+/**
+ * @category Api responses
+ */
 type SprintResultsResponse = SuccessResponse<{
     RaceTable: {
         Races: (RaceApiData & {

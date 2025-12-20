@@ -1,61 +1,166 @@
 import { StatusType } from '../enums/StatusType.js';
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 1.0.1
+ */
 interface StatusOption {
     status?: StatusType;
 }
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 1.0.1
+ */
 interface SeasonOption {
     season?: 'current' | (number & {});
 }
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 1.0.1
+ */
 interface RoundOption {
     round?: number | 'last' | 'next';
 }
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 1.0.1
+ */
 interface CircuitOption {
     circuit?: string;
 }
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 1.0.1
+ */
 interface DriverOption {
     driver?: string;
 }
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 1.0.1
+ */
 interface TeamOption {
     team?: string;
 }
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 1.0.1
+ */
 interface LapOption {
     lap?: number;
 }
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 1.0.1
+ */
 interface PitStopOption {
     pitStopNumber?: number;
 }
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 1.0.1
+ */
 interface FastestRankOption {
     fastestRank?: number;
 }
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 1.0.1
+ */
 interface GridPositionOption {
     gridPosition?: number;
 }
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 1.0.1
+ */
 interface FinishPositionOption {
     finishPosition?: number;
 }
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 1.0.1
+ */
 interface DriverStandingOption {
     driverStanding?: number;
 }
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 1.0.1
+ */
 interface QualifyingResultOption {
     qualifying?: number;
 }
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 1.0.1
+ */
 interface TeamStandingOption {
     teamStanding?: number;
 }
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 2.1.0
+ */
 type CircuitOptions =
     & SeasonOption
     & RoundOption
@@ -67,12 +172,26 @@ type CircuitOptions =
     & TeamOption
     & CircuitOption;
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 2.1.0
+ */
 type DriverStandingOptions =
     & Required<SeasonOption>
     & RoundOption
     & DriverOption
     & DriverStandingOption;
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 2.1.0
+ */
 type DriverOptions =
     & SeasonOption
     & RoundOption
@@ -84,6 +203,13 @@ type DriverOptions =
     & TeamOption
     & DriverOption;
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 2.1.0
+ */
 type LapOptions =
     & Required<SeasonOption>
     & Required<RoundOption>
@@ -91,6 +217,13 @@ type LapOptions =
     & LapOption
     & TeamOption;
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 2.1.0
+ */
 type PitStopOptions =
     & Required<SeasonOption>
     & Required<RoundOption>
@@ -98,6 +231,13 @@ type PitStopOptions =
     & LapOption
     & PitStopOption;
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 2.1.0
+ */
 type QualifyingResultOptions =
     & SeasonOption
     & RoundOption
@@ -109,6 +249,13 @@ type QualifyingResultOptions =
     & TeamOption
     & QualifyingResultOption;
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 2.1.0
+ */
 type RaceOptions =
     & SeasonOption
     & RoundOption
@@ -119,6 +266,13 @@ type RaceOptions =
     & StatusOption
     & TeamOption;
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 2.1.0
+ */
 type ResultOptions =
     & SeasonOption
     & RoundOption
@@ -130,6 +284,13 @@ type ResultOptions =
     & TeamOption
     & FinishPositionOption;
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 2.1.0
+ */
 type SeasonOptions =
     & CircuitOption
     & DriverOption
@@ -137,6 +298,13 @@ type SeasonOptions =
     & StatusOption
     & TeamOption;
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 2.1.0
+ */
 type SprintResultOptions =
     & CircuitOption
     & DriverOption
@@ -144,12 +312,26 @@ type SprintResultOptions =
     & StatusOption
     & TeamOption;
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 2.1.0
+ */
 type TeamStandingOptions =
     & Required<SeasonOption>
     & RoundOption
     & TeamOption
     & TeamStandingOption;
 
+/**
+ * @category Options
+ *
+ * @inline
+ *
+ * @since 2.1.0
+ */
 type TeamOptions =
     & SeasonOption
     & RoundOption

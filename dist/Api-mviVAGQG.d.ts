@@ -1,10 +1,10 @@
-import './structures/AverageSpeed.js';
-import { FastestLap } from './structures/FastestLap.js';
-import './structures/FastestLapTime.js';
-import { FinishingTime } from './structures/FinishingTime.js';
-import { Location } from './structures/Location.js';
-import { SessionDateTime } from './structures/SessionDateTime.js';
-import { Timing } from './structures/Timing.js';
+import './models/AverageSpeed.js';
+import { FastestLap } from './models/FastestLap.js';
+import './models/FastestLapTime.js';
+import { FinishingTime } from './models/FinishingTime.js';
+import { Location } from './models/Location.js';
+import { SessionDateTime } from './models/SessionDateTime.js';
+import { Timing } from './models/Timing.js';
 import { BaseApi } from './BaseApi.js';
 import { CircuitOptions, DriverStandingOptions, LapOptions, PitStopOptions, QualifyingResultOptions, RaceOptions, ResultOptions, SeasonOptions, SprintResultOptions, TeamOptions, SeasonOption, RoundOption, CircuitOption, DriverOption, TeamOption, LapOption, PitStopOption, FastestRankOption, GridPositionOption, FinishPositionOption, StatusOption, DriverStandingOption, QualifyingResultOption, TeamStandingOption, DriverOptions, TeamStandingOptions } from './types/options.d.js';
 import { CircuitApiData, CircuitsResponse } from './types/api/circuit.d.js';
@@ -24,6 +24,11 @@ import { ConstructorStandingApiData, ConstructorStandingsResponse } from './type
 import { Pagination } from './types/api/common.d.js';
 import './types/ApiCache.d.js';
 
+/**
+ * @category Models
+ *
+ * @since 2.0.0
+ */
 declare class Circuit {
     protected readonly api: Api;
     readonly id: string;
@@ -33,14 +38,11 @@ declare class Circuit {
     constructor(data: CircuitApiData, api: Api);
 }
 
-interface Response<T> {
-    meta: {
-        limit: number;
-        offset: number;
-        total: number;
-    };
-    data: T;
-}
+/**
+ * @category Base
+ *
+ * @since 2.0.0
+ */
 declare class PendingRequest<TResource extends keyof ResponsesMap, TStructure extends StructuresMap[TResource] = StructuresMap[TResource]> {
     protected readonly api: Api;
     readonly resource: TResource;
@@ -52,6 +54,11 @@ declare class PendingRequest<TResource extends keyof ResponsesMap, TStructure ex
     private getPath;
 }
 
+/**
+ * @category Models
+ *
+ * @since 2.0.0
+ */
 declare class Driver {
     protected readonly api: Api;
     readonly id: string;
@@ -63,22 +70,69 @@ declare class Driver {
     readonly number: number | null;
     readonly code: string | null;
     constructor(data: DriverApiData, api: Api);
+    /**
+     * @since 2.1.0
+     */
     get name(): string;
+    /**
+     * @since 2.1.0
+     */
     get age(): number;
+    /**
+     * @since 2.1.0
+     */
     ageAt(date: Date): number;
+    /**
+     * @since 2.1.0
+     */
     circuits(options?: Omit<CircuitOptions, 'driver'>): PendingRequest<'circuits'>;
+    /**
+     * @since 2.1.0
+     */
     driverStandings(options: Omit<DriverStandingOptions, 'driver'>): PendingRequest<'driverstandings'>;
+    /**
+     * @since 2.1.0
+     */
     laps(options: Omit<LapOptions, 'driver'>): PendingRequest<'laps'>;
+    /**
+     * @since 2.1.0
+     */
     pitStops(options: Omit<PitStopOptions, 'driver'>): PendingRequest<'pitstops'>;
+    /**
+     * @since 2.1.0
+     */
     qualifyingResults(options?: Omit<QualifyingResultOptions, 'driver'>): PendingRequest<'qualifying'>;
+    /**
+     * @since 2.1.0
+     */
     races(options?: Omit<RaceOptions, 'driver'>): PendingRequest<'races'>;
+    /**
+     * @since 2.1.0
+     */
     results(options?: Omit<ResultOptions, 'driver'>): PendingRequest<'results'>;
+    /**
+     * @since 2.1.0
+     */
     seasons(options?: Omit<SeasonOptions, 'driver'>): PendingRequest<'seasons'>;
+    /**
+     * @since 2.1.0
+     */
     sprintResults(options?: Omit<SprintResultOptions, 'driver'>): PendingRequest<'sprint'>;
+    /**
+     * @since 2.1.0
+     */
     teams(options?: TeamOptions): PendingRequest<'constructors'>;
+    /**
+     * @since 2.1.0
+     */
     private getOptions;
 }
 
+/**
+ * @category Models
+ *
+ * @since 2.0.0
+ */
 declare class Team {
     protected readonly api: Api;
     readonly id: string | null;
@@ -88,6 +142,11 @@ declare class Team {
     constructor(data: ConstructorApiData, api: Api);
 }
 
+/**
+ * @category Models
+ *
+ * @since 2.0.0
+ */
 declare class DriverStanding {
     protected readonly api: Api;
     readonly season: number;
@@ -101,6 +160,11 @@ declare class DriverStanding {
     constructor(data: DriverStandingApiData, season: string, round: string, api: Api);
 }
 
+/**
+ * @category Models
+ *
+ * @since 2.0.0
+ */
 declare class Race {
     protected readonly api: Api;
     readonly season: number;
@@ -121,6 +185,11 @@ declare class Race {
     get dateTime(): Date;
 }
 
+/**
+ * @category Models
+ *
+ * @since 2.0.0
+ */
 declare class Lap {
     protected readonly api: Api;
     readonly number: number;
@@ -129,6 +198,11 @@ declare class Lap {
     constructor(data: LapApiData, raceData: RaceApiData, api: Api);
 }
 
+/**
+ * @category Models
+ *
+ * @since 2.0.0
+ */
 declare class PitStop {
     protected readonly api: Api;
     readonly driverId: string;
@@ -140,6 +214,11 @@ declare class PitStop {
     constructor(data: PitStopApiData, raceData: RaceApiData, api: Api);
 }
 
+/**
+ * @category Models
+ *
+ * @since 2.0.0
+ */
 declare class QualifyingResult {
     protected readonly api: Api;
     readonly number: number;
@@ -153,6 +232,11 @@ declare class QualifyingResult {
     constructor(data: QualifyingResultApiData, raceData: RaceApiData, api: Api);
 }
 
+/**
+ * @category Models
+ *
+ * @since 2.0.0
+ */
 declare class Result {
     protected readonly api: Api;
     readonly number: number;
@@ -168,9 +252,17 @@ declare class Result {
     readonly finishingTime: FinishingTime | null;
     readonly race: Race;
     constructor(data: ResultApiData, raceData: RaceApiData, api: Api);
+    /**
+     * @experimental
+     */
     get driverAge(): number;
 }
 
+/**
+ * @category Models
+ *
+ * @since 2.0.0
+ */
 declare class Season {
     protected readonly api: Api;
     readonly year: number;
@@ -178,6 +270,11 @@ declare class Season {
     constructor(data: SeasonApiData, api: Api);
 }
 
+/**
+ * @category Models
+ *
+ * @since 2.0.0
+ */
 declare class SprintResult {
     protected readonly api: Api;
     readonly number: number;
@@ -195,6 +292,11 @@ declare class SprintResult {
     constructor(data: SprintResultApiData, raceData: RaceApiData, api: Api);
 }
 
+/**
+ * @category Models
+ *
+ * @since 2.0.0
+ */
 declare class Status {
     protected readonly api: Api;
     readonly id: StatusType;
@@ -203,6 +305,11 @@ declare class Status {
     constructor(data: StatusApiData, api: Api);
 }
 
+/**
+ * @category Models
+ *
+ * @since 2.0.0
+ */
 declare class TeamStanding {
     protected readonly api: Api;
     readonly season: number;
@@ -248,10 +355,19 @@ interface StructuresMap {
 }
 
 /**
+ * @category Options
+ *
+ * @since 1.0.1
+ *
  * @deprecated Use {@link AllApiOptions} instead
  */
 type SimpleApiOptions = AllApiOptions;
 
+/**
+ * @category Options
+ *
+ * @since 2.1.0
+ */
 type AllApiOptions =
     & SeasonOption
     & RoundOption
@@ -268,20 +384,80 @@ type AllApiOptions =
     & QualifyingResultOption
     & TeamStandingOption;
 
+/**
+ * @category Base
+ */
+interface Response<T> {
+    meta: {
+        limit: number;
+        offset: number;
+        total: number;
+    };
+    data: T;
+}
+
+/**
+ * @category Base
+ *
+ * @since 1.0.1
+ */
 declare class Api extends BaseApi {
+    /**
+     * @since 2.0.0
+     */
     circuits(options?: CircuitOptions): PendingRequest<'circuits'>;
+    /**
+     * @since 2.0.0
+     */
     driverStandings(options: DriverStandingOptions): PendingRequest<'driverstandings'>;
+    /**
+     * @since 2.0.0
+     */
     drivers(options?: DriverOptions): PendingRequest<'drivers'>;
+    /**
+     * @since 2.0.0
+     */
     laps(options: LapOptions): PendingRequest<'laps'>;
+    /**
+     * @since 2.0.0
+     */
     pitStops(options: PitStopOptions): PendingRequest<'pitstops'>;
+    /**
+     * @since 2.0.0
+     */
     qualifyingResults(options?: QualifyingResultOptions): PendingRequest<'qualifying'>;
+    /**
+     * @since 2.0.0
+     */
     races(options?: RaceOptions): PendingRequest<'races'>;
+    /**
+     * @since 2.0.0
+     *
+     * @example Get the Norris' wins from 2025
+     * ```ts
+     * const { data: results } = await api
+     *    .results({ season: 2025, driver: 'norris'})
+     *     .get();
+     * ```
+     */
     results(options?: ResultOptions): PendingRequest<'results'>;
+    /**
+     * @since 2.0.0
+     */
     seasons(options?: SeasonOptions): PendingRequest<'seasons'>;
+    /**
+     * @since 2.0.0
+     */
     sprintResults(options?: SprintResultOptions): PendingRequest<'sprint'>;
+    /**
+     * @since 2.0.0
+     */
     teamStandings(options: TeamStandingOptions): PendingRequest<'constructorstandings'>;
+    /**
+     * @since 2.0.0
+     */
     teams(options?: TeamOptions): PendingRequest<'constructors'>;
     private makePendingRequest;
 }
 
-export { Api as A, Circuit as C, Driver as D, Lap as L, PendingRequest as P, QualifyingResult as Q, Race as R, Season as S, Team as T, DriverStanding as a, PitStop as b, Result as c, SprintResult as d, Status as e, TeamStanding as f, type ResponsesMap as g, type StructuresMap as h, type SimpleApiOptions as i, type AllApiOptions as j };
+export { Api as A, Circuit as C, Driver as D, Lap as L, PitStop as P, QualifyingResult as Q, Race as R, Season as S, Team as T, DriverStanding as a, Result as b, SprintResult as c, Status as d, TeamStanding as e, PendingRequest as f, type ResponsesMap as g, type StructuresMap as h, type SimpleApiOptions as i, type AllApiOptions as j, type Response as k };

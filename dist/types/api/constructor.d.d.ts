@@ -1,5 +1,8 @@
 import { SuccessResponse } from './common.d.js';
 
+/**
+ * @category Api data
+ */
 interface ConstructorApiData {
     constructorId?: string;
     url?: string;
@@ -7,6 +10,9 @@ interface ConstructorApiData {
     nationality?: string;
 }
 
+/**
+ * @category Api responses
+ */
 type ConstructorsResponse = SuccessResponse<{
     ConstructorTable: {
         Constructors: ConstructorApiData[];

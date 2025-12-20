@@ -2,6 +2,9 @@ import { SuccessResponse } from './common.d.js';
 import { RaceApiData } from './race.d.js';
 import './circuit.d.js';
 
+/**
+ * @category Api data
+ */
 interface PitStopApiData {
     driverId: string;
     lap?: string;
@@ -10,6 +13,9 @@ interface PitStopApiData {
     duration?: string;
 }
 
+/**
+ * @category Api responses
+ */
 type PitStopsResponse = SuccessResponse<{
     RaceTable: {
         Races: (RaceApiData & { PitStops: PitStopApiData[] })[];

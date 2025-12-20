@@ -4,6 +4,9 @@ import { DriverApiData } from './driver.d.js';
 import { RaceApiData } from './race.d.js';
 import './circuit.d.js';
 
+/**
+ * @category Api data
+ */
 interface QualifyingResultApiData {
     number: string;
     position?: string;
@@ -14,6 +17,9 @@ interface QualifyingResultApiData {
     Q3?: string;
 }
 
+/**
+ * @category Api responses
+ */
 type QualifyingResultsResponse = SuccessResponse<{
     RaceTable: {
         Races: (RaceApiData & { QualifyingResults: QualifyingResultApiData[] })[];

@@ -1,5 +1,8 @@
 import { SuccessResponse } from './common.d.js';
 
+/**
+ * @category Api data
+ */
 interface LocationApiData {
     lat: `${number}`;
     long: `${number}`;
@@ -7,6 +10,9 @@ interface LocationApiData {
     country: string;
 }
 
+/**
+ * @category Api data
+ */
 interface CircuitApiData {
     circuitId: string;
     url: string;
@@ -14,6 +20,9 @@ interface CircuitApiData {
     Location: LocationApiData;
 }
 
+/**
+ * @category Api responses
+ */
 type CircuitsResponse = SuccessResponse<{
     CircuitTable: {
         Circuits: CircuitApiData[];

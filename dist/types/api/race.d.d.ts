@@ -1,11 +1,17 @@
 import { CircuitApiData } from './circuit.d.js';
 import { SuccessResponse } from './common.d.js';
 
+/**
+ * @category Api data
+ */
 interface DateTimeApiData {
     date?: string;
     time?: string;
 }
 
+/**
+ * @category Api data
+ */
 interface RaceApiData {
     season: string;
     round: string;
@@ -23,6 +29,9 @@ interface RaceApiData {
     SprintShootout?: DateTimeApiData;
 }
 
+/**
+ * @category Api responses
+ */
 type RacesResponse = SuccessResponse<{
     RaceTable: {
         Races: RaceApiData[];

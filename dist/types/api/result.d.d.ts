@@ -4,6 +4,9 @@ import { DriverApiData } from './driver.d.js';
 import { RaceApiData } from './race.d.js';
 import './circuit.d.js';
 
+/**
+ * @category Api data
+ */
 interface ResultApiData {
     number: string;
     position: string;
@@ -18,6 +21,9 @@ interface ResultApiData {
     Time?: FinishingTimeApiData;
 }
 
+/**
+ * @category Api responses
+ */
 type ResultsResponse = SuccessResponse<{
     RaceTable: {
         Races: (RaceApiData & {

@@ -1,5 +1,8 @@
 import { SuccessResponse } from './common.d.js';
 
+/**
+ * @category Api data
+ */
 interface DriverApiData {
     driverId: string;
     url: string;
@@ -11,6 +14,9 @@ interface DriverApiData {
     code?: string;
 }
 
+/**
+ * @category Api responses
+ */
 type DriversResponse = SuccessResponse<{
     DriverTable: {
         Drivers: DriverApiData[];

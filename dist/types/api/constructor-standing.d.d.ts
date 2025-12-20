@@ -1,6 +1,9 @@
 import { SuccessResponse } from './common.d.js';
 import { ConstructorApiData } from './constructor.d.js';
 
+/**
+ * @category Api data
+ */
 interface ConstructorStandingApiData {
     position?: string;
     positionText: string;
@@ -9,6 +12,9 @@ interface ConstructorStandingApiData {
     Constructor: ConstructorApiData;
 }
 
+/**
+ * @category Api responses
+ */
 type ConstructorStandingsResponse = SuccessResponse<{
     StandingsTable: {
         StandingsLists: {
