@@ -5,7 +5,7 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 import tseslint from 'typescript-eslint';
 
 export default defineConfig(
-    globalIgnores(['dist/*', 'eslint.config.mjs']),
+    globalIgnores(['dist/*', 'docs/*', 'eslint.config.mjs', 'typedoc-plugin.mjs']),
     js.configs.all,
     tseslint.configs.all,
     {
