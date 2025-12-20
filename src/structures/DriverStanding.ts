@@ -3,6 +3,9 @@ import type { DriverStandingApiData } from '../types';
 import { Driver } from './Driver';
 import { Team } from './Team';
 
+/**
+ * @since 2.0.0
+ */
 export class DriverStanding {
     public readonly season: number;
     public readonly round: number;

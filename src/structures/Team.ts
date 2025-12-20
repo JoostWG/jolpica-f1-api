@@ -1,6 +1,9 @@
 import type { Api } from '../Api';
 import type { ConstructorApiData } from '../types';
 
+/**
+ * @since 2.0.0
+ */
 export class Team {
     public readonly id: string | null;
     public readonly wikiUrl: string | null;

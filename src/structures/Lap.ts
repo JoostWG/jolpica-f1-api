@@ -3,6 +3,9 @@ import type { LapApiData, RaceApiData } from '../types';
 import { Race } from './Race';
 import { Timing } from './Timing';
 
+/**
+ * @since 2.0.0
+ */
 export class Lap {
     public readonly number: number;
     public readonly timings: readonly Timing[];

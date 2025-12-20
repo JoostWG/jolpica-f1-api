@@ -3,6 +3,9 @@ import type { RaceApiData } from '../types';
 import { Circuit } from './Circuit';
 import { SessionDateTime } from './SessionDateTime';
 
+/**
+ * @since 2.0.0
+ */
 export class Race {
     public readonly season: number;
     public readonly round: number;

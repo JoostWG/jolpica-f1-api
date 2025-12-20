@@ -32,7 +32,13 @@ import type {
     TeamStandingOptions,
 } from './types';
 
+/**
+ * @since 1.0.1
+ */
 export class Api extends BaseApi {
+    /**
+     * @since 2.0.0
+     */
     public circuits(options?: CircuitOptions): PendingRequest<'circuits'> {
         return this.makePendingRequest(
             'circuits',
@@ -42,6 +48,9 @@ export class Api extends BaseApi {
         );
     }
 
+    /**
+     * @since 2.0.0
+     */
     public driverStandings(options: DriverStandingOptions): PendingRequest<'driverstandings'> {
         return new PendingRequest(
             this,
@@ -61,6 +70,9 @@ export class Api extends BaseApi {
         );
     }
 
+    /**
+     * @since 2.0.0
+     */
     public drivers(options?: DriverOptions): PendingRequest<'drivers'> {
         return this.makePendingRequest(
             'drivers',
@@ -69,6 +81,9 @@ export class Api extends BaseApi {
         );
     }
 
+    /**
+     * @since 2.0.0
+     */
     public laps(options: LapOptions): PendingRequest<'laps'> {
         return this.makePendingRequest(
             'laps',
@@ -80,6 +95,9 @@ export class Api extends BaseApi {
         );
     }
 
+    /**
+     * @since 2.0.0
+     */
     public pitStops(options: PitStopOptions): PendingRequest<'pitstops'> {
         return this.makePendingRequest(
             'pitstops',
@@ -91,6 +109,9 @@ export class Api extends BaseApi {
         );
     }
 
+    /**
+     * @since 2.0.0
+     */
     public qualifyingResults(options?: QualifyingResultOptions): PendingRequest<'qualifying'> {
         return this.makePendingRequest(
             'qualifying',
@@ -104,6 +125,9 @@ export class Api extends BaseApi {
         );
     }
 
+    /**
+     * @since 2.0.0
+     */
     public races(options?: RaceOptions): PendingRequest<'races'> {
         return this.makePendingRequest(
             'races',
@@ -112,6 +136,9 @@ export class Api extends BaseApi {
         );
     }
 
+    /**
+     * @since 2.0.0
+     */
     public results(options?: ResultOptions): PendingRequest<'results'> {
         return this.makePendingRequest(
             'results',
@@ -123,6 +150,9 @@ export class Api extends BaseApi {
         );
     }
 
+    /**
+     * @since 2.0.0
+     */
     public seasons(options?: SeasonOptions): PendingRequest<'seasons'> {
         return this.makePendingRequest(
             'seasons',
@@ -131,6 +161,9 @@ export class Api extends BaseApi {
         );
     }
 
+    /**
+     * @since 2.0.0
+     */
     public sprintResults(options?: SprintResultOptions): PendingRequest<'sprint'> {
         return this.makePendingRequest(
             'sprint',
@@ -144,6 +177,9 @@ export class Api extends BaseApi {
         );
     }
 
+    /**
+     * @since 2.0.0
+     */
     public teamStandings(options: TeamStandingOptions): PendingRequest<'constructorstandings'> {
         return this.makePendingRequest(
             'constructorstandings',
@@ -162,6 +198,9 @@ export class Api extends BaseApi {
         );
     }
 
+    /**
+     * @since 2.0.0
+     */
     public teams(options?: TeamOptions): PendingRequest<'constructors'> {
         return this.makePendingRequest(
             'constructors',

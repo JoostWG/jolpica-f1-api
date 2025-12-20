@@ -2,6 +2,9 @@ import type { Api } from '../Api';
 import type { CircuitApiData } from '../types';
 import { Location } from './Location';
 
+/**
+ * @since 2.0.0
+ */
 export class Circuit {
     public readonly id: string;
     public readonly wikiUrl: string;

@@ -1,5 +1,8 @@
 import type { LocationApiData } from '../types';
 
+/**
+ * @since 2.0.0
+ */
 export class Location {
     public readonly latitude: number;
     public readonly longitude: number;

@@ -2,6 +2,9 @@ import type { Api } from '../Api';
 import type { PitStopApiData, RaceApiData } from '../types';
 import { Race } from './Race';
 
+/**
+ * @since 2.0.0
+ */
 export class PitStop {
     public readonly driverId: string;
     public readonly lap: number | null;

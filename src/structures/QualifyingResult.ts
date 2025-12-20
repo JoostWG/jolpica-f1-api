@@ -4,6 +4,9 @@ import { Driver } from './Driver';
 import { Race } from './Race';
 import { Team } from './Team';
 
+/**
+ * @since 2.0.0
+ */
 export class QualifyingResult {
     public readonly number: number;
     public readonly position: number | null;

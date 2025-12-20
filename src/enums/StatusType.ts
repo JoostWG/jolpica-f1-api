@@ -1,5 +1,7 @@
 /**
  * @see [Documentation](https://github.com/jolpica/jolpica-f1/blob/main/docs/endpoints/status.md)
+ *
+ * @since 1.0.1
  */
 export enum StatusType {
     Finished = '1',

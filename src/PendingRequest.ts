@@ -1,14 +1,5 @@
 import type { Api } from './Api';
-import type { AllApiOptions, Pagination, ResponsesMap, StructuresMap } from './types';
-
-interface Response<T> {
-    meta: {
-        limit: number;
-        offset: number;
-        total: number;
-    };
-    data: T;
-}
+import type { AllApiOptions, Pagination, Response, ResponsesMap, StructuresMap } from './types';
 
 /**
  * @since 2.0.0

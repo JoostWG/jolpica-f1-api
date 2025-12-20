@@ -2,6 +2,9 @@ import type { Api } from '../Api';
 import type { ConstructorStandingApiData } from '../types';
 import { Team } from './Team';
 
+/**
+ * @since 2.0.0
+ */
 export class TeamStanding {
     public readonly season: number;
     public readonly round: number;

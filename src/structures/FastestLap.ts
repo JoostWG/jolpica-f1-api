@@ -2,6 +2,9 @@ import type { FastestLapApiData } from '../types';
 import { AverageSpeed } from './AverageSpeed';
 import { FastestLapTime } from './FastestLapTime';
 
+/**
+ * @since 2.0.0
+ */
 export class FastestLap {
     public readonly rank: number;
     public readonly lap: number;

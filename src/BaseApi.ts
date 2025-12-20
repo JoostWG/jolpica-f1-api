@@ -8,11 +8,17 @@ import axios, {
 import { BadRequest, HttpError, NotFound } from './errors';
 import type { ApiCache, BadRequestResponse, Pagination, SuccessResponse } from './types';
 
+/**
+ * @since 1.0.1
+ */
 export interface BaseApiConstructorOptions {
     cache?: ApiCache;
     config?: Omit<CreateAxiosDefaults, 'baseUrl'>;
 }
 
+/**
+ * @since 1.0.1
+ */
 export class BaseApi {
     private readonly axios: AxiosInstance;
     private readonly cache?: ApiCache;

@@ -6,6 +6,9 @@ import { FinishingTime } from './FinishingTime';
 import { Race } from './Race';
 import { Team } from './Team';
 
+/**
+ * @since 2.0.0
+ */
 export class Result {
     public readonly number: number;
     public readonly position: string;

@@ -1,5 +1,8 @@
 import type { TimingApiData } from '../types';
 
+/**
+ * @since 2.0.0
+ */
 export class Timing {
     public readonly driverId: string;
     public readonly position: number;

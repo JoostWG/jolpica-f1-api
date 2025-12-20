@@ -1,0 +1,10 @@
+{
+    "cleanOutputDir": true,
+    "entryPoints": ["src/index.ts"],
+    "out": "./docs",
+    "plugin": ["./typedoc-plugin.js"],
+    "navigation": {
+        "includeCategories": true
+    },
+    "navigationLeaves": ["JSONOutput"]
+}

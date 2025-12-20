@@ -2,6 +2,9 @@ import type { Api } from '../Api';
 import type { StatusType } from '../enums';
 import type { StatusApiData } from '../types';
 
+/**
+ * @since 2.0.0
+ */
 export class Status {
     public readonly id: StatusType;
     public readonly count: number;
