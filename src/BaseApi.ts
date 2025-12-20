@@ -9,21 +9,18 @@ import { BadRequest, HttpError, NotFound } from './errors';
 import type { ApiCache, BadRequestResponse, Pagination, SuccessResponse } from './types';
 
 /**
- * @since 1.0.1
- */
-export interface BaseApiConstructorOptions {
-    cache?: ApiCache;
-    config?: Omit<CreateAxiosDefaults, 'baseUrl'>;
-}
-
-/**
+ * @category Base
+ *
  * @since 1.0.1
  */
 export class BaseApi {
     private readonly axios: AxiosInstance;
     private readonly cache?: ApiCache;
 
-    public constructor({ cache, config }: BaseApiConstructorOptions = {}) {
+    public constructor({ cache, config }: {
+        cache?: ApiCache;
+        config?: Omit<CreateAxiosDefaults, 'baseUrl'>;
+    } = {}) {
         this.axios = axios.create({
             baseURL: 'https://api.jolpi.ca/ergast/f1',
             validateStatus: (status) =>

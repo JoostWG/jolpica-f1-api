@@ -2,6 +2,8 @@ import type { AxiosResponse } from 'axios';
 import { HttpError } from './HttpError';
 
 /**
+ * @category Errors
+ *
  * @since 1.0.1
  */
 export class NotFound extends HttpError {

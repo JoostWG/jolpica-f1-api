@@ -5,6 +5,8 @@ import { Race } from './Race';
 import { Team } from './Team';
 
 /**
+ * @category Models
+ *
  * @since 2.0.0
  */
 export class QualifyingResult {

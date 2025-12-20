@@ -3,6 +3,8 @@ import type { CircuitApiData } from '../types';
 import { Location } from './Location';
 
 /**
+ * @category Models
+ *
  * @since 2.0.0
  */
 export class Circuit {

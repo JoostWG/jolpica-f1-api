@@ -33,6 +33,8 @@ import type {
 } from './types';
 
 /**
+ * @category Base
+ *
  * @since 1.0.1
  */
 export class Api extends BaseApi {
@@ -138,6 +140,13 @@ export class Api extends BaseApi {
 
     /**
      * @since 2.0.0
+     *
+     * @example Get the Norris' wins from 2025
+     * ```ts
+     * const { data: results } = await api
+     *    .results({ season: 2025, driver: 'norris'})
+     *     .get();
+     * ```
      */
     public results(options?: ResultOptions): PendingRequest<'results'> {
         return this.makePendingRequest(

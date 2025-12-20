@@ -3,6 +3,8 @@ import type { PitStopApiData, RaceApiData } from '../types';
 import { Race } from './Race';
 
 /**
+ * @category Models
+ *
  * @since 2.0.0
  */
 export class PitStop {

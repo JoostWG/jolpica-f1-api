@@ -1,6 +1,8 @@
 import { HttpError } from './HttpError';
 
 /**
+ * @category Errors
+ *
  * @since 1.0.1
  */
 export class BadRequest extends HttpError {

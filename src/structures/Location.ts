@@ -1,6 +1,8 @@
 import type { LocationApiData } from '../types';
 
 /**
+ * @category Models
+ *
  * @since 2.0.0
  */
 export class Location {

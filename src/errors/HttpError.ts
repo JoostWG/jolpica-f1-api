@@ -1,4 +1,6 @@
 /**
+ * @category Errors
+ *
  * @since 1.0.1
  */
 export class HttpError extends Error {

@@ -4,6 +4,8 @@ import { Race } from './Race';
 import { Timing } from './Timing';
 
 /**
+ * @category Models
+ *
  * @since 2.0.0
  */
 export class Lap {

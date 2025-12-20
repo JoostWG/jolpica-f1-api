@@ -1,17 +1,29 @@
+/**
+ * @category Api data
+ */
 export interface FinishingTimeApiData {
     millis: string;
     time: string;
 }
 
+/**
+ * @category Api data
+ */
 export interface FastestLapTimeApiData {
     time: string;
 }
 
+/**
+ * @category Api data
+ */
 export interface AverageSpeedApiData {
     units: string;
     speed: string;
 }
 
+/**
+ * @category Api data
+ */
 export interface FastestLapApiData {
     rank: string;
     lap: string;
@@ -19,6 +31,9 @@ export interface FastestLapApiData {
     AverageSpeed?: AverageSpeedApiData;
 }
 
+/**
+ * @category Base
+ */
 export interface Pagination {
     /**
      * Maximum number of results results returned. Defaults to 30. Max is 100
@@ -39,10 +54,16 @@ export type MRData<T> = T & {
     total: `${number}`;
 };
 
+/**
+ * @category Api responses
+ */
 export interface SuccessResponse<T = unknown> {
     MRData: MRData<T>;
 }
 
+/**
+ * @category Api responses
+ */
 export interface BadRequestResponse {
     detail: string;
 }

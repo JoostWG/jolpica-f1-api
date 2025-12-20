@@ -1,6 +1,8 @@
 import type { TimingApiData } from '../types';
 
 /**
+ * @category Models
+ *
  * @since 2.0.0
  */
 export class Timing {

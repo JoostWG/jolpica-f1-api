@@ -2,6 +2,8 @@ import type axios from 'axios';
 import type { Pagination } from './api';
 
 /**
+ * @category Base
+ *
  * @since 1.0.1
  */
 export interface ApiCache {

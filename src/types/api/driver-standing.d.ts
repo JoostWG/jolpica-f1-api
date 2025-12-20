@@ -2,6 +2,9 @@ import type { SuccessResponse } from '.';
 import type { ConstructorApiData } from './constructor';
 import type { DriverApiData } from './driver';
 
+/**
+ * @category Api data
+ */
 export interface DriverStandingApiData {
     position?: string;
     positionText: string;
@@ -11,6 +14,9 @@ export interface DriverStandingApiData {
     Constructors: ConstructorApiData[];
 }
 
+/**
+ * @category Api responses
+ */
 export type DriverStandingsResponse = SuccessResponse<{
     StandingsTable: {
         StandingsLists: {

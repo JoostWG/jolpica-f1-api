@@ -1,5 +1,8 @@
 import type { SuccessResponse } from '.';
 
+/**
+ * @category Api data
+ */
 export interface ConstructorApiData {
     constructorId?: string;
     url?: string;
@@ -7,6 +10,9 @@ export interface ConstructorApiData {
     nationality?: string;
 }
 
+/**
+ * @category Api responses
+ */
 export type ConstructorsResponse = SuccessResponse<{
     ConstructorTable: {
         Constructors: ConstructorApiData[];

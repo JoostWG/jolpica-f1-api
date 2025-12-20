@@ -1,5 +1,8 @@
 import type { SuccessResponse } from '.';
 
+/**
+ * @category Api data
+ */
 export interface LocationApiData {
     lat: `${number}`;
     long: `${number}`;
@@ -7,6 +10,9 @@ export interface LocationApiData {
     country: string;
 }
 
+/**
+ * @category Api data
+ */
 export interface CircuitApiData {
     circuitId: string;
     url: string;
@@ -14,6 +20,9 @@ export interface CircuitApiData {
     Location: LocationApiData;
 }
 
+/**
+ * @category Api responses
+ */
 export type CircuitsResponse = SuccessResponse<{
     CircuitTable: {
         Circuits: CircuitApiData[];

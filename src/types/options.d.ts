@@ -1,6 +1,10 @@
 import type { StatusType } from '../enums';
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 1.0.1
  */
 export interface StatusOption {
@@ -8,6 +12,10 @@ export interface StatusOption {
 }
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 1.0.1
  */
 export interface SeasonOption {
@@ -15,6 +23,10 @@ export interface SeasonOption {
 }
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 1.0.1
  */
 export interface RoundOption {
@@ -22,6 +34,10 @@ export interface RoundOption {
 }
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 1.0.1
  */
 export interface CircuitOption {
@@ -29,6 +45,10 @@ export interface CircuitOption {
 }
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 1.0.1
  */
 export interface DriverOption {
@@ -36,6 +56,10 @@ export interface DriverOption {
 }
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 1.0.1
  */
 export interface TeamOption {
@@ -43,6 +67,10 @@ export interface TeamOption {
 }
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 1.0.1
  */
 export interface LapOption {
@@ -50,6 +78,10 @@ export interface LapOption {
 }
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 1.0.1
  */
 export interface PitStopOption {
@@ -57,6 +89,10 @@ export interface PitStopOption {
 }
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 1.0.1
  */
 export interface FastestRankOption {
@@ -64,6 +100,10 @@ export interface FastestRankOption {
 }
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 1.0.1
  */
 export interface GridPositionOption {
@@ -71,6 +111,10 @@ export interface GridPositionOption {
 }
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 1.0.1
  */
 export interface FinishPositionOption {
@@ -78,6 +122,10 @@ export interface FinishPositionOption {
 }
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 1.0.1
  */
 export interface DriverStandingOption {
@@ -85,6 +133,10 @@ export interface DriverStandingOption {
 }
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 1.0.1
  */
 export interface QualifyingResultOption {
@@ -92,6 +144,10 @@ export interface QualifyingResultOption {
 }
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 1.0.1
  */
 export interface TeamStandingOption {
@@ -99,6 +155,10 @@ export interface TeamStandingOption {
 }
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 2.1.0
  */
 export type CircuitOptions =
@@ -113,6 +173,10 @@ export type CircuitOptions =
     & CircuitOption;
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 2.1.0
  */
 export type DriverStandingOptions =
@@ -122,6 +186,10 @@ export type DriverStandingOptions =
     & DriverStandingOption;
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 2.1.0
  */
 export type DriverOptions =
@@ -136,6 +204,10 @@ export type DriverOptions =
     & DriverOption;
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 2.1.0
  */
 export type LapOptions =
@@ -146,6 +218,10 @@ export type LapOptions =
     & TeamOption;
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 2.1.0
  */
 export type PitStopOptions =
@@ -156,6 +232,10 @@ export type PitStopOptions =
     & PitStopOption;
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 2.1.0
  */
 export type QualifyingResultOptions =
@@ -170,6 +250,10 @@ export type QualifyingResultOptions =
     & QualifyingResultOption;
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 2.1.0
  */
 export type RaceOptions =
@@ -183,6 +267,10 @@ export type RaceOptions =
     & TeamOption;
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 2.1.0
  */
 export type ResultOptions =
@@ -197,6 +285,10 @@ export type ResultOptions =
     & FinishPositionOption;
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 2.1.0
  */
 export type SeasonOptions =
@@ -207,6 +299,10 @@ export type SeasonOptions =
     & TeamOption;
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 2.1.0
  */
 export type SprintResultOptions =
@@ -217,6 +313,10 @@ export type SprintResultOptions =
     & TeamOption;
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 2.1.0
  */
 export type TeamStandingOptions =
@@ -226,6 +326,10 @@ export type TeamStandingOptions =
     & TeamStandingOption;
 
 /**
+ * @category Options
+ *
+ * @inline
+ *
  * @since 2.1.0
  */
 export type TeamOptions =

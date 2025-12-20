@@ -2,6 +2,8 @@ import type { Api } from './Api';
 import type { AllApiOptions, Pagination, Response, ResponsesMap, StructuresMap } from './types';
 
 /**
+ * @category Base
+ *
  * @since 2.0.0
  */
 export class PendingRequest<

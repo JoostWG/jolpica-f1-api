@@ -82,10 +82,19 @@ export interface StructuresMap {
 }
 
 /**
+ * @category Options
+ *
+ * @since 1.0.1
+ *
  * @deprecated Use {@link AllApiOptions} instead
  */
 export type SimpleApiOptions = AllApiOptions;
 
+/**
+ * @category Options
+ *
+ * @since 2.1.0
+ */
 export type AllApiOptions =
     & SeasonOption
     & RoundOption
@@ -102,6 +111,9 @@ export type AllApiOptions =
     & QualifyingResultOption
     & TeamStandingOption;
 
+/**
+ * @category Base
+ */
 export interface Response<T> {
     meta: {
         limit: number;

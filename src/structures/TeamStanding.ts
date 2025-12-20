@@ -3,6 +3,8 @@ import type { ConstructorStandingApiData } from '../types';
 import { Team } from './Team';
 
 /**
+ * @category Models
+ *
  * @since 2.0.0
  */
 export class TeamStanding {

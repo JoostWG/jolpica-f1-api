@@ -3,6 +3,8 @@ import { AverageSpeed } from './AverageSpeed';
 import { FastestLapTime } from './FastestLapTime';
 
 /**
+ * @category Models
+ *
  * @since 2.0.0
  */
 export class FastestLap {

@@ -3,6 +3,8 @@ import type { StatusType } from '../enums';
 import type { StatusApiData } from '../types';
 
 /**
+ * @category Models
+ *
  * @since 2.0.0
  */
 export class Status {

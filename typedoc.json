@@ -2,9 +2,21 @@
     "cleanOutputDir": true,
     "entryPoints": ["src/index.ts"],
     "out": "./docs",
-    "plugin": ["./typedoc-plugin.js"],
+    "plugin": ["./typedoc-plugin.mjs"],
     "navigation": {
         "includeCategories": true
     },
-    "navigationLeaves": ["JSONOutput"]
+    "navigationLeaves": ["JSONOutput"],
+    "categoryOrder": [
+        "Base",
+        "Options",
+        "Models",
+        "Enums",
+        "Errors",
+        "Api data",
+        "Api responses",
+        "Other"
+    ],
+    "maxTypeConversionDepth": 10,
+    "sourceLinkExternal": true
 }

@@ -2,6 +2,8 @@ import type { Api } from '../Api';
 import type { ConstructorApiData } from '../types';
 
 /**
+ * @category Models
+ *
  * @since 2.0.0
  */
 export class Team {

@@ -4,6 +4,8 @@ import { Circuit } from './Circuit';
 import { SessionDateTime } from './SessionDateTime';
 
 /**
+ * @category Models
+ *
  * @since 2.0.0
  */
 export class Race {
