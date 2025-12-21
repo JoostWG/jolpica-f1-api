@@ -6,6 +6,7 @@ import type {
     DriverStandingOptions,
     LapOptions,
     PitStopOptions,
+    Prettify,
     QualifyingResultOptions,
     RaceOptions,
     ResultOptions,
@@ -13,6 +14,16 @@ import type {
     SprintResultOptions,
     TeamOptions,
 } from '../types';
+import type { Circuit } from './Circuit';
+import type { DriverStanding } from './DriverStanding';
+import type { Lap } from './Lap';
+import type { PitStop } from './PitStop';
+import type { QualifyingResult } from './QualifyingResult';
+import type { Race } from './Race';
+import type { Result } from './Result';
+import type { Season } from './Season';
+import type { SprintResult } from './SprintResult';
+import type { Team } from './Team';
 
 /**
  * @category Models
@@ -20,14 +31,38 @@ import type {
  * @since 2.0.0
  */
 export class Driver {
+    /**
+     *  Unique ID used by the API
+     */
     public readonly id: string;
-    public readonly wikiUrl: string;
+    /**
+     *  The driver's first name
+     */
     public readonly firstName: string;
+    /**
+     *  The driver's last name
+     */
     public readonly lastName: string;
+    /**
+     *  The driver's date of birth
+     */
     public readonly dateOfBirth: Date;
+    /**
+     *  The driver's nationality
+     */
     public readonly nationality: string;
+    /**
+     *  The driver's racing number
+     */
     public readonly number: number | null;
+    /**
+     *  The driver's three letter code
+     */
     public readonly code: string | null;
+    /**
+     *  URL to wikipedia page
+     */
+    public readonly wikiUrl: string;
 
     public constructor(data: DriverApiData, protected readonly api: Api) {
         this.id = data.driverId;
@@ -41,6 +76,8 @@ export class Driver {
     }
 
     /**
+     * The driver's full name.
+     *
      * @since 2.1.0
      */
     public get name(): string {
@@ -48,6 +85,8 @@ export class Driver {
     }
 
     /**
+     * The driver's current age.
+     *
      * @since 2.1.0
      */
     public get age(): number {
@@ -55,6 +94,8 @@ export class Driver {
     }
 
     /**
+     * Get the driver's age for a given date.
+     *
      * @since 2.1.0
      */
     public ageAt(date: Date): number {
@@ -72,9 +113,11 @@ export class Driver {
     }
 
     /**
+     * Get circuits the driver has raced at.
+     *
      * @since 2.1.0
      */
-    public circuits(options?: Omit<CircuitOptions, 'driver'>): PendingRequest<'circuits'> {
+    public circuits(options?: Prettify<Omit<CircuitOptions, 'driver'>>): PendingRequest<Circuit> {
         return this.api.circuits(this.getOptions(options));
     }
 
@@ -82,22 +125,22 @@ export class Driver {
      * @since 2.1.0
      */
     public driverStandings(
-        options: Omit<DriverStandingOptions, 'driver'>,
-    ): PendingRequest<'driverstandings'> {
+        options: Prettify<Omit<DriverStandingOptions, 'driver'>>,
+    ): PendingRequest<DriverStanding> {
         return this.api.driverStandings(this.getOptions(options));
     }
 
     /**
      * @since 2.1.0
      */
-    public laps(options: Omit<LapOptions, 'driver'>): PendingRequest<'laps'> {
+    public laps(options: Prettify<Omit<LapOptions, 'driver'>>): PendingRequest<Lap> {
         return this.api.laps(this.getOptions(options));
     }
 
     /**
      * @since 2.1.0
      */
-    public pitStops(options: Omit<PitStopOptions, 'driver'>): PendingRequest<'pitstops'> {
+    public pitStops(options: Prettify<Omit<PitStopOptions, 'driver'>>): PendingRequest<PitStop> {
         return this.api.pitStops(this.getOptions(options));
     }
 
@@ -105,43 +148,45 @@ export class Driver {
      * @since 2.1.0
      */
     public qualifyingResults(
-        options?: Omit<QualifyingResultOptions, 'driver'>,
-    ): PendingRequest<'qualifying'> {
+        options?: Prettify<Omit<QualifyingResultOptions, 'driver'>>,
+    ): PendingRequest<QualifyingResult> {
         return this.api.qualifyingResults(this.getOptions(options));
     }
 
     /**
      * @since 2.1.0
      */
-    public races(options?: Omit<RaceOptions, 'driver'>): PendingRequest<'races'> {
+    public races(options?: Prettify<Omit<RaceOptions, 'driver'>>): PendingRequest<Race> {
         return this.api.races(this.getOptions(options));
     }
 
     /**
      * @since 2.1.0
      */
-    public results(options?: Omit<ResultOptions, 'driver'>): PendingRequest<'results'> {
+    public results(options?: Prettify<Omit<ResultOptions, 'driver'>>): PendingRequest<Result> {
         return this.api.results(this.getOptions(options));
     }
 
     /**
      * @since 2.1.0
      */
-    public seasons(options?: Omit<SeasonOptions, 'driver'>): PendingRequest<'seasons'> {
+    public seasons(options?: Prettify<Omit<SeasonOptions, 'driver'>>): PendingRequest<Season> {
         return this.api.seasons(this.getOptions(options));
     }
 
     /**
      * @since 2.1.0
      */
-    public sprintResults(options?: Omit<SprintResultOptions, 'driver'>): PendingRequest<'sprint'> {
+    public sprintResults(
+        options?: Prettify<Omit<SprintResultOptions, 'driver'>>,
+    ): PendingRequest<SprintResult> {
         return this.api.sprintResults(this.getOptions(options));
     }
 
     /**
      * @since 2.1.0
      */
-    public teams(options?: TeamOptions): PendingRequest<'constructors'> {
+    public teams(options?: Prettify<TeamOptions>): PendingRequest<Team> {
         return this.api.teams(this.getOptions(options));
     }
 

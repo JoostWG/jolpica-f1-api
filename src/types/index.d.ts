@@ -49,6 +49,15 @@ export type * from './api';
 export type * from './ApiCache';
 export type * from './options';
 
+/**
+ * This type exists solely for documentation purposes. To nicely format intersections.
+ *
+ * @inline
+ *
+ * @internal
+ */
+export type Prettify<T> = { [K in keyof T]: T[K] } & {};
+
 export interface ResponsesMap {
     circuits: CircuitsResponse;
     constructorstandings: ConstructorStandingsResponse;
@@ -65,7 +74,7 @@ export interface ResponsesMap {
     status: StatusesResponse;
 }
 
-export interface StructuresMap {
+export interface ModelsMap {
     circuits: Circuit;
     constructorstandings: TeamStanding;
     constructors: Team;
@@ -80,6 +89,10 @@ export interface StructuresMap {
     sprint: SprintResult;
     status: Status;
 }
+
+export type ModelsKey<T> = {
+    [K in keyof ModelsMap]: ModelsMap[K] extends T ? K : never;
+}[keyof ModelsMap];
 
 /**
  * @category Options

@@ -20,14 +20,15 @@ import type {
     DriverOptions,
     DriverStandingOptions,
     LapOptions,
-    PitStopOptions,
+    ModelsKey,
+    ModelsMap,
+    Prettify,
     QualifyingResultOptions,
     RaceOptions,
     ResponsesMap,
     ResultOptions,
     SeasonOptions,
     SprintResultOptions,
-    StructuresMap,
     TeamOptions,
     TeamStandingOptions,
 } from './types';
@@ -39,9 +40,11 @@ import type {
  */
 export class Api extends BaseApi {
     /**
+     * Get circuits
+     *
      * @since 2.0.0
      */
-    public circuits(options?: CircuitOptions): PendingRequest<'circuits'> {
+    public circuits(options?: Prettify<CircuitOptions>): PendingRequest<Circuit> {
         return this.makePendingRequest(
             'circuits',
             (data) =>
@@ -51,9 +54,13 @@ export class Api extends BaseApi {
     }
 
     /**
+     * Get driver standings
+     *
      * @since 2.0.0
      */
-    public driverStandings(options: DriverStandingOptions): PendingRequest<'driverstandings'> {
+    public driverStandings(
+        options: Prettify<DriverStandingOptions>,
+    ): PendingRequest<DriverStanding> {
         return new PendingRequest(
             this,
             'driverstandings',
@@ -73,9 +80,11 @@ export class Api extends BaseApi {
     }
 
     /**
+     * Get drivers
+     *
      * @since 2.0.0
      */
-    public drivers(options?: DriverOptions): PendingRequest<'drivers'> {
+    public drivers(options?: Prettify<DriverOptions>): PendingRequest<Driver> {
         return this.makePendingRequest(
             'drivers',
             (data) => data.DriverTable.Drivers.map((driverData) => new Driver(driverData, this)),
@@ -84,9 +93,11 @@ export class Api extends BaseApi {
     }
 
     /**
+     * Get laps
+     *
      * @since 2.0.0
      */
-    public laps(options: LapOptions): PendingRequest<'laps'> {
+    public laps(options: Prettify<LapOptions>): PendingRequest<Lap> {
         return this.makePendingRequest(
             'laps',
             (data) =>
@@ -98,9 +109,11 @@ export class Api extends BaseApi {
     }
 
     /**
+     * Get pit stops
+     *
      * @since 2.0.0
      */
-    public pitStops(options: PitStopOptions): PendingRequest<'pitstops'> {
+    public pitStops(options: Prettify<LapOptions>): PendingRequest<PitStop> {
         return this.makePendingRequest(
             'pitstops',
             (data) =>
@@ -112,9 +125,13 @@ export class Api extends BaseApi {
     }
 
     /**
+     * Get qualifying results
+     *
      * @since 2.0.0
      */
-    public qualifyingResults(options?: QualifyingResultOptions): PendingRequest<'qualifying'> {
+    public qualifyingResults(
+        options?: Prettify<QualifyingResultOptions>,
+    ): PendingRequest<QualifyingResult> {
         return this.makePendingRequest(
             'qualifying',
             (data) =>
@@ -128,9 +145,11 @@ export class Api extends BaseApi {
     }
 
     /**
+     * Get races
+     *
      * @since 2.0.0
      */
-    public races(options?: RaceOptions): PendingRequest<'races'> {
+    public races(options?: Prettify<RaceOptions>): PendingRequest<Race> {
         return this.makePendingRequest(
             'races',
             (data) => data.RaceTable.Races.map((raceData) => new Race(raceData, this)),
@@ -139,7 +158,7 @@ export class Api extends BaseApi {
     }
 
     /**
-     * @since 2.0.0
+     * Get results
      *
      * @example Get the Norris' wins from 2025
      * ```ts
@@ -147,8 +166,10 @@ export class Api extends BaseApi {
      *    .results({ season: 2025, driver: 'norris'})
      *     .get();
      * ```
+     *
+     * @since 2.0.0
      */
-    public results(options?: ResultOptions): PendingRequest<'results'> {
+    public results(options?: Prettify<ResultOptions>): PendingRequest<Result> {
         return this.makePendingRequest(
             'results',
             (data) =>
@@ -160,9 +181,11 @@ export class Api extends BaseApi {
     }
 
     /**
+     * Get seasons
+     *
      * @since 2.0.0
      */
-    public seasons(options?: SeasonOptions): PendingRequest<'seasons'> {
+    public seasons(options?: Prettify<SeasonOptions>): PendingRequest<Season> {
         return this.makePendingRequest(
             'seasons',
             (data) => data.SeasonTable.Seasons.map((seasonData) => new Season(seasonData, this)),
@@ -171,9 +194,11 @@ export class Api extends BaseApi {
     }
 
     /**
+     * Get sprint results
+     *
      * @since 2.0.0
      */
-    public sprintResults(options?: SprintResultOptions): PendingRequest<'sprint'> {
+    public sprintResults(options?: Prettify<SprintResultOptions>): PendingRequest<SprintResult> {
         return this.makePendingRequest(
             'sprint',
             (data) =>
@@ -187,9 +212,11 @@ export class Api extends BaseApi {
     }
 
     /**
+     * Get team standings
+     *
      * @since 2.0.0
      */
-    public teamStandings(options: TeamStandingOptions): PendingRequest<'constructorstandings'> {
+    public teamStandings(options: Prettify<TeamStandingOptions>): PendingRequest<TeamStanding> {
         return this.makePendingRequest(
             'constructorstandings',
             (data) =>
@@ -208,9 +235,11 @@ export class Api extends BaseApi {
     }
 
     /**
+     * Get teams
+     *
      * @since 2.0.0
      */
-    public teams(options?: TeamOptions): PendingRequest<'constructors'> {
+    public teams(options?: Prettify<TeamOptions>): PendingRequest<Team> {
         return this.makePendingRequest(
             'constructors',
             (data) =>
@@ -219,11 +248,14 @@ export class Api extends BaseApi {
         );
     }
 
-    private makePendingRequest<TResource extends keyof ResponsesMap>(
+    private makePendingRequest<
+        TModel extends ModelsMap[keyof ModelsMap],
+        TResource extends ModelsKey<TModel> = ModelsKey<TModel>,
+    >(
         resource: TResource,
-        transform: (data: ResponsesMap[TResource]['MRData']) => StructuresMap[TResource][],
+        transform: (data: ResponsesMap[TResource]['MRData']) => TModel[],
         options?: AllApiOptions,
-    ): PendingRequest<TResource> {
+    ): PendingRequest<TModel, TResource> {
         return new PendingRequest(this, resource, options ?? {}, transform);
     }
 }

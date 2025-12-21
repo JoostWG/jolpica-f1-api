@@ -30,7 +30,7 @@ export interface SeasonOption {
  * @since 1.0.1
  */
 export interface RoundOption {
-    round?: number | 'last' | 'next';
+    round?: 'last' | 'next' | number;
 }
 
 /**

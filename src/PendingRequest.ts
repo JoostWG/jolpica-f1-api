@@ -1,5 +1,12 @@
 import type { Api } from './Api';
-import type { AllApiOptions, Pagination, Response, ResponsesMap, StructuresMap } from './types';
+import type {
+    AllApiOptions,
+    ModelsKey,
+    ModelsMap,
+    Pagination,
+    Response,
+    ResponsesMap,
+} from './types';
 
 /**
  * @category Base
@@ -7,19 +14,19 @@ import type { AllApiOptions, Pagination, Response, ResponsesMap, StructuresMap }
  * @since 2.0.0
  */
 export class PendingRequest<
-    TResource extends keyof ResponsesMap,
-    TStructure extends StructuresMap[TResource] = StructuresMap[TResource],
+    TModel extends ModelsMap[keyof ModelsMap],
+    TResource extends ModelsKey<TModel> = ModelsKey<TModel>,
 > {
     public constructor(
         protected readonly api: Api,
         public readonly resource: TResource,
         public readonly options: AllApiOptions,
-        protected readonly transform: (data: ResponsesMap[TResource]['MRData']) => TStructure[],
+        protected readonly transform: (data: ResponsesMap[TResource]['MRData']) => TModel[],
     ) {
         //
     }
 
-    public async get(pagination?: Pagination): Promise<Response<TStructure[]>> {
+    public async get(pagination?: Pagination): Promise<Response<TModel[]>> {
         const response = await this.api.get<ResponsesMap[TResource]>(
             this.getPath(`/${this.resource}`, this.options),
             pagination,
@@ -35,7 +42,7 @@ export class PendingRequest<
         };
     }
 
-    public async getOne(pagination?: Pick<Pagination, 'offset'>): Promise<TStructure | null> {
+    public async getOne(pagination?: Pick<Pagination, 'offset'>): Promise<TModel | null> {
         const { data } = await this.get({ limit: 1, ...pagination ?? {} });
 
         return data.length > 0 ? data[0] : null;

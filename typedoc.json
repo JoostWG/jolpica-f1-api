@@ -1,4 +1,5 @@
 {
+    "lang": "en",
     "cleanOutputDir": true,
     "entryPoints": ["src/index.ts"],
     "out": "./docs",
@@ -6,17 +7,21 @@
     "navigation": {
         "includeCategories": true
     },
+    "sort": [
+        "source-order"
+    ],
     "navigationLeaves": ["JSONOutput"],
     "categoryOrder": [
         "Base",
-        "Options",
         "Models",
         "Enums",
         "Errors",
+        "Options",
         "Api data",
         "Api responses",
         "Other"
     ],
-    "maxTypeConversionDepth": 10,
-    "sourceLinkExternal": true
+    "sourceLinkExternal": true,
+    "excludeInternal": true,
+    "router": "category"
 }
