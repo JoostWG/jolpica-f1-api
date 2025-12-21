@@ -1,7 +1,9 @@
 # Jolpica F1 API Wrapper
 
 > [!NOTE]
+>
 > # Disclaimer
+>
 > Despite the versioning, this package is still in development and anything could change at any point with or without proper versioning. Major changes may be made without a major semver increment. There are no guarantees this package will be consistent and stable as long as this disclaimer is present.
 
 ## Installation
