@@ -1,17 +1,14 @@
 name: Build
 
 on:
-  workflow_dispatch:
-
   push:
-    # branches:
-    #   - master
-    # paths:
-    #   - src/**
-    #   - package.json
-    #   - package-lock.json
-    #   - tsconfig.json
-
+    branches:
+      - master
+    paths:
+      - src/**
+      - package.json
+      - package-lock.json
+      - tsconfig.json
 
 jobs:
   build:
