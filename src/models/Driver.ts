@@ -105,7 +105,10 @@ export class Driver {
             return age - 1;
         }
 
-        if (this.dateOfBirth.getDate() > date.getDate()) {
+        if (
+            this.dateOfBirth.getMonth() === date.getMonth()
+            && this.dateOfBirth.getDate() > date.getDate()
+        ) {
             return age - 1;
         }
 
