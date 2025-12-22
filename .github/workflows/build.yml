@@ -31,13 +31,12 @@ jobs:
 
       - name: Checkout target branch
         run: |
-          git fetch origin build || true
-          git checkout build || git checkout --orphan build
+         git checkout --orphan build
 
       - name: Commit
         run: |
-          git rm .gitignore --ignore-unmatch
-          git add package.json package-lock.json dist/*
+          git rm --cached -r .
+          git add package.json package-lock.json dist/* --force
           git commit -m "Build" || echo "No changes to commit"
 
       - name: Push
