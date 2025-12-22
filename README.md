@@ -9,7 +9,7 @@
 ## Installation
 
 ```
-npm install https://github.com/JoostWG/jolpica-f1-api
+npm install https://github.com/JoostWG/jolpica-f1-api#build
 ```
 
 ## Examples
