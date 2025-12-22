@@ -42,7 +42,7 @@ export class PendingRequest<
         };
     }
 
-    public async getOne(pagination?: Pick<Pagination, 'offset'>): Promise<TModel | null> {
+    public async getOne(pagination?: Omit<Pagination, 'limit'>): Promise<TModel | null> {
         const { data } = await this.get({ limit: 1, ...pagination ?? {} });
 
         return data.length > 0 ? data[0] : null;
