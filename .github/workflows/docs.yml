@@ -31,8 +31,7 @@ jobs:
 
       - name: Checkout target branch
         run: |
-          git fetch origin docs || true
-          git checkout docs || git checkout --orphan docs
+           git checkout --orphan docs
 
       - name: Copy files
         run: |
