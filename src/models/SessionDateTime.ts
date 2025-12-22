@@ -6,7 +6,13 @@ import type { DateTimeApiData } from '../types';
  * @since 2.0.0
  */
 export class SessionDateTime {
+    /**
+     * The date this session was held
+     */
     public readonly date: string | null;
+    /**
+     * The time the session started
+     */
     public readonly time: string | null;
 
     public constructor(data: DateTimeApiData) {
