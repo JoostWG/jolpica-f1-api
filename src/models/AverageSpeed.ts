@@ -7,11 +7,11 @@ import type { AverageSpeedApiData } from '../types';
  */
 export class AverageSpeed {
     /**
-     * The units
+     * The units the speed was measured in
      */
     public readonly units: string;
     /**
-     * tests
+     * The average speed
      */
     public readonly speed: number;
 
