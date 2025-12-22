@@ -35,7 +35,7 @@ jobs:
 
       - name: Commit
         run: |
-          git rm .gitignore || true
+          git rm .gitignore --force
           git add package.json package-lock.json dist/*
           git commit -m "Build" || echo "No changes to commit"
 
