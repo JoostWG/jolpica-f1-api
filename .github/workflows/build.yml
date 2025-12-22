@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 
   push:
-    branches:
-      - master
+    # branches:
+    #   - master
     # paths:
     #   - src/**
     #   - package.json
@@ -39,7 +39,7 @@ jobs:
 
       - name: Commit
         run: |
-          git add package.json package-lock.json dist/*
+          git add package.json package-lock.json dist/* --force
           git commit -m "Build" || echo "No changes to commit"
 
       - name: Push
