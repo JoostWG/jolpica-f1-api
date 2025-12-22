@@ -2,13 +2,13 @@ name: Build
 
 on:
   push:
-    branches:
-      - master
-    paths:
-      - src/**
-      - package.json
-      - package-lock.json
-      - tsconfig.json
+    # branches:
+    #   - master
+    # paths:
+    #   - src/**
+    #   - package.json
+    #   - package-lock.json
+    #   - tsconfig.json
 
 jobs:
   build:
@@ -31,12 +31,11 @@ jobs:
 
       - name: Checkout target branch
         run: |
-          git fetch origin build || true
-          git checkout build || git checkout --orphan build
+         git checkout --orphan build
 
       - name: Commit
         run: |
-          git rm .gitignore --ignore-unmatch
+          git rm .gitignore || true
           git add package.json package-lock.json dist/*
           git commit -m "Build" || echo "No changes to commit"
 
