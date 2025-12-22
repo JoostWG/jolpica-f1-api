@@ -1,8 +1,6 @@
 name: Build
 
 on:
-  workflow_dispatch:
-
   push:
     branches:
       - master
@@ -38,9 +36,8 @@ jobs:
 
       - name: Commit
         run: |
-          git rm -r .
-          git reset HEAD dist/* package.json package-lock.json
-          git add .
+          git rm .gitignore --ignore-unmatch
+          git add package.json package-lock.json dist/*
           git commit -m "Build" || echo "No changes to commit"
 
       - name: Push
