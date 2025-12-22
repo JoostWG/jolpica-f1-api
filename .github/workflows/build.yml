@@ -1,8 +1,6 @@
 name: Build
 
 on:
-  workflow_dispatch:
-
   push:
     branches:
       - master
@@ -33,14 +31,15 @@ jobs:
 
       - name: Checkout target branch
         run: |
-          git fetch origin dist || true
-          git checkout dist || git checkout --orphan dist
+          git fetch origin build || true
+          git checkout build || git checkout --orphan build
 
       - name: Commit
         run: |
+          git rm .gitignore
           git add package.json package-lock.json dist/*
           git commit -m "Build" || echo "No changes to commit"
 
       - name: Push
         run: |
-          git push origin dist --force
+          git push origin build --force
