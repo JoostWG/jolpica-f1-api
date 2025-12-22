@@ -36,7 +36,7 @@ jobs:
       - name: Commit
         run: |
           git rm --cached -r .
-          git add package.json package-lock.json dist/* --force
+          git add dist/* package.json README.md LICENSE --force
           git commit -m "Build" || echo "No changes to commit"
 
       - name: Push
