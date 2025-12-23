@@ -2,6 +2,8 @@ import type { ConstructorApiData, DriverApiData, RaceApiData, SuccessResponse } 
 
 /**
  * @category Api data
+ *
+ * @since 1.0.1
  */
 export interface QualifyingResultApiData {
     number: string;
@@ -15,6 +17,8 @@ export interface QualifyingResultApiData {
 
 /**
  * @category Api responses
+ *
+ * @since 1.0.1
  */
 export type QualifyingResultsResponse = SuccessResponse<{
     RaceTable: {

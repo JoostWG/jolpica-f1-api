@@ -1,5 +1,7 @@
 /**
  * @category Api data
+ *
+ * @since 1.0.1
  */
 export interface FinishingTimeApiData {
     millis: string;
@@ -8,6 +10,8 @@ export interface FinishingTimeApiData {
 
 /**
  * @category Api data
+ *
+ * @since 1.0.1
  */
 export interface FastestLapTimeApiData {
     time: string;
@@ -15,6 +19,8 @@ export interface FastestLapTimeApiData {
 
 /**
  * @category Api data
+ *
+ * @since 1.0.1
  */
 export interface AverageSpeedApiData {
     units: string;
@@ -23,6 +29,8 @@ export interface AverageSpeedApiData {
 
 /**
  * @category Api data
+ *
+ * @since 1.0.1
  */
 export interface FastestLapApiData {
     rank: string;
@@ -33,6 +41,8 @@ export interface FastestLapApiData {
 
 /**
  * @category Base
+ *
+ * @since 1.0.1
  */
 export interface Pagination {
     /**
@@ -48,7 +58,9 @@ export interface Pagination {
 /**
  * The root object of the json response.
  *
- * @see [Reference](https://github.com/jolpica/jolpica-f1/tree/main/docs#common-response-fields)
+ * @since 1.0.1
+ *
+ * @see https://github.com/jolpica/jolpica-f1/tree/main/docs#common-response-fields
  */
 export type MRData<T> = T & {
     /**
@@ -79,6 +91,8 @@ export type MRData<T> = T & {
 
 /**
  * @category Api responses
+ *
+ * @since 1.0.1
  */
 export interface SuccessResponse<T = unknown> {
     MRData: MRData<T>;
@@ -86,6 +100,8 @@ export interface SuccessResponse<T = unknown> {
 
 /**
  * @category Api responses
+ *
+ * @since 1.0.1
  */
 export interface BadRequestResponse {
     detail: string;

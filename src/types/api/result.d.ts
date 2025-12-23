@@ -5,6 +5,8 @@ import type { DriverApiData } from './driver';
 
 /**
  * @category Api data
+ *
+ * @since 1.0.1
  */
 export interface ResultApiData {
     number: string;
@@ -22,6 +24,8 @@ export interface ResultApiData {
 
 /**
  * @category Api responses
+ *
+ * @since 1.0.1
  */
 export type ResultsResponse = SuccessResponse<{
     RaceTable: {

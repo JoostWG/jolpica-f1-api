@@ -2,6 +2,8 @@ import type { SuccessResponse } from '.';
 
 /**
  * @category Api data
+ *
+ * @since 1.0.1
  */
 export interface DriverApiData {
     driverId: string;
@@ -16,6 +18,8 @@ export interface DriverApiData {
 
 /**
  * @category Api responses
+ *
+ * @since 1.0.1
  */
 export type DriversResponse = SuccessResponse<{
     DriverTable: {

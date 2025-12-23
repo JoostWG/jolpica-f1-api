@@ -3,6 +3,8 @@ import type { ConstructorApiData } from './constructor';
 
 /**
  * @category Api data
+ *
+ * @since 1.0.1
  */
 export interface ConstructorStandingApiData {
     position?: string;
@@ -14,6 +16,8 @@ export interface ConstructorStandingApiData {
 
 /**
  * @category Api responses
+ *
+ * @since 1.0.1
  */
 export type ConstructorStandingsResponse = SuccessResponse<{
     StandingsTable: {

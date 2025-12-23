@@ -3,6 +3,8 @@ import type { CircuitApiData } from './circuit';
 
 /**
  * @category Api data
+ *
+ * @since 1.0.1
  */
 export interface DateTimeApiData {
     date?: string;
@@ -11,6 +13,8 @@ export interface DateTimeApiData {
 
 /**
  * @category Api data
+ *
+ * @since 1.0.1
  */
 export interface RaceApiData {
     season: string;
@@ -31,6 +35,8 @@ export interface RaceApiData {
 
 /**
  * @category Api responses
+ *
+ * @since 1.0.1
  */
 export type RacesResponse = SuccessResponse<{
     RaceTable: {

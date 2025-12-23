@@ -1,5 +1,5 @@
 /**
- * @see [Documentation](https://github.com/jolpica/jolpica-f1/blob/main/docs/endpoints/status.md)
+ * @see https://github.com/jolpica/jolpica-f1/blob/main/docs/endpoints/status.md
  *
  * @category Enums
  *

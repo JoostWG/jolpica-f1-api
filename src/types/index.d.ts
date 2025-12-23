@@ -126,6 +126,8 @@ export type AllApiOptions =
 
 /**
  * @category Base
+ *
+ * @since 1.0.1
  */
 export interface Response<T> {
     meta: {

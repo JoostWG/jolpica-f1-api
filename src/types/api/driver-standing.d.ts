@@ -4,6 +4,8 @@ import type { DriverApiData } from './driver';
 
 /**
  * @category Api data
+ *
+ * @since 1.0.1
  */
 export interface DriverStandingApiData {
     position?: string;
@@ -16,6 +18,8 @@ export interface DriverStandingApiData {
 
 /**
  * @category Api responses
+ *
+ * @since 1.0.1
  */
 export type DriverStandingsResponse = SuccessResponse<{
     StandingsTable: {

@@ -2,6 +2,8 @@ import type { RaceApiData, SuccessResponse } from '.';
 
 /**
  * @category Api data
+ *
+ * @since 1.0.1
  */
 export interface PitStopApiData {
     driverId: string;
@@ -13,6 +15,8 @@ export interface PitStopApiData {
 
 /**
  * @category Api responses
+ *
+ * @since 1.0.1
  */
 export type PitStopsResponse = SuccessResponse<{
     RaceTable: {

@@ -2,6 +2,8 @@ import type { SuccessResponse } from '.';
 
 /**
  * @category Api data
+ *
+ * @since 1.0.1
  */
 export interface SeasonApiData {
     season: string;
@@ -10,6 +12,8 @@ export interface SeasonApiData {
 
 /**
  * @category Api responses
+ *
+ * @since 1.0.1
  */
 export type SeasonsResponse = SuccessResponse<{
     SeasonTable: {
