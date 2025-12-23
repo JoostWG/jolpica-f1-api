@@ -28,6 +28,7 @@ export class BaseApi {
             baseURL: this.baseUrl,
             validateStatus: (status) =>
                 (status >= 200 && status <= 299) || (status >= 400 && status <= 499),
+            headers: new AxiosHeaders().setAccept('application/json'),
             ...config,
         });
 
@@ -50,7 +51,6 @@ export class BaseApi {
         }
 
         const response = await this.axios.get<T | BadRequestResponse>(`${path}.json`, {
-            headers: new AxiosHeaders().setAccept('application/json'),
             params: pagination,
             ...config,
         });
