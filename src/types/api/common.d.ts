@@ -45,12 +45,35 @@ export interface Pagination {
     offset?: number;
 }
 
+/**
+ * The root object of the json response.
+ *
+ * @see [Reference](https://github.com/jolpica/jolpica-f1/tree/main/docs#common-response-fields)
+ */
 export type MRData<T> = T & {
+    /**
+     * Blank, provided for compatibility with legacy ergast API.
+     */
     xmlns: '';
+    /**
+     * The racing series of the results (always f1).
+     */
     series: 'f1';
+    /**
+     * The API URL that the returned data was retrieved from (without query parameters).
+     */
     url: string;
+    /**
+     * The limit used for this call. May be different from the query parameter set in some cases.
+     */
     limit: `${number}`;
+    /**
+     * The result offset of this call.
+     */
     offset: `${number}`;
+    /**
+     * The total number of items available from the endpoint.
+     */
     total: `${number}`;
 };
 
