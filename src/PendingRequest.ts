@@ -26,11 +26,12 @@ export class PendingRequest<
         //
     }
 
+    public get url(): string {
+        return this.api.baseUrl + this.getPath();
+    }
+
     public async get(pagination?: Pagination): Promise<Response<TModel[]>> {
-        const response = await this.api.get<ResponsesMap[TResource]>(
-            this.getPath(`/${this.resource}`, this.options),
-            pagination,
-        );
+        const response = await this.api.get<ResponsesMap[TResource]>(this.getPath(), pagination);
 
         return {
             meta: {
@@ -48,63 +49,65 @@ export class PendingRequest<
         return data.length > 0 ? data[0] : null;
     }
 
-    private getPath(basePath: string, options: AllApiOptions): string {
+    private getPath(): string {
+        const basePath = `/${this.resource}`;
+
         const path: string[] = [];
 
-        if (options.season) {
-            path.push(String(options.season));
+        if (this.options.season) {
+            path.push(String(this.options.season));
 
-            if (options.round) {
-                path.push(String(options.round));
+            if (this.options.round) {
+                path.push(String(this.options.round));
             }
         }
 
-        if (options.circuit) {
-            path.push('circuits', options.circuit);
+        if (this.options.circuit) {
+            path.push('circuits', this.options.circuit);
         }
 
-        if (options.driver) {
-            path.push('drivers', options.driver);
+        if (this.options.driver) {
+            path.push('drivers', this.options.driver);
         }
 
-        if (options.team) {
-            path.push('constructors', options.team);
+        if (this.options.team) {
+            path.push('constructors', this.options.team);
         }
 
-        if (options.lap) {
-            path.push('laps', String(options.lap));
+        if (this.options.lap) {
+            path.push('laps', String(this.options.lap));
         }
 
-        if (options.pitStopNumber) {
-            path.push('pitstops', String(options.pitStopNumber));
+        if (this.options.pitStopNumber) {
+            path.push('pitstops', String(this.options.pitStopNumber));
         }
 
-        if (options.fastestRank) {
-            path.push('fastest', String(options.fastestRank));
+        if (this.options.fastestRank) {
+            path.push('fastest', String(this.options.fastestRank));
         }
 
-        if (options.gridPosition) {
-            path.push('grid', String(options.gridPosition));
+        if (this.options.gridPosition) {
+            path.push('grid', String(this.options.gridPosition));
         }
 
-        if (options.finishPosition) {
-            path.push('results', String(options.finishPosition));
+        if (this.options.finishPosition) {
+            path.push('results', String(this.options.finishPosition));
         }
 
-        if (options.status) {
-            path.push('status', options.status);
+        if (this.options.status) {
+            path.push('status', this.options.status);
         }
 
-        if (options.driverStanding) {
-            path.push('driverstandings', String(options.driverStanding));
+        if (this.options.driverStanding) {
+            path.push('driverstandings', String(this.options.driverStanding));
         }
 
-        if (options.qualifying) {
-            path.push('qualifying', String(options.qualifying));
+        if (this.options.qualifying) {
+            path.push('qualifying', String(this.options.qualifying));
         }
 
-        if (options.teamStanding) {
-            path.push('constructorstandings', String(options.teamStanding));
+        if (this.options.teamStanding) {
+            path.push('constructorstandings', String(this.options.teamStanding));
         }
 
         if (path.length === 0) {
