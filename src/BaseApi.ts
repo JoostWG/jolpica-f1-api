@@ -14,6 +14,7 @@ import type { ApiCache, BadRequestResponse, Pagination, SuccessResponse } from '
  * @since 1.0.1
  */
 export class BaseApi {
+    public readonly baseUrl: string;
     private readonly axios: AxiosInstance;
     private readonly cache?: ApiCache;
 
@@ -21,8 +22,10 @@ export class BaseApi {
         cache?: ApiCache;
         config?: Omit<CreateAxiosDefaults, 'baseUrl'>;
     } = {}) {
+        this.baseUrl = 'https://api.jolpi.ca/ergast/f1';
+
         this.axios = axios.create({
-            baseURL: 'https://api.jolpi.ca/ergast/f1',
+            baseURL: this.baseUrl,
             validateStatus: (status) =>
                 (status >= 200 && status <= 299) || (status >= 400 && status <= 499),
             ...config,
