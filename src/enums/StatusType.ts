@@ -4,6 +4,8 @@
  * @category Enums
  *
  * @since 1.0.1
+ *
+ * @sortStrategy alphabetical
  */
 export enum StatusType {
     Finished = '1',

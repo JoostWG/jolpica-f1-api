@@ -21,6 +21,22 @@
         "Api responses",
         "Other"
     ],
+    "notRenderedTags": [
+        "@showCategories",
+        "@showGroups",
+        "@hideCategories",
+        "@hideGroups",
+        "@disableGroups",
+        "@expand",
+        "@preventExpand",
+        "@expandType",
+        "@summary",
+        "@group",
+        "@groupDescription",
+        "@category",
+        "@categoryDescription",
+        "@sortStrategy"
+    ],
     "sourceLinkExternal": true,
     "excludeInternal": true,
     "router": "category"
