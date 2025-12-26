@@ -3,8 +3,6 @@ import type { StatusType } from '../enums';
 /**
  * @category Options
  *
- * @inline
- *
  * @since 1.0.1
  */
 export interface StatusOption {
@@ -13,8 +11,6 @@ export interface StatusOption {
 
 /**
  * @category Options
- *
- * @inline
  *
  * @since 1.0.1
  */
@@ -25,8 +21,6 @@ export interface SeasonOption {
 /**
  * @category Options
  *
- * @inline
- *
  * @since 1.0.1
  */
 export interface RoundOption {
@@ -35,8 +29,6 @@ export interface RoundOption {
 
 /**
  * @category Options
- *
- * @inline
  *
  * @since 1.0.1
  */
@@ -47,8 +39,6 @@ export interface CircuitOption {
 /**
  * @category Options
  *
- * @inline
- *
  * @since 1.0.1
  */
 export interface DriverOption {
@@ -57,8 +47,6 @@ export interface DriverOption {
 
 /**
  * @category Options
- *
- * @inline
  *
  * @since 1.0.1
  */
@@ -69,8 +57,6 @@ export interface TeamOption {
 /**
  * @category Options
  *
- * @inline
- *
  * @since 1.0.1
  */
 export interface LapOption {
@@ -79,8 +65,6 @@ export interface LapOption {
 
 /**
  * @category Options
- *
- * @inline
  *
  * @since 1.0.1
  */
@@ -91,8 +75,6 @@ export interface PitStopOption {
 /**
  * @category Options
  *
- * @inline
- *
  * @since 1.0.1
  */
 export interface FastestRankOption {
@@ -101,8 +83,6 @@ export interface FastestRankOption {
 
 /**
  * @category Options
- *
- * @inline
  *
  * @since 1.0.1
  */
@@ -113,8 +93,6 @@ export interface GridPositionOption {
 /**
  * @category Options
  *
- * @inline
- *
  * @since 1.0.1
  */
 export interface FinishPositionOption {
@@ -123,8 +101,6 @@ export interface FinishPositionOption {
 
 /**
  * @category Options
- *
- * @inline
  *
  * @since 1.0.1
  */
@@ -135,8 +111,6 @@ export interface DriverStandingOption {
 /**
  * @category Options
  *
- * @inline
- *
  * @since 1.0.1
  */
 export interface QualifyingResultOption {
@@ -146,8 +120,6 @@ export interface QualifyingResultOption {
 /**
  * @category Options
  *
- * @inline
- *
  * @since 1.0.1
  */
 export interface TeamStandingOption {
@@ -156,8 +128,6 @@ export interface TeamStandingOption {
 
 /**
  * @category Options
- *
- * @inline
  *
  * @since 2.1.0
  */
@@ -175,8 +145,6 @@ export type CircuitOptions =
 /**
  * @category Options
  *
- * @inline
- *
  * @since 2.1.0
  */
 export type DriverStandingOptions =
@@ -187,8 +155,6 @@ export type DriverStandingOptions =
 
 /**
  * @category Options
- *
- * @inline
  *
  * @since 2.1.0
  */
@@ -206,8 +172,6 @@ export type DriverOptions =
 /**
  * @category Options
  *
- * @inline
- *
  * @since 2.1.0
  */
 export type LapOptions =
@@ -220,8 +184,6 @@ export type LapOptions =
 /**
  * @category Options
  *
- * @inline
- *
  * @since 2.1.0
  */
 export type PitStopOptions =
@@ -233,8 +195,6 @@ export type PitStopOptions =
 
 /**
  * @category Options
- *
- * @inline
  *
  * @since 2.1.0
  */
@@ -252,8 +212,6 @@ export type QualifyingResultOptions =
 /**
  * @category Options
  *
- * @inline
- *
  * @since 2.1.0
  */
 export type RaceOptions =
@@ -268,8 +226,6 @@ export type RaceOptions =
 
 /**
  * @category Options
- *
- * @inline
  *
  * @since 2.1.0
  */
@@ -287,8 +243,6 @@ export type ResultOptions =
 /**
  * @category Options
  *
- * @inline
- *
  * @since 2.1.0
  */
 export type SeasonOptions =
@@ -300,8 +254,6 @@ export type SeasonOptions =
 
 /**
  * @category Options
- *
- * @inline
  *
  * @since 2.1.0
  */
@@ -315,8 +267,6 @@ export type SprintResultOptions =
 /**
  * @category Options
  *
- * @inline
- *
  * @since 2.1.0
  */
 export type TeamStandingOptions =
@@ -327,8 +277,6 @@ export type TeamStandingOptions =
 
 /**
  * @category Options
- *
- * @inline
  *
  * @since 2.1.0
  */
