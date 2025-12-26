@@ -157,7 +157,7 @@ export class Driver {
     }
 
     /**
-     * Get races this driver participated in\
+     * Get races this driver participated in
      *
      * @since 2.1.0
      */
