@@ -8,9 +8,21 @@ import { Location } from './Location';
  * @since 2.0.0
  */
 export class Circuit {
+    /**
+     * The ID of this circuit used by the Jolpica API
+     */
     public readonly id: string;
-    public readonly wikiUrl: string;
+    /**
+     * The name of this circuit
+     */
     public readonly name: string;
+    /**
+     * URL to the wikipedia page about this circuit
+     */
+    public readonly wikiUrl: string;
+    /**
+     * The location of the circuit.
+     */
     public readonly location: Location;
 
     public constructor(data: CircuitApiData, protected readonly api: Api) {
