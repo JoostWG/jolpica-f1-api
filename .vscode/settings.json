@@ -25,7 +25,8 @@
         "dist/**": true,
         "package-lock.json": true,
         "tsconfig.tsbuildinfo": true,
-        "**/**.db": true
+        ".eslintcache": true,
+        "docs/**": true
     },
     "cSpell.words": [
         "constructorstandings",
