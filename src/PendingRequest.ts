@@ -28,6 +28,9 @@ export class PendingRequest<
         //
     }
 
+    /**
+     * @since 3.0.0
+     */
     public get url(): string {
         return this.api.baseUrl + this.getPath();
     }

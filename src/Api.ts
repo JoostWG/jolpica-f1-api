@@ -51,6 +51,9 @@ import type {
  * @since 1.0.1
  */
 export class Api {
+    /**
+     * @since 3.0.0
+     */
     public readonly baseUrl: string;
     protected readonly axios: AxiosInstance;
     protected readonly cache?: ApiCache;
