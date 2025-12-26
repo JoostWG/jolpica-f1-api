@@ -52,12 +52,17 @@ export type * from './options';
 /**
  * This type exists solely for documentation purposes. To nicely format intersections.
  *
+ * @since 3.0.0
+ *
  * @inline
  *
  * @internal
  */
 export type Prettify<T> = { [K in keyof T]: T[K] } & {};
 
+/**
+ * @since 2.0.0
+ */
 export interface ResponsesMap {
     circuits: CircuitsResponse;
     constructorstandings: ConstructorStandingsResponse;
@@ -74,6 +79,9 @@ export interface ResponsesMap {
     status: StatusesResponse;
 }
 
+/**
+ * @since 2.0.0
+ */
 export interface ModelsMap {
     circuits: Circuit;
     constructorstandings: TeamStanding;
@@ -90,8 +98,14 @@ export interface ModelsMap {
     status: Status;
 }
 
+/**
+ * @since 3.0.0
+ */
 export type AnyModel = ModelsMap[keyof ModelsMap];
 
+/**
+ * @since 3.0.0
+ */
 export type ModelsKey<T extends AnyModel> = {
     [K in keyof ModelsMap]: ModelsMap[K] extends T ? K : never;
 }[keyof ModelsMap];
