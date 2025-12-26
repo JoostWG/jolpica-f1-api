@@ -5,6 +5,8 @@ import type { ApiCache, Pagination } from './types';
 /**
  * A simple cache. Can also serve as an example.
  *
+ * @category Base
+ *
  * @since 3.0.0
  *
  * @experimental
