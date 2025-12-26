@@ -39,5 +39,17 @@
     ],
     "sourceLinkExternal": true,
     "excludeInternal": true,
-    "router": "category"
+    "router": "category",
+    "externalSymbolLinkMappings": {
+        "axios": {
+            "axios.AxiosInstance": "https://axios-http.com/docs/instance",
+            "axios.CreateAxiosDefaults": "https://axios-http.com/docs/config_defaults",
+            "axios.AxiosRequestConfig": "https://axios-http.com/docs/req_config",
+            "AxiosResponse": "https://axios-http.com/docs/res_schema",
+            "*": "https://axios-http.com/docs/intro"
+        },
+        "typescript": {
+            "Promise": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise"
+        }
+    }
 }

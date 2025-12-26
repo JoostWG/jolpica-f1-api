@@ -52,8 +52,8 @@ import type {
  */
 export class Api {
     public readonly baseUrl: string;
-    private readonly axios: AxiosInstance;
-    private readonly cache?: ApiCache;
+    protected readonly axios: AxiosInstance;
+    protected readonly cache?: ApiCache;
 
     public constructor({ cache, config }: {
         cache?: ApiCache;
@@ -320,7 +320,7 @@ export class Api {
         return data;
     }
 
-    private makePendingRequest<
+    protected makePendingRequest<
         TData extends AnyModel[],
         TResource extends ModelsKey<TData[number]> = ModelsKey<TData[number]>,
         TModel extends ModelsMap[TResource] = ModelsMap[TResource],
@@ -332,7 +332,7 @@ export class Api {
         return new PendingRequest(this, resource, options ?? {}, transform);
     }
 
-    private responseIsBadRequest(
+    protected responseIsBadRequest(
         response: AxiosResponse,
     ): response is AxiosResponse<BadRequestResponse> {
         return response.status === 400;

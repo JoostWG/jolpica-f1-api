@@ -197,7 +197,7 @@ export class Driver {
     /**
      * @since 2.1.0
      */
-    private getOptions<T>(options: T): T & { driver: string } {
+    protected getOptions<T>(options: T): T & { driver: string } {
         return { driver: this.id, ...options };
     }
 }

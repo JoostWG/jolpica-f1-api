@@ -51,7 +51,7 @@ export class PendingRequest<
         return data.length > 0 ? data[0] : null;
     }
 
-    private getPath(): string {
+    protected getPath(): string {
         const basePath = `/${this.resource}`;
 
         const path: string[] = [];
