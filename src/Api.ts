@@ -22,7 +22,7 @@ import {
 } from './models';
 import { PendingRequest } from './PendingRequest';
 import type {
-    AllApiOptions,
+    AnyApiOptions,
     AnyModel,
     ApiCache,
     BadRequestResponse,
@@ -327,7 +327,7 @@ export class Api {
     >(
         resource: TResource,
         transform: (data: ResponsesMap[TResource]['MRData']) => TModel[],
-        options?: AllApiOptions,
+        options?: AnyApiOptions,
     ): PendingRequest<TData, TResource> {
         return new PendingRequest(this, resource, options ?? {}, transform);
     }

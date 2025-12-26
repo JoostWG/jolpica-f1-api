@@ -101,16 +101,25 @@ export type ModelsKey<T extends AnyModel> = {
  *
  * @since 1.0.1
  *
- * @deprecated Use {@link AllApiOptions} instead
+ * @deprecated Use {@link AnyApiOptions} instead
  */
-export type SimpleApiOptions = AllApiOptions;
+export type SimpleApiOptions = AnyApiOptions;
 
 /**
  * @category Options
  *
  * @since 2.1.0
+ *
+ * @deprecated Use {@link AnyApiOptions} instead
  */
-export type AllApiOptions =
+export type AllApiOptions = AnyApiOptions;
+
+/**
+ * @category Options
+ *
+ * @since 3.0.0
+ */
+export type AnyApiOptions = Partial<
     & SeasonOption
     & RoundOption
     & CircuitOption
@@ -124,7 +133,8 @@ export type AllApiOptions =
     & StatusOption
     & DriverStandingOption
     & QualifyingResultOption
-    & TeamStandingOption;
+    & TeamStandingOption
+>;
 
 /**
  * @category Base

@@ -1,6 +1,6 @@
 import type { Api } from './Api';
 import type {
-    AllApiOptions,
+    AnyApiOptions,
     AnyModel,
     ModelsKey,
     ModelsMap,
@@ -22,7 +22,7 @@ export class PendingRequest<
     public constructor(
         protected readonly api: Api,
         public readonly resource: TResource,
-        public readonly options: AllApiOptions,
+        public readonly options: AnyApiOptions,
         protected readonly transform: (data: ResponsesMap[TResource]['MRData']) => TModel[],
     ) {
         //

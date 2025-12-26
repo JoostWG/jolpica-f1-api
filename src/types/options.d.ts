@@ -6,7 +6,7 @@ import type { StatusType } from '../enums';
  * @since 1.0.1
  */
 export interface StatusOption {
-    status?: StatusType;
+    status: StatusType;
 }
 
 /**
@@ -15,7 +15,7 @@ export interface StatusOption {
  * @since 1.0.1
  */
 export interface SeasonOption {
-    season?: 'current' | (number & {});
+    season: 'current' | (number & {});
 }
 
 /**
@@ -24,7 +24,7 @@ export interface SeasonOption {
  * @since 1.0.1
  */
 export interface RoundOption {
-    round?: 'last' | 'next' | number;
+    round: 'last' | 'next' | number;
 }
 
 /**
@@ -33,7 +33,7 @@ export interface RoundOption {
  * @since 1.0.1
  */
 export interface CircuitOption {
-    circuit?: string;
+    circuit: string;
 }
 
 /**
@@ -42,7 +42,7 @@ export interface CircuitOption {
  * @since 1.0.1
  */
 export interface DriverOption {
-    driver?: string;
+    driver: string;
 }
 
 /**
@@ -51,7 +51,7 @@ export interface DriverOption {
  * @since 1.0.1
  */
 export interface TeamOption {
-    team?: string;
+    team: string;
 }
 
 /**
@@ -60,7 +60,7 @@ export interface TeamOption {
  * @since 1.0.1
  */
 export interface LapOption {
-    lap?: number;
+    lap: number;
 }
 
 /**
@@ -69,7 +69,7 @@ export interface LapOption {
  * @since 1.0.1
  */
 export interface PitStopOption {
-    pitStopNumber?: number;
+    pitStopNumber: number;
 }
 
 /**
@@ -78,7 +78,7 @@ export interface PitStopOption {
  * @since 1.0.1
  */
 export interface FastestRankOption {
-    fastestRank?: number;
+    fastestRank: number;
 }
 
 /**
@@ -87,7 +87,7 @@ export interface FastestRankOption {
  * @since 1.0.1
  */
 export interface GridPositionOption {
-    gridPosition?: number;
+    gridPosition: number;
 }
 
 /**
@@ -96,7 +96,7 @@ export interface GridPositionOption {
  * @since 1.0.1
  */
 export interface FinishPositionOption {
-    finishPosition?: number;
+    finishPosition: number;
 }
 
 /**
@@ -105,7 +105,7 @@ export interface FinishPositionOption {
  * @since 1.0.1
  */
 export interface DriverStandingOption {
-    driverStanding?: number;
+    driverStanding: number;
 }
 
 /**
@@ -114,7 +114,7 @@ export interface DriverStandingOption {
  * @since 1.0.1
  */
 export interface QualifyingResultOption {
-    qualifying?: number;
+    qualifying: number;
 }
 
 /**
@@ -123,7 +123,7 @@ export interface QualifyingResultOption {
  * @since 1.0.1
  */
 export interface TeamStandingOption {
-    teamStanding?: number;
+    teamStanding: number;
 }
 
 /**
@@ -131,7 +131,7 @@ export interface TeamStandingOption {
  *
  * @since 2.1.0
  */
-export type CircuitOptions =
+export type CircuitOptions = Partial<
     & SeasonOption
     & RoundOption
     & DriverOption
@@ -140,7 +140,8 @@ export type CircuitOptions =
     & FinishPositionOption
     & StatusOption
     & TeamOption
-    & CircuitOption;
+    & CircuitOption
+>;
 
 /**
  * @category Options
@@ -149,16 +150,18 @@ export type CircuitOptions =
  */
 export type DriverStandingOptions =
     & Required<SeasonOption>
-    & RoundOption
-    & DriverOption
-    & DriverStandingOption;
+    & Partial<
+        & RoundOption
+        & DriverOption
+        & DriverStandingOption
+    >;
 
 /**
  * @category Options
  *
  * @since 2.1.0
  */
-export type DriverOptions =
+export type DriverOptions = Partial<
     & SeasonOption
     & RoundOption
     & CircuitOption
@@ -167,7 +170,8 @@ export type DriverOptions =
     & FinishPositionOption
     & StatusOption
     & TeamOption
-    & DriverOption;
+    & DriverOption
+>;
 
 /**
  * @category Options
@@ -175,11 +179,12 @@ export type DriverOptions =
  * @since 2.1.0
  */
 export type LapOptions =
-    & Required<SeasonOption>
-    & Required<RoundOption>
-    & DriverOption
-    & LapOption
-    & TeamOption;
+    & Required<SeasonOption & RoundOption>
+    & Partial<
+        & DriverOption
+        & LapOption
+        & TeamOption
+    >;
 
 /**
  * @category Options
@@ -187,18 +192,19 @@ export type LapOptions =
  * @since 2.1.0
  */
 export type PitStopOptions =
-    & Required<SeasonOption>
-    & Required<RoundOption>
-    & DriverOption
-    & LapOption
-    & PitStopOption;
+    & Required<SeasonOption & RoundOption>
+    & Partial<
+        & DriverOption
+        & LapOption
+        & TeamOption
+    >;
 
 /**
  * @category Options
  *
  * @since 2.1.0
  */
-export type QualifyingResultOptions =
+export type QualifyingResultOptions = Partial<
     & SeasonOption
     & RoundOption
     & CircuitOption
@@ -207,14 +213,15 @@ export type QualifyingResultOptions =
     & FastestRankOption
     & StatusOption
     & TeamOption
-    & QualifyingResultOption;
+    & QualifyingResultOption
+>;
 
 /**
  * @category Options
  *
  * @since 2.1.0
  */
-export type RaceOptions =
+export type RaceOptions = Partial<
     & SeasonOption
     & RoundOption
     & CircuitOption
@@ -222,14 +229,15 @@ export type RaceOptions =
     & FinishPositionOption
     & GridPositionOption
     & StatusOption
-    & TeamOption;
+    & TeamOption
+>;
 
 /**
  * @category Options
  *
  * @since 2.1.0
  */
-export type ResultOptions =
+export type ResultOptions = Partial<
     & SeasonOption
     & RoundOption
     & CircuitOption
@@ -238,31 +246,34 @@ export type ResultOptions =
     & GridPositionOption
     & StatusOption
     & TeamOption
-    & FinishPositionOption;
+    & FinishPositionOption
+>;
 
 /**
  * @category Options
  *
  * @since 2.1.0
  */
-export type SeasonOptions =
+export type SeasonOptions = Partial<
     & CircuitOption
     & DriverOption
     & GridPositionOption
     & StatusOption
-    & TeamOption;
+    & TeamOption
+>;
 
 /**
  * @category Options
  *
  * @since 2.1.0
  */
-export type SprintResultOptions =
+export type SprintResultOptions = Partial<
     & CircuitOption
     & DriverOption
     & GridPositionOption
     & StatusOption
-    & TeamOption;
+    & TeamOption
+>;
 
 /**
  * @category Options
@@ -271,20 +282,23 @@ export type SprintResultOptions =
  */
 export type TeamStandingOptions =
     & Required<SeasonOption>
-    & RoundOption
-    & TeamOption
-    & TeamStandingOption;
+    & Partial<
+        & RoundOption
+        & TeamOption
+        & TeamStandingOption
+    >;
 
 /**
  * @category Options
  *
  * @since 2.1.0
  */
-export type TeamOptions =
+export type TeamOptions = Partial<
     & SeasonOption
     & RoundOption
     & CircuitOption
     & FastestRankOption
     & GridPositionOption
     & FinishPositionOption
-    & StatusOption;
+    & StatusOption
+>;
