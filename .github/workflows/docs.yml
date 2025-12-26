@@ -40,10 +40,10 @@ jobs:
           rm -rf node_modules
 
           # Copy docs folder contents to root
-          cp -r ./docs/build/* ./
+          cp -r ./docs-build/* ./
 
           # Delete docs folder
-          rm -rf docs
+          rm -rf docs-build
 
       - name: Commit
         run: |
