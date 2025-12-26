@@ -120,7 +120,7 @@ export class Driver {
      *
      * @since 2.1.0
      */
-    public circuits(options?: Prettify<Omit<CircuitOptions, 'driver'>>): PendingRequest<Circuit> {
+    public circuits(options?: Prettify<Omit<CircuitOptions, 'driver'>>): PendingRequest<Circuit[]> {
         return this.api.circuits(this.getOptions(options));
     }
 
@@ -129,21 +129,21 @@ export class Driver {
      */
     public driverStandings(
         options: Prettify<Omit<DriverStandingOptions, 'driver'>>,
-    ): PendingRequest<DriverStanding> {
+    ): PendingRequest<DriverStanding[]> {
         return this.api.driverStandings(this.getOptions(options));
     }
 
     /**
      * @since 2.1.0
      */
-    public laps(options: Prettify<Omit<LapOptions, 'driver'>>): PendingRequest<Lap> {
+    public laps(options: Prettify<Omit<LapOptions, 'driver'>>): PendingRequest<Lap[]> {
         return this.api.laps(this.getOptions(options));
     }
 
     /**
      * @since 2.1.0
      */
-    public pitStops(options: Prettify<Omit<PitStopOptions, 'driver'>>): PendingRequest<PitStop> {
+    public pitStops(options: Prettify<Omit<PitStopOptions, 'driver'>>): PendingRequest<PitStop[]> {
         return this.api.pitStops(this.getOptions(options));
     }
 
@@ -152,7 +152,7 @@ export class Driver {
      */
     public qualifyingResults(
         options?: Prettify<Omit<QualifyingResultOptions, 'driver'>>,
-    ): PendingRequest<QualifyingResult> {
+    ): PendingRequest<QualifyingResult[]> {
         return this.api.qualifyingResults(this.getOptions(options));
     }
 
@@ -160,21 +160,21 @@ export class Driver {
      * Get races this driver participated in
      * @since 2.1.0
      */
-    public races(options?: Prettify<Omit<RaceOptions, 'driver'>>): PendingRequest<Race> {
+    public races(options?: Prettify<Omit<RaceOptions, 'driver'>>): PendingRequest<Race[]> {
         return this.api.races(this.getOptions(options));
     }
 
     /**
      * @since 2.1.0
      */
-    public results(options?: Prettify<Omit<ResultOptions, 'driver'>>): PendingRequest<Result> {
+    public results(options?: Prettify<Omit<ResultOptions, 'driver'>>): PendingRequest<Result[]> {
         return this.api.results(this.getOptions(options));
     }
 
     /**
      * @since 2.1.0
      */
-    public seasons(options?: Prettify<Omit<SeasonOptions, 'driver'>>): PendingRequest<Season> {
+    public seasons(options?: Prettify<Omit<SeasonOptions, 'driver'>>): PendingRequest<Season[]> {
         return this.api.seasons(this.getOptions(options));
     }
 
@@ -183,14 +183,14 @@ export class Driver {
      */
     public sprintResults(
         options?: Prettify<Omit<SprintResultOptions, 'driver'>>,
-    ): PendingRequest<SprintResult> {
+    ): PendingRequest<SprintResult[]> {
         return this.api.sprintResults(this.getOptions(options));
     }
 
     /**
      * @since 2.1.0
      */
-    public teams(options?: Prettify<TeamOptions>): PendingRequest<Team> {
+    public teams(options?: Prettify<TeamOptions>): PendingRequest<Team[]> {
         return this.api.teams(this.getOptions(options));
     }
 

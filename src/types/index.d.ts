@@ -90,7 +90,9 @@ export interface ModelsMap {
     status: Status;
 }
 
-export type ModelsKey<T> = {
+export type AnyModel = ModelsMap[keyof ModelsMap];
+
+export type ModelsKey<T extends AnyModel> = {
     [K in keyof ModelsMap]: ModelsMap[K] extends T ? K : never;
 }[keyof ModelsMap];
 

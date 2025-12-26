@@ -1,6 +1,7 @@
 import type { Api } from './Api';
 import type {
     AllApiOptions,
+    AnyModel,
     ModelsKey,
     ModelsMap,
     Pagination,
@@ -14,8 +15,9 @@ import type {
  * @since 2.0.0
  */
 export class PendingRequest<
-    TModel extends ModelsMap[keyof ModelsMap],
-    TResource extends ModelsKey<TModel> = ModelsKey<TModel>,
+    TData extends AnyModel[],
+    TResource extends ModelsKey<TData[number]> = ModelsKey<TData[number]>,
+    TModel extends ModelsMap[TResource] = ModelsMap[TResource],
 > {
     public constructor(
         protected readonly api: Api,

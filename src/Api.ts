@@ -23,6 +23,7 @@ import {
 import { PendingRequest } from './PendingRequest';
 import type {
     AllApiOptions,
+    AnyModel,
     ApiCache,
     BadRequestResponse,
     CircuitOptions,
@@ -76,7 +77,7 @@ export class Api {
      *
      * @since 2.0.0
      */
-    public circuits(options?: Prettify<CircuitOptions>): PendingRequest<Circuit> {
+    public circuits(options?: Prettify<CircuitOptions>): PendingRequest<Circuit[]> {
         return this.makePendingRequest(
             'circuits',
             (data) =>
@@ -92,7 +93,7 @@ export class Api {
      */
     public driverStandings(
         options: Prettify<DriverStandingOptions>,
-    ): PendingRequest<DriverStanding> {
+    ): PendingRequest<DriverStanding[]> {
         return new PendingRequest(
             this,
             'driverstandings',
@@ -116,7 +117,7 @@ export class Api {
      *
      * @since 2.0.0
      */
-    public drivers(options?: Prettify<DriverOptions>): PendingRequest<Driver> {
+    public drivers(options?: Prettify<DriverOptions>): PendingRequest<Driver[]> {
         return this.makePendingRequest(
             'drivers',
             (data) => data.DriverTable.Drivers.map((driverData) => new Driver(driverData, this)),
@@ -129,7 +130,7 @@ export class Api {
      *
      * @since 2.0.0
      */
-    public laps(options: Prettify<LapOptions>): PendingRequest<Lap> {
+    public laps(options: Prettify<LapOptions>): PendingRequest<Lap[]> {
         return this.makePendingRequest(
             'laps',
             (data) =>
@@ -145,7 +146,7 @@ export class Api {
      *
      * @since 2.0.0
      */
-    public pitStops(options: Prettify<LapOptions>): PendingRequest<PitStop> {
+    public pitStops(options: Prettify<LapOptions>): PendingRequest<PitStop[]> {
         return this.makePendingRequest(
             'pitstops',
             (data) =>
@@ -163,7 +164,7 @@ export class Api {
      */
     public qualifyingResults(
         options?: Prettify<QualifyingResultOptions>,
-    ): PendingRequest<QualifyingResult> {
+    ): PendingRequest<QualifyingResult[]> {
         return this.makePendingRequest(
             'qualifying',
             (data) =>
@@ -181,7 +182,7 @@ export class Api {
      *
      * @since 2.0.0
      */
-    public races(options?: Prettify<RaceOptions>): PendingRequest<Race> {
+    public races(options?: Prettify<RaceOptions>): PendingRequest<Race[]> {
         return this.makePendingRequest(
             'races',
             (data) => data.RaceTable.Races.map((raceData) => new Race(raceData, this)),
@@ -201,7 +202,7 @@ export class Api {
      *
      * @since 2.0.0
      */
-    public results(options?: Prettify<ResultOptions>): PendingRequest<Result> {
+    public results(options?: Prettify<ResultOptions>): PendingRequest<Result[]> {
         return this.makePendingRequest(
             'results',
             (data) =>
@@ -217,7 +218,7 @@ export class Api {
      *
      * @since 2.0.0
      */
-    public seasons(options?: Prettify<SeasonOptions>): PendingRequest<Season> {
+    public seasons(options?: Prettify<SeasonOptions>): PendingRequest<Season[]> {
         return this.makePendingRequest(
             'seasons',
             (data) => data.SeasonTable.Seasons.map((seasonData) => new Season(seasonData, this)),
@@ -230,7 +231,7 @@ export class Api {
      *
      * @since 2.0.0
      */
-    public sprintResults(options?: Prettify<SprintResultOptions>): PendingRequest<SprintResult> {
+    public sprintResults(options?: Prettify<SprintResultOptions>): PendingRequest<SprintResult[]> {
         return this.makePendingRequest(
             'sprint',
             (data) =>
@@ -248,7 +249,7 @@ export class Api {
      *
      * @since 2.0.0
      */
-    public teamStandings(options: Prettify<TeamStandingOptions>): PendingRequest<TeamStanding> {
+    public teamStandings(options: Prettify<TeamStandingOptions>): PendingRequest<TeamStanding[]> {
         return this.makePendingRequest(
             'constructorstandings',
             (data) =>
@@ -271,7 +272,7 @@ export class Api {
      *
      * @since 2.0.0
      */
-    public teams(options?: Prettify<TeamOptions>): PendingRequest<Team> {
+    public teams(options?: Prettify<TeamOptions>): PendingRequest<Team[]> {
         return this.makePendingRequest(
             'constructors',
             (data) =>
@@ -320,13 +321,14 @@ export class Api {
     }
 
     private makePendingRequest<
-        TModel extends ModelsMap[keyof ModelsMap],
-        TResource extends ModelsKey<TModel> = ModelsKey<TModel>,
+        TData extends AnyModel[],
+        TResource extends ModelsKey<TData[number]> = ModelsKey<TData[number]>,
+        TModel extends ModelsMap[TResource] = ModelsMap[TResource],
     >(
         resource: TResource,
         transform: (data: ResponsesMap[TResource]['MRData']) => TModel[],
         options?: AllApiOptions,
-    ): PendingRequest<TModel, TResource> {
+    ): PendingRequest<TData, TResource> {
         return new PendingRequest(this, resource, options ?? {}, transform);
     }
 
