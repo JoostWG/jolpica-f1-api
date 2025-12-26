@@ -45,7 +45,7 @@
             "axios.AxiosInstance": "https://axios-http.com/docs/instance",
             "axios.CreateAxiosDefaults": "https://axios-http.com/docs/config_defaults",
             "axios.AxiosRequestConfig": "https://axios-http.com/docs/req_config",
-            "AxiosResponse": "https://axios-http.com/docs/res_schema",
+            "axios.AxiosResponse": "https://axios-http.com/docs/res_schema",
             "*": "https://axios-http.com/docs/intro"
         },
         "typescript": {
