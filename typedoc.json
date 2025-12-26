@@ -2,7 +2,7 @@
     "lang": "en",
     "cleanOutputDir": true,
     "entryPoints": ["src/index.ts"],
-    "out": "./docs",
+    "out": "./docs/build",
     "plugin": ["./typedoc-plugin.mjs"],
     "navigation": {
         "includeCategories": true
