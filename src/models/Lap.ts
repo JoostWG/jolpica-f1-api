@@ -1,5 +1,6 @@
 import type { Api } from '../Api';
 import type { LapApiData, RaceApiData } from '../types';
+import { Model } from './Model';
 import { Race } from './Race';
 import { Timing } from './Timing';
 
@@ -8,14 +9,16 @@ import { Timing } from './Timing';
  *
  * @since 2.0.0
  */
-export class Lap {
+export class Lap extends Model {
     public readonly number: number;
     public readonly timings: readonly Timing[];
     public readonly race: Race;
 
-    public constructor(data: LapApiData, raceData: RaceApiData, protected readonly api: Api) {
+    public constructor(data: LapApiData, raceData: RaceApiData, api: Api) {
+        super(api);
+
         this.number = Number(data.number);
-        this.timings = data.Timings.map((timingData) => new Timing(timingData));
+        this.timings = data.Timings.map((timingData) => new Timing(timingData, this.api));
         this.race = new Race(raceData, this.api);
     }
 }

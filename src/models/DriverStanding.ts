@@ -1,6 +1,7 @@
 import type { Api } from '../Api';
 import type { DriverStandingApiData } from '../types';
 import { Driver } from './Driver';
+import { Model } from './Model';
 import { Team } from './Team';
 
 /**
@@ -8,7 +9,7 @@ import { Team } from './Team';
  *
  * @since 2.0.0
  */
-export class DriverStanding {
+export class DriverStanding extends Model {
     public readonly season: number;
     public readonly round: number;
     public readonly position: number | null;
@@ -18,12 +19,9 @@ export class DriverStanding {
     public readonly driver: Driver;
     public readonly teams: readonly Team[];
 
-    public constructor(
-        data: DriverStandingApiData,
-        season: string,
-        round: string,
-        protected readonly api: Api,
-    ) {
+    public constructor(data: DriverStandingApiData, season: string, round: string, api: Api) {
+        super(api);
+
         this.season = Number(season);
         this.round = Number(round);
         this.position = data.position !== undefined ? Number(data.position) : null;

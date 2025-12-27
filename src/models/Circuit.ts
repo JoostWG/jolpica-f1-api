@@ -1,13 +1,14 @@
 import type { Api } from '../Api';
 import type { CircuitApiData } from '../types';
 import { Location } from './Location';
+import { Model } from './Model';
 
 /**
  * @category Models
  *
  * @since 2.0.0
  */
-export class Circuit {
+export class Circuit extends Model {
     /**
      * The ID of this circuit used by the Jolpica API
      */
@@ -25,10 +26,12 @@ export class Circuit {
      */
     public readonly location: Location;
 
-    public constructor(data: CircuitApiData, protected readonly api: Api) {
+    public constructor(data: CircuitApiData, api: Api) {
+        super(api);
+
         this.id = data.circuitId;
         this.wikiUrl = data.url;
         this.name = data.circuitName;
-        this.location = new Location(data.Location);
+        this.location = new Location(data.Location, this.api);
     }
 }

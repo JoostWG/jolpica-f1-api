@@ -17,6 +17,7 @@ import type {
 import type { Circuit } from './Circuit';
 import type { DriverStanding } from './DriverStanding';
 import type { Lap } from './Lap';
+import { Model } from './Model';
 import type { PitStop } from './PitStop';
 import type { QualifyingResult } from './QualifyingResult';
 import type { Race } from './Race';
@@ -30,7 +31,7 @@ import type { Team } from './Team';
  *
  * @since 2.0.0
  */
-export class Driver {
+export class Driver extends Model {
     /**
      *  Unique ID used by the API
      */
@@ -64,7 +65,9 @@ export class Driver {
      */
     public readonly wikiUrl: string;
 
-    public constructor(data: DriverApiData, protected readonly api: Api) {
+    public constructor(data: DriverApiData, api: Api) {
+        super(api);
+
         this.id = data.driverId;
         this.wikiUrl = data.url;
         this.firstName = data.givenName;

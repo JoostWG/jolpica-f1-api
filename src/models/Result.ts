@@ -3,6 +3,7 @@ import type { RaceApiData, ResultApiData } from '../types';
 import { Driver } from './Driver';
 import { FastestLap } from './FastestLap';
 import { FinishingTime } from './FinishingTime';
+import { Model } from './Model';
 import { Race } from './Race';
 import { Team } from './Team';
 
@@ -11,7 +12,7 @@ import { Team } from './Team';
  *
  * @since 2.0.0
  */
-export class Result {
+export class Result extends Model {
     public readonly number: number;
     public readonly position: string;
     public readonly positionText: string;
@@ -25,7 +26,9 @@ export class Result {
     public readonly finishingTime: FinishingTime | null;
     public readonly race: Race;
 
-    public constructor(data: ResultApiData, raceData: RaceApiData, protected readonly api: Api) {
+    public constructor(data: ResultApiData, raceData: RaceApiData, api: Api) {
+        super(api);
+
         this.number = Number(data.number);
         this.position = data.position;
         this.positionText = data.positionText;
@@ -38,10 +41,10 @@ export class Result {
         this.laps = data.laps !== undefined ? Number(data.laps) : null;
         this.status = data.status ?? null;
         this.fastestLap = data.FastestLap !== undefined
-            ? new FastestLap(data.FastestLap)
+            ? new FastestLap(data.FastestLap, this.api)
             : null;
         this.finishingTime = data.Time !== undefined
-            ? new FinishingTime(data.Time)
+            ? new FinishingTime(data.Time, this.api)
             : null;
         this.race = new Race(raceData, this.api);
     }

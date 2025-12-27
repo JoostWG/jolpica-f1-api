@@ -1,5 +1,6 @@
 import type { Api } from '../Api';
 import type { PitStopApiData, RaceApiData } from '../types';
+import { Model } from './Model';
 import { Race } from './Race';
 
 /**
@@ -7,7 +8,7 @@ import { Race } from './Race';
  *
  * @since 2.0.0
  */
-export class PitStop {
+export class PitStop extends Model {
     public readonly driverId: string;
     public readonly lap: number | null;
     public readonly stop: number | null;
@@ -15,7 +16,9 @@ export class PitStop {
     public readonly duration: number | null;
     public readonly race: Race;
 
-    public constructor(data: PitStopApiData, raceData: RaceApiData, protected readonly api: Api) {
+    public constructor(data: PitStopApiData, raceData: RaceApiData, api: Api) {
+        super(api);
+
         this.driverId = data.driverId;
         this.lap = data.lap !== undefined ? Number(data.lap) : null;
         this.stop = data.stop !== undefined ? Number(data.stop) : null;
