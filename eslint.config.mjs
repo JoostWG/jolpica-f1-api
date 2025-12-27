@@ -114,6 +114,7 @@ export default defineConfig(
                 },
             ],
             '@typescript-eslint/max-params': ['error', { max: 4 }],
+            '@typescript-eslint/method-signature-style': ['error', 'method'],
             // Below is all disabled
             '@typescript-eslint/no-unnecessary-type-parameters': 'off',
             '@typescript-eslint/prefer-regexp-exec': 'off',
