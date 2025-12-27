@@ -60,6 +60,10 @@ export type * from './options';
  */
 export type Prettify<T> = { [K in keyof T]: T[K] } & {};
 
+export type Unsure<T> = {
+    [K in keyof T]?: T[K] | null;
+};
+
 /**
  * @since 2.0.0
  */

@@ -20,7 +20,7 @@ export class AverageSpeed extends Model {
     public constructor(data: AverageSpeedApiData, api: Api) {
         super(api);
 
-        this.units = data.units;
-        this.speed = Number(data.speed);
+        this.units = this.validator.ensure('string', data, 'units', true);
+        this.speed = this.validator.ensure('number', data, 'speed', true);
     }
 }

@@ -44,6 +44,7 @@ import type {
     TeamOptions,
     TeamStandingOptions,
 } from './types';
+import { Validator } from './Validator';
 
 /**
  * @category Base
@@ -55,11 +56,13 @@ export class Api {
      * @since 3.0.0
      */
     public readonly baseUrl: string;
+    public readonly validator: Validator;
     protected readonly axios: AxiosInstance;
     protected readonly cache?: ApiCache;
 
-    public constructor({ cache, config }: {
+    public constructor({ cache, validator, config }: {
         cache?: ApiCache;
+        validator?: Validator;
         config?: Omit<CreateAxiosDefaults, 'baseUrl'>;
     } = {}) {
         this.baseUrl = 'https://api.jolpi.ca/ergast/f1';
@@ -72,6 +75,7 @@ export class Api {
             ...config,
         });
 
+        this.validator = validator ?? new Validator();
         this.cache = cache;
     }
 

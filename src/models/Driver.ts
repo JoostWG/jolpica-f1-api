@@ -68,14 +68,14 @@ export class Driver extends Model {
     public constructor(data: DriverApiData, api: Api) {
         super(api);
 
-        this.id = data.driverId;
-        this.wikiUrl = data.url;
-        this.firstName = data.givenName;
-        this.lastName = data.familyName;
+        this.id = this.validator.ensure('string', data, 'driverId', true);
+        this.wikiUrl = this.validator.ensure('string', data, 'url', true);
+        this.firstName = this.validator.ensure('string', data, 'givenName', true);
+        this.lastName = this.validator.ensure('string', data, 'familyName', true);
         this.dateOfBirth = new Date(data.dateOfBirth);
-        this.nationality = data.nationality;
-        this.number = data.permanentNumber !== undefined ? Number(data.permanentNumber) : null;
-        this.code = data.code ?? null;
+        this.nationality = this.validator.ensure('string', data, 'nationality', true);
+        this.number = this.validator.ensure('number', data, 'permanentNumber', true);
+        this.code = this.validator.ensure('string', data, 'code');
     }
 
     /**

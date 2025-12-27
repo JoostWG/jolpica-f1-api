@@ -1,5 +1,5 @@
 import type { Api } from '../Api';
-import type { CircuitApiData } from '../types';
+import type { CircuitApiData, Unsure } from '../types';
 import { Location } from './Location';
 import { Model } from './Model';
 
@@ -26,12 +26,15 @@ export class Circuit extends Model {
      */
     public readonly location: Location;
 
-    public constructor(data: CircuitApiData, api: Api) {
+    public constructor(data: Unsure<CircuitApiData>, api: Api) {
         super(api);
 
-        this.id = data.circuitId;
-        this.wikiUrl = data.url;
-        this.name = data.circuitName;
-        this.location = new Location(data.Location, this.api);
+        this.id = this.validator.ensure('string', data, 'circuitId', true);
+        this.wikiUrl = this.validator.ensure('string', data, 'url', true);
+        this.name = this.validator.ensure('string', data, 'circuitName', true);
+        this.location = new Location(
+            this.validator.ensure('object', data, 'Location', true),
+            this.api,
+        );
     }
 }
