@@ -1,6 +1,7 @@
 import type { Api } from '../Api';
 import type { RaceApiData } from '../types';
 import { Circuit } from './Circuit';
+import { Model } from './Model';
 import { SessionDateTime } from './SessionDateTime';
 
 /**
@@ -8,7 +9,7 @@ import { SessionDateTime } from './SessionDateTime';
  *
  * @since 2.0.0
  */
-export class Race {
+export class Race extends Model {
     public readonly season: number;
     public readonly round: number;
     public readonly wikiUrl: string | null;
@@ -24,7 +25,9 @@ export class Race {
     public readonly sprintQualifying: SessionDateTime | null;
     public readonly sprintShootout: SessionDateTime | null;
 
-    public constructor(data: RaceApiData, protected readonly api: Api) {
+    public constructor(data: RaceApiData, api: Api) {
+        super(api);
+
         this.season = Number(data.season);
         this.round = Number(data.round);
         this.wikiUrl = data.url ?? null;
@@ -33,25 +36,25 @@ export class Race {
         this.date = data.date;
         this.time = data.time ?? null;
         this.firstPractice = data.FirstPractice !== undefined
-            ? new SessionDateTime(data.FirstPractice)
+            ? new SessionDateTime(data.FirstPractice, this.api)
             : null;
         this.secondPractice = data.SecondPractice !== undefined
-            ? new SessionDateTime(data.SecondPractice)
+            ? new SessionDateTime(data.SecondPractice, this.api)
             : null;
         this.thirdPractice = data.ThirdPractice !== undefined
-            ? new SessionDateTime(data.ThirdPractice)
+            ? new SessionDateTime(data.ThirdPractice, this.api)
             : null;
         this.qualifying = data.Qualifying !== undefined
-            ? new SessionDateTime(data.Qualifying)
+            ? new SessionDateTime(data.Qualifying, this.api)
             : null;
         this.sprint = data.Sprint !== undefined
-            ? new SessionDateTime(data.Sprint)
+            ? new SessionDateTime(data.Sprint, this.api)
             : null;
         this.sprintQualifying = data.SprintQualifying !== undefined
-            ? new SessionDateTime(data.SprintQualifying)
+            ? new SessionDateTime(data.SprintQualifying, this.api)
             : null;
         this.sprintShootout = data.SprintShootout !== undefined
-            ? new SessionDateTime(data.SprintShootout)
+            ? new SessionDateTime(data.SprintShootout, this.api)
             : null;
     }
 

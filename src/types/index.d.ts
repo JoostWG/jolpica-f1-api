@@ -104,10 +104,15 @@ export interface ModelsMap {
 export type AnyModel = ModelsMap[keyof ModelsMap];
 
 /**
+ * @internal
+ */
+type Exact<T, U> = T extends U ? (U extends T ? true : false) : false;
+
+/**
  * @since 3.0.0
  */
 export type ModelsKey<T extends AnyModel> = {
-    [K in keyof ModelsMap]: ModelsMap[K] extends T ? K : never;
+    [K in keyof ModelsMap]: Exact<ModelsMap[K], T> extends true ? K : never;
 }[keyof ModelsMap];
 
 /**
