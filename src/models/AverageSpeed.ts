@@ -1,5 +1,5 @@
 import type { Api } from '../Api';
-import type { AverageSpeedApiData } from '../types';
+import type { AverageSpeedApiData, Unsure } from '../types';
 import { Model } from './Model';
 
 /**
@@ -17,7 +17,7 @@ export class AverageSpeed extends Model {
      */
     public readonly speed: number;
 
-    public constructor(data: AverageSpeedApiData, api: Api) {
+    public constructor(data: Unsure<AverageSpeedApiData>, api: Api) {
         super(api);
 
         this.units = this.validator.ensure('string', data, 'units', true);

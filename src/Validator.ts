@@ -1,38 +1,44 @@
 import { InvalidType } from './errors';
 
-interface Types<T> {
+interface ReturnTypes<T> {
     string: string;
     number: number;
     object: T;
     array: T;
+    date: Date;
+}
+interface InputTypes {
+    string: string;
+    number: number | string;
+    object: object;
+    array: unknown[];
+    date: string;
 }
 
+type Filter<TData, TType extends keyof InputTypes> = {
+    [K in keyof TData as TData[K] extends InputTypes[TType] | null | undefined ? K : never]:
+        TData[K];
+};
+
 export class Validator {
-    public ensure<
-        TData,
-        TKey extends keyof TData,
-        TType extends keyof Types<TData[TKey]>,
-    >(
+    public ensure<TType extends keyof InputTypes, TData, TKey extends keyof Filter<TData, TType>>(
         type: TType,
         data: TData,
         key: TKey,
         required?: false,
-    ): Exclude<Types<TData[TKey]>[TType], undefined>;
-    public ensure<
-        TData,
-        TKey extends keyof TData,
-        TType extends keyof Types<TData[TKey]>,
-    >(
+    ): Exclude<ReturnTypes<TData[TKey]>[TType], undefined>;
+    public ensure<TType extends keyof InputTypes, TData, TKey extends keyof Filter<TData, TType>>(
         type: TType,
         data: TData,
         key: TKey,
         required: true,
-    ): Exclude<Types<TData[TKey]>[TType], undefined | null>;
-    public ensure<
-        TData,
-        TKey extends keyof TData,
-        TType extends keyof Types<TData[TKey]>,
-    >(type: TType, data: TData, key: TKey, required?: boolean): unknown {
+    ): Exclude<ReturnTypes<TData[TKey]>[TType], undefined | null>;
+    public ensure<TType extends keyof InputTypes, TData, TKey extends keyof Filter<TData, TType>>(
+        type: TType,
+        data: TData,
+        key: TKey,
+        required?: boolean,
+    ): unknown {
         const value = data[key];
 
         switch (type) {
@@ -67,12 +73,19 @@ export class Validator {
                 }
 
                 break;
+
+            case 'date':
+                if (typeof value === 'string') {
+                    return new Date(value);
+                }
+
+                break;
         }
 
         if (!required && (value === null || value === undefined)) {
             return null;
         }
 
-        throw new InvalidType(`Expected '${String(key)}' ${type}, got ${String(value)}`);
+        throw new InvalidType(`Expected '${String(key)}' to be ${type}, got ${String(value)}`);
     }
 }

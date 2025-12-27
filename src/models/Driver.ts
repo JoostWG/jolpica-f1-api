@@ -72,7 +72,7 @@ export class Driver extends Model {
         this.wikiUrl = this.validator.ensure('string', data, 'url', true);
         this.firstName = this.validator.ensure('string', data, 'givenName', true);
         this.lastName = this.validator.ensure('string', data, 'familyName', true);
-        this.dateOfBirth = new Date(data.dateOfBirth);
+        this.dateOfBirth = this.validator.ensure('date', data, 'dateOfBirth', true);
         this.nationality = this.validator.ensure('string', data, 'nationality', true);
         this.number = this.validator.ensure('number', data, 'permanentNumber', true);
         this.code = this.validator.ensure('string', data, 'code');
