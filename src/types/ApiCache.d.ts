@@ -7,9 +7,9 @@ import type { Pagination } from './api';
  * @since 1.0.1
  */
 export interface ApiCache {
-    get: <T>(path: string, pagination?: Pagination) => Promise<T | null>;
+    get<T>(path: string, pagination?: Pagination): Promise<T | null>;
 
-    set: (
+    set(
         data: unknown,
         /**
          * @since 2.0.0
@@ -17,5 +17,5 @@ export interface ApiCache {
         cacheControl: axios.AxiosHeaderValue | undefined,
         path: string,
         pagination?: Pagination,
-    ) => Promise<void>;
+    ): Promise<void>;
 }
