@@ -7,6 +7,7 @@ export * from './FastestLapTime';
 export * from './FinishingTime';
 export * from './Lap';
 export * from './Location';
+export * from './Model';
 export * from './PitStop';
 export * from './QualifyingResult';
 export * from './Race';

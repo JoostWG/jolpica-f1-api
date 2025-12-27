@@ -1,5 +1,6 @@
 import type { Api } from '../Api';
 import type { ConstructorStandingApiData } from '../types';
+import { Model } from './Model';
 import { Team } from './Team';
 
 /**
@@ -7,7 +8,7 @@ import { Team } from './Team';
  *
  * @since 2.0.0
  */
-export class TeamStanding {
+export class TeamStanding extends Model {
     public readonly season: number;
     public readonly round: number;
     public readonly position: string | null;
@@ -16,12 +17,9 @@ export class TeamStanding {
     public readonly wins: number;
     public readonly team: Team;
 
-    public constructor(
-        data: ConstructorStandingApiData,
-        season: string,
-        round: string,
-        protected readonly api: Api,
-    ) {
+    public constructor(data: ConstructorStandingApiData, season: string, round: string, api: Api) {
+        super(api);
+
         this.season = Number(season);
         this.round = Number(round);
         this.position = data.position ?? null;

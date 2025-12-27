@@ -1,6 +1,7 @@
 import type { Api } from '../Api';
 import type { QualifyingResultApiData, RaceApiData } from '../types';
 import { Driver } from './Driver';
+import { Model } from './Model';
 import { Race } from './Race';
 import { Team } from './Team';
 
@@ -9,7 +10,7 @@ import { Team } from './Team';
  *
  * @since 2.0.0
  */
-export class QualifyingResult {
+export class QualifyingResult extends Model {
     public readonly number: number;
     public readonly position: number | null;
     public readonly driver: Driver;
@@ -19,11 +20,9 @@ export class QualifyingResult {
     public readonly q3: string | null;
     public readonly race: Race;
 
-    public constructor(
-        data: QualifyingResultApiData,
-        raceData: RaceApiData,
-        protected readonly api: Api,
-    ) {
+    public constructor(data: QualifyingResultApiData, raceData: RaceApiData, api: Api) {
+        super(api);
+
         this.number = Number(data.number);
         this.position = data.position !== undefined ? Number(data.position) : null;
         this.driver = new Driver(data.Driver, this.api);

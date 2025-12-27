@@ -17,6 +17,7 @@ import type {
 import type { Circuit } from './Circuit';
 import type { DriverStanding } from './DriverStanding';
 import type { Lap } from './Lap';
+import { Model } from './Model';
 import type { PitStop } from './PitStop';
 import type { QualifyingResult } from './QualifyingResult';
 import type { Race } from './Race';
@@ -30,7 +31,7 @@ import type { Team } from './Team';
  *
  * @since 2.0.0
  */
-export class Driver {
+export class Driver extends Model {
     /**
      *  Unique ID used by the API
      */
@@ -64,15 +65,17 @@ export class Driver {
      */
     public readonly wikiUrl: string;
 
-    public constructor(data: DriverApiData, protected readonly api: Api) {
-        this.id = data.driverId;
-        this.wikiUrl = data.url;
-        this.firstName = data.givenName;
-        this.lastName = data.familyName;
-        this.dateOfBirth = new Date(data.dateOfBirth);
-        this.nationality = data.nationality;
-        this.number = data.permanentNumber !== undefined ? Number(data.permanentNumber) : null;
-        this.code = data.code ?? null;
+    public constructor(data: DriverApiData, api: Api) {
+        super(api);
+
+        this.id = this.validator.ensure('string', data, 'driverId', true);
+        this.wikiUrl = this.validator.ensure('string', data, 'url', true);
+        this.firstName = this.validator.ensure('string', data, 'givenName', true);
+        this.lastName = this.validator.ensure('string', data, 'familyName', true);
+        this.dateOfBirth = this.validator.ensure('date', data, 'dateOfBirth', true);
+        this.nationality = this.validator.ensure('string', data, 'nationality', true);
+        this.number = this.validator.ensure('number', data, 'permanentNumber', true);
+        this.code = this.validator.ensure('string', data, 'code');
     }
 
     /**
