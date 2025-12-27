@@ -5,6 +5,8 @@
 > # Disclaimer
 >
 > Despite the versioning, this package is still in development and anything could change at any point with or without proper versioning. Major changes may be made without a major semver increment. There are no guarantees this package will be consistent and stable as long as this disclaimer is present.
+>
+> At some point in the future I will rename this repo to `jolpica-f1-api-development` or something similar. Then I will create a fresh repo with the name `jolpica-f1-api` or something like that and copy only the contents of this repo. Not the commit history. Starting at version 1.0.0.
 
 ## Installation
 
