@@ -196,7 +196,7 @@ export class Validate {
             Constructor: this.optional(this.team()),
             grid: this.optional(this.integer()),
             laps: this.optional(this.integer()),
-            status: this.optional(this.exact(...Object.values(StatusType))),
+            status: this.optional(this.statusEnum()),
             FastestLap: this.optional(this.fastestLap()),
             Time: this.optional(this.finishingTime()),
         });
@@ -219,7 +219,7 @@ export class Validate {
             Constructor: this.optional(this.team()),
             grid: this.optional(this.integer()),
             laps: this.optional(this.integer()),
-            status: this.optional(this.exact(...Object.values(StatusType))),
+            status: this.optional(this.statusEnum()),
             Time: this.optional(this.finishingTime()),
             FastestLap: this.optional(this.fastestLap()),
         });
@@ -227,7 +227,7 @@ export class Validate {
 
     public status(): Validator<StatusApiData> {
         return this.object({
-            statusId: this.exact(...Object.values(StatusType)),
+            statusId: this.statusEnum(),
             count: this.integer(),
             status: this.string(),
         });
@@ -379,6 +379,10 @@ export class Validate {
                 ...dataShape,
             } as Shape<MRData & T>),
         });
+    }
+
+    protected statusEnum(): Validator<StatusType> {
+        return this.exact(...Object.values(StatusType));
     }
 
     /**
