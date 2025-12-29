@@ -62,7 +62,7 @@ export interface Pagination {
  *
  * @see https://github.com/jolpica/jolpica-f1/tree/main/docs#common-response-fields
  */
-export type MRData<T> = T & {
+export interface MRData  {
     /**
      * Blank, provided for compatibility with legacy ergast API.
      */
@@ -87,7 +87,7 @@ export type MRData<T> = T & {
      * The total number of items available from the endpoint.
      */
     total: `${number}`;
-};
+}
 
 /**
  * @category Api responses
@@ -95,7 +95,7 @@ export type MRData<T> = T & {
  * @since 1.0.1
  */
 export interface SuccessResponse<T = unknown> {
-    MRData: MRData<T>;
+    MRData: MRData & T;
 }
 
 /**
