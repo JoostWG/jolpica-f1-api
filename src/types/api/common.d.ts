@@ -62,7 +62,7 @@ export interface Pagination {
  *
  * @see https://github.com/jolpica/jolpica-f1/tree/main/docs#common-response-fields
  */
-export interface MRData  {
+export interface MRData {
     /**
      * Blank, provided for compatibility with legacy ergast API.
      */
