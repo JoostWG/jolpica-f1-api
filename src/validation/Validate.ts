@@ -388,7 +388,7 @@ export class Validate {
     /**
      * @internal
      */
-    private optional<T>(validator: Validator<T>): Validator<T | undefined> {
+    protected optional<T>(validator: Validator<T>): Validator<T | undefined> {
         return function(value: unknown, path: string): T | undefined {
             if (value === undefined) {
                 return undefined;
@@ -401,7 +401,7 @@ export class Validate {
     /**
      * @internal
      */
-    private string({ pattern }: { pattern?: RegExp } = {}): Validator<string> {
+    protected string({ pattern }: { pattern?: RegExp } = {}): Validator<string> {
         return function(value: unknown, path: string): string {
             if (typeof value !== 'string') {
                 throw new ValidationError(`[${path}] should be a string`);
@@ -418,21 +418,21 @@ export class Validate {
     /**
      * @internal
      */
-    private integer(): Validator<`${number}`> {
+    protected integer(): Validator<`${number}`> {
         return this.string({ pattern: /^-?\d+$/u }) as Validator<`${number}`>;
     }
 
     /**
      * @internal
      */
-    private decimal(): Validator<`${number}`> {
+    protected decimal(): Validator<`${number}`> {
         return this.string({ pattern: /^-?\d+(\.\d+)?$/u }) as Validator<`${number}`>;
     }
 
     /**
      * @internal
      */
-    private object<T extends Record<string, unknown>>(shape: Shape<T>): Validator<T> {
+    protected object<T extends Record<string, unknown>>(shape: Shape<T>): Validator<T> {
         return function(value: unknown, path: string): T {
             if (typeof value !== 'object' || !value || Array.isArray(value)) {
                 throw new ValidationError(`[${path}] should be an object`);
@@ -456,7 +456,7 @@ export class Validate {
     /**
      * @internal
      */
-    private array<T>(validator: Validator<T>): Validator<T[]> {
+    protected array<T>(validator: Validator<T>): Validator<T[]> {
         return function(value: unknown, path: string): T[] {
             if (!Array.isArray(value)) {
                 throw new ValidationError(`[${path}] should be an array`);
@@ -469,14 +469,14 @@ export class Validate {
     /**
      * @internal
      */
-    private date(): Validator<string> {
+    protected date(): Validator<string> {
         return this.string({ pattern: /^\d{4}-\d{2}\d{2}$/u });
     }
 
     /**
      * @internal
      */
-    private exact<const A extends unknown[]>(...allowed: A): Validator<A[number]> {
+    protected exact<const A extends unknown[]>(...allowed: A): Validator<A[number]> {
         return function(value: unknown, path: string): A[number] {
             for (const x of allowed) {
                 if (x === value) {
