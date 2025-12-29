@@ -17,6 +17,7 @@ import {
     Result,
     Season,
     SprintResult,
+    Status,
     Team,
     TeamStanding,
 } from './models';
@@ -31,7 +32,6 @@ import type {
     DriverStandingOptions,
     LapOptions,
     ModelsKey,
-    ModelsMap,
     Pagination,
     Prettify,
     QualifyingResultOptions,
@@ -40,6 +40,7 @@ import type {
     ResultOptions,
     SeasonOptions,
     SprintResultOptions,
+    StatusOptions,
     SuccessResponse,
     TeamOptions,
     TeamStandingOptions,
@@ -248,6 +249,19 @@ export class Api {
     }
 
     /**
+     * Get statuses
+     *
+     * @since 3.0.0
+     */
+    public statuses(options?: Prettify<StatusOptions>): PendingRequest<Status[]> {
+        return this.makePendingRequest(
+            'status',
+            (data) => data.StatusTable.Status.map((statusData) => new Status(statusData, this)),
+            options,
+        );
+    }
+
+    /**
      * Get team standings
      *
      * @since 2.0.0
@@ -326,10 +340,9 @@ export class Api {
     protected makePendingRequest<
         TData extends AnyModel[],
         TResource extends ModelsKey<TData[number]> = ModelsKey<TData[number]>,
-        TModel extends ModelsMap[TResource] = ModelsMap[TResource],
     >(
         resource: TResource,
-        transform: (data: ResponsesMap[TResource]['MRData']) => TModel[],
+        transform: (data: ResponsesMap[TResource]['MRData']) => TData,
         options?: AnyApiOptions,
     ): PendingRequest<TData, TResource> {
         return new PendingRequest(this, resource, options ?? {}, transform);
