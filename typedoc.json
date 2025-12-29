@@ -1,5 +1,6 @@
 {
     "lang": "en",
+    "includeVersion": true,
     "cleanOutputDir": true,
     "entryPoints": ["src/index.ts"],
     "out": "./docs-build",
