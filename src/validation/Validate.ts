@@ -393,7 +393,7 @@ export class Validate {
      * @internal
      */
     protected optional<T>(validator: Validator<T>): Validator<T | undefined> {
-        return function(value: unknown, path: string): T | undefined {
+        return (value, path) => {
             if (value === undefined) {
                 return undefined;
             }
@@ -406,7 +406,7 @@ export class Validate {
      * @internal
      */
     protected string({ pattern }: { pattern?: RegExp } = {}): Validator<string> {
-        return function(value: unknown, path: string): string {
+        return (value, path) => {
             if (typeof value !== 'string') {
                 throw new ValidationError(`[${path}] should be a string`);
             }
@@ -437,7 +437,7 @@ export class Validate {
      * @internal
      */
     protected object<T extends Record<string, unknown>>(shape: Shape<T>): Validator<T> {
-        return function(value: unknown, path: string): T {
+        return (value, path) => {
             if (typeof value !== 'object' || !value || Array.isArray(value)) {
                 throw new ValidationError(`[${path}] should be an object`);
             }
@@ -461,7 +461,7 @@ export class Validate {
      * @internal
      */
     protected array<T>(validator: Validator<T>): Validator<T[]> {
-        return function(value: unknown, path: string): T[] {
+        return (value, path) => {
             if (!Array.isArray(value)) {
                 throw new ValidationError(`[${path}] should be an array`);
             }
@@ -481,7 +481,7 @@ export class Validate {
      * @internal
      */
     protected exact<const A extends unknown[]>(...allowed: A): Validator<A[number]> {
-        return function(value: unknown, path: string): A[number] {
+        return (value, path) => {
             for (const x of allowed) {
                 if (x === value) {
                     return value;
