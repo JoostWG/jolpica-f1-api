@@ -36,6 +36,7 @@ export default defineConfig(
             'no-param-reassign': 'warn',
             'require-unicode-regexp': 'warn',
             'func-style': ['error', 'declaration'],
+            'func-names': ['error', 'never'],
             'no-console': [
                 'warn',
                 {

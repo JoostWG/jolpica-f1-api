@@ -12,6 +12,7 @@ import type {
     ResultOptions,
     SeasonOptions,
     SprintResultOptions,
+    StatusOptions,
     TeamOptions,
 } from '../types';
 import type { Circuit } from './Circuit';
@@ -24,6 +25,7 @@ import type { Race } from './Race';
 import type { Result } from './Result';
 import type { Season } from './Season';
 import type { SprintResult } from './SprintResult';
+import type { Status } from './Status';
 import type { Team } from './Team';
 
 /**
@@ -189,6 +191,13 @@ export class Driver extends Model {
         options?: Prettify<Omit<SprintResultOptions, 'driver'>>,
     ): PendingRequest<SprintResult[]> {
         return this.api.sprintResults(this.getOptions(options));
+    }
+
+    /**
+     * @since 3.0.0
+     */
+    public statuses(options?: Prettify<Omit<StatusOptions, 'driver'>>): PendingRequest<Status[]> {
+        return this.api.statuses(this.getOptions(options));
     }
 
     /**

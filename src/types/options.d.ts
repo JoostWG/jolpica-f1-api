@@ -278,6 +278,23 @@ export type SprintResultOptions = Partial<
 /**
  * @category Options
  *
+ * @since 3.0.0
+ */
+export type StatusOptions = Partial<
+    & SeasonOption
+    & RoundOption
+    & CircuitOption
+    & TeamOption
+    & DriverOption
+    & GridPositionOption
+    & FinishPositionOption
+    & FastestRankOption
+    & StatusOption
+>;
+
+/**
+ * @category Options
+ *
  * @since 2.1.0
  */
 export type TeamStandingOptions =
