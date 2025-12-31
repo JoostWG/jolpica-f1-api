@@ -32,6 +32,7 @@ import type {
     DriverStandingOptions,
     LapOptions,
     ModelsKey,
+    ModelsMap,
     Pagination,
     Prettify,
     QualifyingResultOptions,
@@ -340,9 +341,10 @@ export class Api {
     protected makePendingRequest<
         TData extends AnyModel[],
         TResource extends ModelsKey<TData[number]> = ModelsKey<TData[number]>,
+        TModel extends ModelsMap[TResource] = ModelsMap[TResource],
     >(
         resource: TResource,
-        transform: (data: ResponsesMap[TResource]['MRData']) => TData,
+        transform: (data: ResponsesMap[TResource]['MRData']) => TModel[],
         options?: AnyApiOptions,
     ): PendingRequest<TData, TResource> {
         return new PendingRequest(this, resource, options ?? {}, transform);
