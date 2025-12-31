@@ -168,7 +168,7 @@ export class Validate {
 
     public race<T extends Record<string, unknown>>(extra?: Shape<T>): Validator<RaceApiData & T> {
         return this.object({
-            season: this.string({ pattern: /^\d{4}$/u }),
+            season: this.year(),
             round: this.integer(),
             url: this.optional(this.string()),
             raceName: this.string(),
@@ -204,7 +204,7 @@ export class Validate {
 
     public season(): Validator<SeasonApiData> {
         return this.object({
-            season: this.string({ pattern: /^\d{4}$/u }),
+            season: this.year(),
             url: this.string(),
         });
     }
@@ -263,7 +263,7 @@ export class Validate {
         return this.apiResponse({
             StandingsTable: this.object({
                 StandingsLists: this.array(this.object({
-                    season: this.string(), // TODO: Add function for \d{4}
+                    season: this.year(),
                     round: this.integer(),
                     ConstructorStandings: this.array(this.teamStanding()),
                 })),
@@ -283,7 +283,7 @@ export class Validate {
         return this.apiResponse({
             StandingsTable: this.object({
                 StandingsLists: this.array(this.object({
-                    season: this.string(), // TODO: Add function for \d{4}
+                    season: this.year(),
                     round: this.integer(),
                     DriverStandings: this.array(this.driverStanding()),
                 })),
@@ -379,6 +379,10 @@ export class Validate {
                 ...dataShape,
             } as Shape<MRData & T>),
         });
+    }
+
+    protected year(): Validator<`${number}`> {
+        return this.string({ pattern: /^\d{4}$/u }) as Validator<`${number}`>;
     }
 
     protected statusEnum(): Validator<StatusType> {
