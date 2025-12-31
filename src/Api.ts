@@ -41,6 +41,7 @@ import type {
     TeamOptions,
     TeamStandingOptions,
 } from './types';
+import { Validate } from './validation';
 
 /**
  * @category Base
@@ -54,6 +55,7 @@ export class Api {
     public readonly baseUrl: string;
     protected readonly axios: AxiosInstance;
     protected readonly cache?: ApiCache;
+    protected readonly validator: Validate;
 
     public constructor({ cache, config }: {
         cache?: ApiCache;
@@ -70,6 +72,7 @@ export class Api {
         });
 
         this.cache = cache;
+        this.validator = new Validate();
     }
 
     /**
@@ -84,6 +87,7 @@ export class Api {
             options ?? {},
             (data) =>
                 data.CircuitTable.Circuits.map((circuitData) => new Circuit(circuitData, this)),
+            this.validator.circuitsResponse(),
         );
     }
 
@@ -110,6 +114,7 @@ export class Api {
                         )
                     )
                 ),
+            this.validator.driverStandingsResponse(),
         );
     }
 
@@ -124,6 +129,7 @@ export class Api {
             'drivers',
             options ?? {},
             (data) => data.DriverTable.Drivers.map((driverData) => new Driver(driverData, this)),
+            this.validator.driversResponse(),
         );
     }
 
@@ -141,6 +147,7 @@ export class Api {
                 data.RaceTable.Races.flatMap((raceData) =>
                     raceData.Laps.map((lapData) => new Lap(lapData, raceData, this))
                 ),
+            this.validator.lapsResponse(),
         );
     }
 
@@ -158,6 +165,7 @@ export class Api {
                 data.RaceTable.Races.flatMap((raceData) =>
                     raceData.PitStops.map((pitStopData) => new PitStop(pitStopData, raceData, this))
                 ),
+            this.validator.pitStopsResponse(),
         );
     }
 
@@ -179,6 +187,7 @@ export class Api {
                         new QualifyingResult(resultData, raceData, this)
                     )
                 ),
+            this.validator.qualifyingResultsResponse(),
         );
     }
 
@@ -193,6 +202,7 @@ export class Api {
             'races',
             options ?? {},
             (data) => data.RaceTable.Races.map((raceData) => new Race(raceData, this)),
+            this.validator.racesResponse(),
         );
     }
 
@@ -217,6 +227,7 @@ export class Api {
                 data.RaceTable.Races.flatMap((raceData) =>
                     raceData.Results.map((resultData) => new Result(resultData, raceData, this))
                 ),
+            this.validator.resultsResponse(),
         );
     }
 
@@ -231,6 +242,7 @@ export class Api {
             'seasons',
             options ?? {},
             (data) => data.SeasonTable.Seasons.map((seasonData) => new Season(seasonData, this)),
+            this.validator.seasonsResponse(),
         );
     }
 
@@ -250,6 +262,7 @@ export class Api {
                         new SprintResult(resultData, raceData, this)
                     )
                 ),
+            this.validator.sprintResultsResponse(),
         );
     }
 
@@ -264,6 +277,7 @@ export class Api {
             'status',
             options ?? {},
             (data) => data.StatusTable.Status.map((statusData) => new Status(statusData, this)),
+            this.validator.statusesResponse(),
         );
     }
 
@@ -288,6 +302,7 @@ export class Api {
                         )
                     )
                 ),
+            this.validator.teamStandingsResponse(),
         );
     }
 
@@ -303,6 +318,7 @@ export class Api {
             options ?? {},
             (data) =>
                 data.ConstructorTable.Constructors.map((teamData) => new Team(teamData, this)),
+            this.validator.teamsResponse(),
         );
     }
 

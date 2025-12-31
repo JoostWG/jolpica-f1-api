@@ -8,6 +8,7 @@ import type {
     Response,
     ResponsesMap,
 } from './types';
+import type { Validator } from './validation';
 
 /**
  * @category Base
@@ -19,11 +20,13 @@ export class PendingRequest<
     TResource extends ModelsKey<TData[number]> = ModelsKey<TData[number]>,
     TModel extends ModelsMap[TResource] = ModelsMap[TResource],
 > {
+    // eslint-disable-next-line @typescript-eslint/max-params
     public constructor(
         protected readonly api: Api,
         public readonly resource: TResource,
         public readonly options: AnyApiOptions,
         protected readonly transform: (data: ResponsesMap[TResource]['MRData']) => TModel[],
+        protected readonly validate: Validator<ResponsesMap[TResource]>,
     ) {
         //
     }
@@ -36,7 +39,7 @@ export class PendingRequest<
     }
 
     public async get(pagination?: Pagination): Promise<Response<TModel[]>> {
-        const response = await this.api.get<ResponsesMap[TResource]>(this.getPath(), pagination);
+        const response = this.validate(await this.api.get(this.getPath(), pagination), 'response');
 
         return {
             meta: {
