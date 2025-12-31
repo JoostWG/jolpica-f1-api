@@ -41,208 +41,6 @@ import type { Shape, Validator } from './types';
 
 // TODO: Better class name? Or rename Validator type
 export class Validate {
-    public averageSpeed(): Validator<AverageSpeedApiData> {
-        return this.object({
-            units: this.string(),
-            speed: this.integer(),
-        });
-    }
-
-    public circuit(): Validator<CircuitApiData> {
-        return this.object({
-            circuitId: this.string(),
-            url: this.string(),
-            circuitName: this.string(),
-            Location: this.location(),
-        });
-    }
-
-    public team(): Validator<ConstructorApiData> {
-        return this.object({
-            constructorId: this.optional(this.integer()),
-            url: this.optional(this.string()),
-            name: this.string(),
-            nationality: this.optional(this.string()),
-        });
-    }
-
-    public teamStanding(): Validator<ConstructorStandingApiData> {
-        return this.object({
-            position: this.optional(this.integer()),
-            positionText: this.string(),
-            points: this.integer(),
-            wins: this.integer(),
-            Constructor: this.team(),
-        });
-    }
-
-    public dateTime(): Validator<DateTimeApiData> {
-        return this.object({
-            date: this.date(),
-            time: this.string({ pattern: /^\d{2}:\d{2}:\d{2}Z$/u }),
-        });
-    }
-
-    public driver(): Validator<DriverApiData> {
-        return this.object({
-            driverId: this.string(),
-            url: this.string(),
-            givenName: this.string(),
-            familyName: this.string(),
-            dateOfBirth: this.date(),
-            nationality: this.string(),
-            permanentNumber: this.optional(this.integer()),
-            code: this.optional(this.string()),
-        });
-    }
-
-    public driverStanding(): Validator<DriverStandingApiData> {
-        return this.object({
-            position: this.optional(this.integer()),
-            positionText: this.string(),
-            points: this.integer(),
-            wins: this.integer(),
-            Driver: this.driver(),
-            Constructors: this.array(this.team()),
-        });
-    }
-
-    public fastestLap(): Validator<FastestLapApiData> {
-        return this.object({
-            rank: this.integer(),
-            lap: this.integer(),
-            Time: this.fastestLapTime(),
-            AverageSpeed: this.averageSpeed(),
-        });
-    }
-
-    public fastestLapTime(): Validator<FastestLapTimeApiData> {
-        return this.object({
-            time: this.string(), // TODO format
-        });
-    }
-
-    public finishingTime(): Validator<FinishingTimeApiData> {
-        return this.object({
-            millis: this.integer(),
-            time: this.string(), // TODO format
-        });
-    }
-
-    public lap(): Validator<LapApiData> {
-        return this.object({
-            number: this.integer(),
-            Timings: this.array(this.timing()),
-        });
-    }
-
-    public location(): Validator<LocationApiData> {
-        return this.object({
-            lat: this.decimal(),
-            long: this.decimal(),
-            locality: this.string(),
-            country: this.string(),
-        });
-    }
-
-    public pitStop(): Validator<PitStopApiData> {
-        return this.object({
-            driverId: this.string(),
-            lap: this.optional(this.integer()),
-            stop: this.optional(this.integer()),
-            time: this.optional(this.string()), // TODO idk what the format is
-        });
-    }
-
-    public qualifyingResult(): Validator<QualifyingResultApiData> {
-        return this.object({
-            number: this.integer(),
-            position: this.optional(this.integer()),
-            Driver: this.driver(),
-            Constructor: this.team(),
-            Q1: this.optional(this.string()),
-            Q2: this.optional(this.string()),
-            Q3: this.optional(this.string()),
-        });
-    }
-
-    public race<T extends Record<string, unknown>>(extra?: Shape<T>): Validator<RaceApiData & T> {
-        return this.object({
-            season: this.year(),
-            round: this.integer(),
-            url: this.optional(this.string()),
-            raceName: this.string(),
-            Circuit: this.circuit(),
-            date: this.date(),
-            time: this.optional(this.string()), // TODO: Format
-            FirstPractice: this.optional(this.dateTime()),
-            SecondPractice: this.optional(this.dateTime()),
-            ThirdPractice: this.optional(this.dateTime()),
-            Qualifying: this.optional(this.dateTime()),
-            Sprint: this.optional(this.dateTime()),
-            SprintQualifying: this.optional(this.dateTime()),
-            SprintShootout: this.optional(this.dateTime()),
-            ...extra,
-        } as Shape<RaceApiData & T>);
-    }
-
-    public result(): Validator<ResultApiData> {
-        return this.object({
-            number: this.integer(),
-            position: this.integer(),
-            positionText: this.string(),
-            points: this.integer(),
-            Driver: this.driver(),
-            Constructor: this.optional(this.team()),
-            grid: this.optional(this.integer()),
-            laps: this.optional(this.integer()),
-            status: this.optional(this.statusEnum()),
-            FastestLap: this.optional(this.fastestLap()),
-            Time: this.optional(this.finishingTime()),
-        });
-    }
-
-    public season(): Validator<SeasonApiData> {
-        return this.object({
-            season: this.year(),
-            url: this.string(),
-        });
-    }
-
-    public sprintResult(): Validator<SprintResultApiData> {
-        return this.object({
-            number: this.integer(),
-            position: this.integer(),
-            positionText: this.string(),
-            points: this.integer(),
-            Driver: this.driver(),
-            Constructor: this.optional(this.team()),
-            grid: this.optional(this.integer()),
-            laps: this.optional(this.integer()),
-            status: this.optional(this.statusEnum()),
-            Time: this.optional(this.finishingTime()),
-            FastestLap: this.optional(this.fastestLap()),
-        });
-    }
-
-    public status(): Validator<StatusApiData> {
-        return this.object({
-            statusId: this.statusEnum(),
-            count: this.integer(),
-            status: this.string(),
-        });
-    }
-
-    public timing(): Validator<TimingApiData> {
-        return this.object({
-            driverId: this.string(),
-            position: this.integer(),
-            time: this.string(), // TODO: Format
-        });
-    }
-
-    // Responses
-
     public circuitsResponse(): Validator<CircuitsResponse> {
         return this.apiResponse({
             CircuitTable: this.object({
@@ -364,6 +162,212 @@ export class Validate {
             }),
         });
     }
+
+    // Models
+
+    protected averageSpeed(): Validator<AverageSpeedApiData> {
+        return this.object({
+            units: this.string(),
+            speed: this.integer(),
+        });
+    }
+
+    protected circuit(): Validator<CircuitApiData> {
+        return this.object({
+            circuitId: this.string(),
+            url: this.string(),
+            circuitName: this.string(),
+            Location: this.location(),
+        });
+    }
+
+    protected team(): Validator<ConstructorApiData> {
+        return this.object({
+            constructorId: this.optional(this.integer()),
+            url: this.optional(this.string()),
+            name: this.string(),
+            nationality: this.optional(this.string()),
+        });
+    }
+
+    protected teamStanding(): Validator<ConstructorStandingApiData> {
+        return this.object({
+            position: this.optional(this.integer()),
+            positionText: this.string(),
+            points: this.integer(),
+            wins: this.integer(),
+            Constructor: this.team(),
+        });
+    }
+
+    protected dateTime(): Validator<DateTimeApiData> {
+        return this.object({
+            date: this.date(),
+            time: this.string({ pattern: /^\d{2}:\d{2}:\d{2}Z$/u }),
+        });
+    }
+
+    protected driver(): Validator<DriverApiData> {
+        return this.object({
+            driverId: this.string(),
+            url: this.string(),
+            givenName: this.string(),
+            familyName: this.string(),
+            dateOfBirth: this.date(),
+            nationality: this.string(),
+            permanentNumber: this.optional(this.integer()),
+            code: this.optional(this.string()),
+        });
+    }
+
+    protected driverStanding(): Validator<DriverStandingApiData> {
+        return this.object({
+            position: this.optional(this.integer()),
+            positionText: this.string(),
+            points: this.integer(),
+            wins: this.integer(),
+            Driver: this.driver(),
+            Constructors: this.array(this.team()),
+        });
+    }
+
+    protected fastestLap(): Validator<FastestLapApiData> {
+        return this.object({
+            rank: this.integer(),
+            lap: this.integer(),
+            Time: this.fastestLapTime(),
+            AverageSpeed: this.averageSpeed(),
+        });
+    }
+
+    protected fastestLapTime(): Validator<FastestLapTimeApiData> {
+        return this.object({
+            time: this.string(), // TODO format
+        });
+    }
+
+    protected finishingTime(): Validator<FinishingTimeApiData> {
+        return this.object({
+            millis: this.integer(),
+            time: this.string(), // TODO format
+        });
+    }
+
+    protected lap(): Validator<LapApiData> {
+        return this.object({
+            number: this.integer(),
+            Timings: this.array(this.timing()),
+        });
+    }
+
+    protected location(): Validator<LocationApiData> {
+        return this.object({
+            lat: this.decimal(),
+            long: this.decimal(),
+            locality: this.string(),
+            country: this.string(),
+        });
+    }
+
+    protected pitStop(): Validator<PitStopApiData> {
+        return this.object({
+            driverId: this.string(),
+            lap: this.optional(this.integer()),
+            stop: this.optional(this.integer()),
+            time: this.optional(this.string()), // TODO idk what the format is
+        });
+    }
+
+    protected qualifyingResult(): Validator<QualifyingResultApiData> {
+        return this.object({
+            number: this.integer(),
+            position: this.optional(this.integer()),
+            Driver: this.driver(),
+            Constructor: this.team(),
+            Q1: this.optional(this.string()),
+            Q2: this.optional(this.string()),
+            Q3: this.optional(this.string()),
+        });
+    }
+
+    protected race<T extends Record<string, unknown>>(
+        extra?: Shape<T>,
+    ): Validator<RaceApiData & T> {
+        return this.object({
+            season: this.year(),
+            round: this.integer(),
+            url: this.optional(this.string()),
+            raceName: this.string(),
+            Circuit: this.circuit(),
+            date: this.date(),
+            time: this.optional(this.string()), // TODO: Format
+            FirstPractice: this.optional(this.dateTime()),
+            SecondPractice: this.optional(this.dateTime()),
+            ThirdPractice: this.optional(this.dateTime()),
+            Qualifying: this.optional(this.dateTime()),
+            Sprint: this.optional(this.dateTime()),
+            SprintQualifying: this.optional(this.dateTime()),
+            SprintShootout: this.optional(this.dateTime()),
+            ...extra,
+        } as Shape<RaceApiData & T>);
+    }
+
+    protected result(): Validator<ResultApiData> {
+        return this.object({
+            number: this.integer(),
+            position: this.integer(),
+            positionText: this.string(),
+            points: this.integer(),
+            Driver: this.driver(),
+            Constructor: this.optional(this.team()),
+            grid: this.optional(this.integer()),
+            laps: this.optional(this.integer()),
+            status: this.optional(this.statusEnum()),
+            FastestLap: this.optional(this.fastestLap()),
+            Time: this.optional(this.finishingTime()),
+        });
+    }
+
+    protected season(): Validator<SeasonApiData> {
+        return this.object({
+            season: this.year(),
+            url: this.string(),
+        });
+    }
+
+    protected sprintResult(): Validator<SprintResultApiData> {
+        return this.object({
+            number: this.integer(),
+            position: this.integer(),
+            positionText: this.string(),
+            points: this.integer(),
+            Driver: this.driver(),
+            Constructor: this.optional(this.team()),
+            grid: this.optional(this.integer()),
+            laps: this.optional(this.integer()),
+            status: this.optional(this.statusEnum()),
+            Time: this.optional(this.finishingTime()),
+            FastestLap: this.optional(this.fastestLap()),
+        });
+    }
+
+    protected status(): Validator<StatusApiData> {
+        return this.object({
+            statusId: this.statusEnum(),
+            count: this.integer(),
+            status: this.string(),
+        });
+    }
+
+    protected timing(): Validator<TimingApiData> {
+        return this.object({
+            driverId: this.string(),
+            position: this.integer(),
+            time: this.string(), // TODO: Format
+        });
+    }
+
+    // Helpers
 
     protected apiResponse<T extends Record<string, unknown>>(
         dataShape: Shape<T>,
