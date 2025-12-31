@@ -75,6 +75,18 @@ export class Api {
         this.validator = new Validate();
     }
 
+    public async getEndpoints(): Promise<Record<string, string>> {
+        const { data } = await axios.get<Record<string, string>>(
+            'https://api.jolpi.ca/ergast/?format=json',
+            {
+                validateStatus: (status) => status === 200,
+                baseURL: '',
+            },
+        );
+
+        return data;
+    }
+
     /**
      * Get circuits
      *

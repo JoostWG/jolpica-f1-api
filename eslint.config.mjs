@@ -18,7 +18,10 @@ export default defineConfig(
         languageOptions: {
             parser: tseslint.parser,
             parserOptions: {
-                project: './tsconfig.json', // make sure this path is correct
+                project: [
+                    './tsconfig.json',
+                    './tsconfig.eslint.json',
+                ],
             },
         },
         rules: {
