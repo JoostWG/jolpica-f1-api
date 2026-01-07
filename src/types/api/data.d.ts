@@ -175,7 +175,7 @@ export interface QualifyingResultApiData {
  *
  * @since 1.0.1
  */
-export interface RaceApiData {
+export interface RaceApiData extends Record<string, unknown> { // temporary extends
     season: string;
     round: string;
     url?: string;

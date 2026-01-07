@@ -41,7 +41,7 @@ import type {
     TeamOptions,
     TeamStandingOptions,
 } from './types';
-import { Validate } from './validation';
+import { Validator } from './validation';
 
 /**
  * @category Base
@@ -55,7 +55,7 @@ export class Api {
     public readonly baseUrl: string;
     protected readonly axios: AxiosInstance;
     protected readonly cache?: ApiCache;
-    protected readonly validator: Validate;
+    protected readonly validator: Validator;
 
     public constructor({ cache, config }: {
         cache?: ApiCache;
@@ -72,7 +72,7 @@ export class Api {
         });
 
         this.cache = cache;
-        this.validator = new Validate();
+        this.validator = new Validator();
     }
 
     /**

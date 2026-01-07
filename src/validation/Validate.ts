@@ -1,5 +1,10 @@
+import {
+    Validator as BaseValidator,
+    type ObjectShape,
+    type ObjectValidatorFunc,
+    type ValidatorFunc,
+} from 'valicheck';
 import { StatusType } from '../enums';
-import { ValidationError } from '../errors';
 import type {
     AverageSpeedApiData,
     CircuitApiData,
@@ -37,11 +42,9 @@ import type {
     SuccessResponse,
     TimingApiData,
 } from '../types';
-import type { Shape, Validator } from './types';
 
-// TODO: Better class name? Or rename Validator type
-export class Validate {
-    public circuitsResponse(): Validator<CircuitsResponse> {
+export class Validate extends BaseValidator {
+    public circuitsResponse(): ValidatorFunc<CircuitsResponse> {
         return this.apiResponse({
             CircuitTable: this.object({
                 Circuits: this.array(this.circuit()),
@@ -49,7 +52,7 @@ export class Validate {
         });
     }
 
-    public teamsResponse(): Validator<ConstructorsResponse> {
+    public teamsResponse(): ValidatorFunc<ConstructorsResponse> {
         return this.apiResponse({
             ConstructorTable: this.object({
                 Constructors: this.array(this.team()),
@@ -57,7 +60,7 @@ export class Validate {
         });
     }
 
-    public teamStandingsResponse(): Validator<ConstructorStandingsResponse> {
+    public teamStandingsResponse(): ValidatorFunc<ConstructorStandingsResponse> {
         return this.apiResponse({
             StandingsTable: this.object({
                 StandingsLists: this.array(this.object({
@@ -69,7 +72,7 @@ export class Validate {
         });
     }
 
-    public driversResponse(): Validator<DriversResponse> {
+    public driversResponse(): ValidatorFunc<DriversResponse> {
         return this.apiResponse({
             DriverTable: this.object({
                 Drivers: this.array(this.driver()),
@@ -77,7 +80,7 @@ export class Validate {
         });
     }
 
-    public driverStandingsResponse(): Validator<DriverStandingsResponse> {
+    public driverStandingsResponse(): ValidatorFunc<DriverStandingsResponse> {
         return this.apiResponse({
             StandingsTable: this.object({
                 StandingsLists: this.array(this.object({
@@ -89,37 +92,46 @@ export class Validate {
         });
     }
 
-    public lapsResponse(): Validator<LapsResponse> {
+    public lapsResponse(): ValidatorFunc<LapsResponse> {
         return this.apiResponse({
             RaceTable: this.object({
-                Races: this.array(this.race({
-                    Laps: this.array(this.lap()),
-                })),
+                Races: this.array(this.intersect(
+                    this.race(),
+                    this.object({
+                        Laps: this.array(this.lap()),
+                    }),
+                )),
             }),
         });
     }
 
-    public pitStopsResponse(): Validator<PitStopsResponse> {
+    public pitStopsResponse(): ValidatorFunc<PitStopsResponse> {
         return this.apiResponse({
             RaceTable: this.object({
-                Races: this.array(this.race({
-                    PitStops: this.array(this.pitStop()),
-                })),
+                Races: this.array(this.intersect(
+                    this.race(),
+                    this.object({
+                        PitStops: this.array(this.pitStop()),
+                    }),
+                )),
             }),
         });
     }
 
-    public qualifyingResultsResponse(): Validator<QualifyingResultsResponse> {
+    public qualifyingResultsResponse(): ValidatorFunc<QualifyingResultsResponse> {
         return this.apiResponse({
             RaceTable: this.object({
-                Races: this.array(this.race({
-                    QualifyingResults: this.array(this.qualifyingResult()),
-                })),
+                Races: this.array(this.intersect(
+                    this.race(),
+                    this.object({
+                        QualifyingResults: this.array(this.qualifyingResult()),
+                    }),
+                )),
             }),
         });
     }
 
-    public racesResponse(): Validator<RacesResponse> {
+    public racesResponse(): ValidatorFunc<RacesResponse> {
         return this.apiResponse({
             RaceTable: this.object({
                 Races: this.array(this.race()),
@@ -127,17 +139,20 @@ export class Validate {
         });
     }
 
-    public resultsResponse(): Validator<ResultsResponse> {
+    public resultsResponse(): ValidatorFunc<ResultsResponse> {
         return this.apiResponse({
             RaceTable: this.object({
-                Races: this.array(this.race({
-                    Results: this.array(this.result()),
-                })),
+                Races: this.array(this.intersect(
+                    this.race(),
+                    this.object({
+                        Results: this.array(this.result()),
+                    }),
+                )),
             }),
         });
     }
 
-    public seasonsResponse(): Validator<SeasonsResponse> {
+    public seasonsResponse(): ValidatorFunc<SeasonsResponse> {
         return this.apiResponse({
             SeasonTable: this.object({
                 Seasons: this.array(this.season()),
@@ -145,17 +160,20 @@ export class Validate {
         });
     }
 
-    public sprintResultsResponse(): Validator<SprintResultsResponse> {
+    public sprintResultsResponse(): ValidatorFunc<SprintResultsResponse> {
         return this.apiResponse({
             RaceTable: this.object({
-                Races: this.array(this.race({
-                    SprintResults: this.array(this.sprintResult()),
-                })),
+                Races: this.array(this.intersect(
+                    this.race(),
+                    this.object({
+                        SprintResults: this.array(this.sprintResult()),
+                    }),
+                )),
             }),
         });
     }
 
-    public statusesResponse(): Validator<StatusesResponse> {
+    public statusesResponse(): ValidatorFunc<StatusesResponse> {
         return this.apiResponse({
             StatusTable: this.object({
                 Status: this.array(this.status()),
@@ -165,14 +183,14 @@ export class Validate {
 
     // Models
 
-    protected averageSpeed(): Validator<AverageSpeedApiData> {
+    protected averageSpeed(): ValidatorFunc<AverageSpeedApiData> {
         return this.object({
             units: this.string(),
             speed: this.integer(),
         });
     }
 
-    protected circuit(): Validator<CircuitApiData> {
+    protected circuit(): ValidatorFunc<CircuitApiData> {
         return this.object({
             circuitId: this.string(),
             url: this.string(),
@@ -181,7 +199,7 @@ export class Validate {
         });
     }
 
-    protected team(): Validator<ConstructorApiData> {
+    protected team(): ValidatorFunc<ConstructorApiData> {
         return this.object({
             constructorId: this.optional(this.integer()),
             url: this.optional(this.string()),
@@ -190,7 +208,7 @@ export class Validate {
         });
     }
 
-    protected teamStanding(): Validator<ConstructorStandingApiData> {
+    protected teamStanding(): ValidatorFunc<ConstructorStandingApiData> {
         return this.object({
             position: this.optional(this.integer()),
             positionText: this.string(),
@@ -200,14 +218,14 @@ export class Validate {
         });
     }
 
-    protected dateTime(): Validator<DateTimeApiData> {
+    protected dateTime(): ValidatorFunc<DateTimeApiData> {
         return this.object({
             date: this.date(),
             time: this.string({ pattern: /^\d{2}:\d{2}:\d{2}Z$/u }),
         });
     }
 
-    protected driver(): Validator<DriverApiData> {
+    protected driver(): ValidatorFunc<DriverApiData> {
         return this.object({
             driverId: this.string(),
             url: this.string(),
@@ -220,7 +238,7 @@ export class Validate {
         });
     }
 
-    protected driverStanding(): Validator<DriverStandingApiData> {
+    protected driverStanding(): ValidatorFunc<DriverStandingApiData> {
         return this.object({
             position: this.optional(this.integer()),
             positionText: this.string(),
@@ -231,7 +249,7 @@ export class Validate {
         });
     }
 
-    protected fastestLap(): Validator<FastestLapApiData> {
+    protected fastestLap(): ValidatorFunc<FastestLapApiData> {
         return this.object({
             rank: this.integer(),
             lap: this.integer(),
@@ -240,27 +258,27 @@ export class Validate {
         });
     }
 
-    protected fastestLapTime(): Validator<FastestLapTimeApiData> {
+    protected fastestLapTime(): ValidatorFunc<FastestLapTimeApiData> {
         return this.object({
             time: this.string(), // TODO format
         });
     }
 
-    protected finishingTime(): Validator<FinishingTimeApiData> {
+    protected finishingTime(): ValidatorFunc<FinishingTimeApiData> {
         return this.object({
             millis: this.integer(),
             time: this.string(), // TODO format
         });
     }
 
-    protected lap(): Validator<LapApiData> {
+    protected lap(): ValidatorFunc<LapApiData> {
         return this.object({
             number: this.integer(),
             Timings: this.array(this.timing()),
         });
     }
 
-    protected location(): Validator<LocationApiData> {
+    protected location(): ValidatorFunc<LocationApiData> {
         return this.object({
             lat: this.decimal(),
             long: this.decimal(),
@@ -269,7 +287,7 @@ export class Validate {
         });
     }
 
-    protected pitStop(): Validator<PitStopApiData> {
+    protected pitStop(): ValidatorFunc<PitStopApiData> {
         return this.object({
             driverId: this.string(),
             lap: this.optional(this.integer()),
@@ -278,7 +296,7 @@ export class Validate {
         });
     }
 
-    protected qualifyingResult(): Validator<QualifyingResultApiData> {
+    protected qualifyingResult(): ValidatorFunc<QualifyingResultApiData> {
         return this.object({
             number: this.integer(),
             position: this.optional(this.integer()),
@@ -290,9 +308,7 @@ export class Validate {
         });
     }
 
-    protected race<T extends Record<string, unknown>>(
-        extra?: Shape<T>,
-    ): Validator<RaceApiData & T> {
+    protected race(): ObjectValidatorFunc<RaceApiData> {
         return this.object({
             season: this.year(),
             round: this.integer(),
@@ -308,11 +324,10 @@ export class Validate {
             Sprint: this.optional(this.dateTime()),
             SprintQualifying: this.optional(this.dateTime()),
             SprintShootout: this.optional(this.dateTime()),
-            ...extra,
-        } as Shape<RaceApiData & T>);
+        });
     }
 
-    protected result(): Validator<ResultApiData> {
+    protected result(): ValidatorFunc<ResultApiData> {
         return this.object({
             number: this.integer(),
             position: this.integer(),
@@ -322,20 +337,20 @@ export class Validate {
             Constructor: this.optional(this.team()),
             grid: this.optional(this.integer()),
             laps: this.optional(this.integer()),
-            status: this.optional(this.statusEnum()),
+            status: this.optional(this.enum(StatusType)),
             FastestLap: this.optional(this.fastestLap()),
             Time: this.optional(this.finishingTime()),
         });
     }
 
-    protected season(): Validator<SeasonApiData> {
+    protected season(): ValidatorFunc<SeasonApiData> {
         return this.object({
             season: this.year(),
             url: this.string(),
         });
     }
 
-    protected sprintResult(): Validator<SprintResultApiData> {
+    protected sprintResult(): ValidatorFunc<SprintResultApiData> {
         return this.object({
             number: this.integer(),
             position: this.integer(),
@@ -345,21 +360,21 @@ export class Validate {
             Constructor: this.optional(this.team()),
             grid: this.optional(this.integer()),
             laps: this.optional(this.integer()),
-            status: this.optional(this.statusEnum()),
+            status: this.optional(this.enum(StatusType)),
             Time: this.optional(this.finishingTime()),
             FastestLap: this.optional(this.fastestLap()),
         });
     }
 
-    protected status(): Validator<StatusApiData> {
+    protected status(): ValidatorFunc<StatusApiData> {
         return this.object({
-            statusId: this.statusEnum(),
+            statusId: this.enum(StatusType),
             count: this.integer(),
             status: this.string(),
         });
     }
 
-    protected timing(): Validator<TimingApiData> {
+    protected timing(): ValidatorFunc<TimingApiData> {
         return this.object({
             driverId: this.string(),
             position: this.integer(),
@@ -367,132 +382,35 @@ export class Validate {
         });
     }
 
-    // Helpers
-
     protected apiResponse<T extends Record<string, unknown>>(
-        dataShape: Shape<T>,
-    ): Validator<SuccessResponse<T>> {
+        dataShape: ObjectShape<T>,
+    ): ValidatorFunc<SuccessResponse<T>> {
         return this.object({
             MRData: this.object({
-                xmlns: this.exact(''),
-                series: this.exact('f1'),
+                xmlns: this.literal(''),
+                series: this.literal('f1'),
                 url: this.string(),
                 limit: this.integer(),
                 offset: this.integer(),
                 total: this.integer(),
                 ...dataShape,
-            } as Shape<MRData & T>),
+            } as ObjectShape<MRData & T>),
         });
     }
 
-    protected year(): Validator<`${number}`> {
-        return this.string({ pattern: /^\d{4}$/u }) as Validator<`${number}`>;
+    protected year(): ValidatorFunc<`${number}`> {
+        return this.string({ pattern: /^\d{4}$/u }) as ValidatorFunc<`${number}`>;
     }
 
-    protected statusEnum(): Validator<StatusType> {
-        return this.exact(...Object.values(StatusType));
+    protected integer(): ValidatorFunc<`${number}`> {
+        return this.string({ pattern: /^-?\d+$/u }) as ValidatorFunc<`${number}`>;
     }
 
-    /**
-     * @internal
-     */
-    protected optional<T>(validator: Validator<T>): Validator<T | undefined> {
-        return (value, path) => {
-            if (value === undefined) {
-                return undefined;
-            }
-
-            return validator(value, path);
-        };
+    protected decimal(): ValidatorFunc<`${number}`> {
+        return this.string({ pattern: /^-?\d+(\.\d+)?$/u }) as ValidatorFunc<`${number}`>;
     }
 
-    /**
-     * @internal
-     */
-    protected string({ pattern }: { pattern?: RegExp } = {}): Validator<string> {
-        return (value, path) => {
-            if (typeof value !== 'string') {
-                throw new ValidationError(`[${path}] should be a string`);
-            }
-
-            if (pattern && !pattern.test(value)) {
-                throw new ValidationError(`[${path}] doesn't match the pattern`);
-            }
-
-            return value;
-        };
-    }
-
-    /**
-     * @internal
-     */
-    protected integer(): Validator<`${number}`> {
-        return this.string({ pattern: /^-?\d+$/u }) as Validator<`${number}`>;
-    }
-
-    /**
-     * @internal
-     */
-    protected decimal(): Validator<`${number}`> {
-        return this.string({ pattern: /^-?\d+(\.\d+)?$/u }) as Validator<`${number}`>;
-    }
-
-    /**
-     * @internal
-     */
-    protected object<T extends Record<string, unknown>>(shape: Shape<T>): Validator<T> {
-        return (value, path) => {
-            if (typeof value !== 'object' || !value || Array.isArray(value)) {
-                throw new ValidationError(`[${path}] should be an object`);
-            }
-
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const result: Record<string, any> = {};
-
-            for (const [key, validator] of Object.entries(shape)) {
-                result[key] = validator(
-                    // @ts-expect-error Not something for now
-                    value[key],
-                    `${path}.${key}`,
-                );
-            }
-
-            return result as T;
-        };
-    }
-
-    /**
-     * @internal
-     */
-    protected array<T>(validator: Validator<T>): Validator<T[]> {
-        return (value, path) => {
-            if (!Array.isArray(value)) {
-                throw new ValidationError(`[${path}] should be an array`);
-            }
-
-            return value.map((item, index) => validator(item, `${path}[${index}]`));
-        };
-    }
-
-    /**
-     * @internal
-     */
-    protected date(): Validator<string> {
+    protected date(): ValidatorFunc<string> {
         return this.string({ pattern: /^\d{4}-\d{2}\d{2}$/u });
-    }
-
-    /**
-     * @internal
-     */
-    protected exact<const A extends unknown[]>(...allowed: A): Validator<A[number]> {
-        return (value, path) => {
-            for (const x of allowed) {
-                if (x === value) {
-                    return value;
-                }
-            }
-
-            throw new ValidationError(`[${path}] is not exact match`);
-        };
     }
 }
