@@ -32,6 +32,6 @@
     },
     "dependencies": {
         "axios": "^1.13.1",
-        "valicheck": "github:JoostWG/valicheck#build"
+        "valicheck": "^0.1.0"
     }
 }
