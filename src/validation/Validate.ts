@@ -1,9 +1,4 @@
-import {
-    Validator as BaseValidator,
-    type ObjectShape,
-    type ObjectValidatorFunc,
-    type ValidatorFunc,
-} from 'valicheck';
+import { v, type ObjectShape, type ObjectValidatorFunc, type ValidatorFunc } from 'valicheck';
 import { StatusType } from '../enums';
 import type {
     AverageSpeedApiData,
@@ -43,30 +38,30 @@ import type {
     TimingApiData,
 } from '../types';
 
-export class Validate extends BaseValidator {
+export class Validate {
     public circuitsResponse(): ValidatorFunc<CircuitsResponse> {
         return this.apiResponse({
-            CircuitTable: this.object({
-                Circuits: this.array(this.circuit()),
+            CircuitTable: v.object({
+                Circuits: v.array(this.circuit()),
             }),
         });
     }
 
     public teamsResponse(): ValidatorFunc<ConstructorsResponse> {
         return this.apiResponse({
-            ConstructorTable: this.object({
-                Constructors: this.array(this.team()),
+            ConstructorTable: v.object({
+                Constructors: v.array(this.team()),
             }),
         });
     }
 
     public teamStandingsResponse(): ValidatorFunc<ConstructorStandingsResponse> {
         return this.apiResponse({
-            StandingsTable: this.object({
-                StandingsLists: this.array(this.object({
+            StandingsTable: v.object({
+                StandingsLists: v.array(v.object({
                     season: this.year(),
                     round: this.integer(),
-                    ConstructorStandings: this.array(this.teamStanding()),
+                    ConstructorStandings: v.array(this.teamStanding()),
                 })),
             }),
         });
@@ -74,19 +69,19 @@ export class Validate extends BaseValidator {
 
     public driversResponse(): ValidatorFunc<DriversResponse> {
         return this.apiResponse({
-            DriverTable: this.object({
-                Drivers: this.array(this.driver()),
+            DriverTable: v.object({
+                Drivers: v.array(this.driver()),
             }),
         });
     }
 
     public driverStandingsResponse(): ValidatorFunc<DriverStandingsResponse> {
         return this.apiResponse({
-            StandingsTable: this.object({
-                StandingsLists: this.array(this.object({
+            StandingsTable: v.object({
+                StandingsLists: v.array(v.object({
                     season: this.year(),
                     round: this.integer(),
-                    DriverStandings: this.array(this.driverStanding()),
+                    DriverStandings: v.array(this.driverStanding()),
                 })),
             }),
         });
@@ -94,11 +89,11 @@ export class Validate extends BaseValidator {
 
     public lapsResponse(): ValidatorFunc<LapsResponse> {
         return this.apiResponse({
-            RaceTable: this.object({
-                Races: this.array(this.intersect(
+            RaceTable: v.object({
+                Races: v.array(v.intersect(
                     this.race(),
-                    this.object({
-                        Laps: this.array(this.lap()),
+                    v.object({
+                        Laps: v.array(this.lap()),
                     }),
                 )),
             }),
@@ -107,11 +102,11 @@ export class Validate extends BaseValidator {
 
     public pitStopsResponse(): ValidatorFunc<PitStopsResponse> {
         return this.apiResponse({
-            RaceTable: this.object({
-                Races: this.array(this.intersect(
+            RaceTable: v.object({
+                Races: v.array(v.intersect(
                     this.race(),
-                    this.object({
-                        PitStops: this.array(this.pitStop()),
+                    v.object({
+                        PitStops: v.array(this.pitStop()),
                     }),
                 )),
             }),
@@ -120,11 +115,11 @@ export class Validate extends BaseValidator {
 
     public qualifyingResultsResponse(): ValidatorFunc<QualifyingResultsResponse> {
         return this.apiResponse({
-            RaceTable: this.object({
-                Races: this.array(this.intersect(
+            RaceTable: v.object({
+                Races: v.array(v.intersect(
                     this.race(),
-                    this.object({
-                        QualifyingResults: this.array(this.qualifyingResult()),
+                    v.object({
+                        QualifyingResults: v.array(this.qualifyingResult()),
                     }),
                 )),
             }),
@@ -133,19 +128,19 @@ export class Validate extends BaseValidator {
 
     public racesResponse(): ValidatorFunc<RacesResponse> {
         return this.apiResponse({
-            RaceTable: this.object({
-                Races: this.array(this.race()),
+            RaceTable: v.object({
+                Races: v.array(this.race()),
             }),
         });
     }
 
     public resultsResponse(): ValidatorFunc<ResultsResponse> {
         return this.apiResponse({
-            RaceTable: this.object({
-                Races: this.array(this.intersect(
+            RaceTable: v.object({
+                Races: v.array(v.intersect(
                     this.race(),
-                    this.object({
-                        Results: this.array(this.result()),
+                    v.object({
+                        Results: v.array(this.result()),
                     }),
                 )),
             }),
@@ -154,19 +149,19 @@ export class Validate extends BaseValidator {
 
     public seasonsResponse(): ValidatorFunc<SeasonsResponse> {
         return this.apiResponse({
-            SeasonTable: this.object({
-                Seasons: this.array(this.season()),
+            SeasonTable: v.object({
+                Seasons: v.array(this.season()),
             }),
         });
     }
 
     public sprintResultsResponse(): ValidatorFunc<SprintResultsResponse> {
         return this.apiResponse({
-            RaceTable: this.object({
-                Races: this.array(this.intersect(
+            RaceTable: v.object({
+                Races: v.array(v.intersect(
                     this.race(),
-                    this.object({
-                        SprintResults: this.array(this.sprintResult()),
+                    v.object({
+                        SprintResults: v.array(this.sprintResult()),
                     }),
                 )),
             }),
@@ -175,8 +170,8 @@ export class Validate extends BaseValidator {
 
     public statusesResponse(): ValidatorFunc<StatusesResponse> {
         return this.apiResponse({
-            StatusTable: this.object({
-                Status: this.array(this.status()),
+            StatusTable: v.object({
+                Status: v.array(this.status()),
             }),
         });
     }
@@ -184,34 +179,34 @@ export class Validate extends BaseValidator {
     // Models
 
     protected averageSpeed(): ValidatorFunc<AverageSpeedApiData> {
-        return this.object({
-            units: this.string(),
+        return v.object({
+            units: v.string(),
             speed: this.integer(),
         });
     }
 
     protected circuit(): ValidatorFunc<CircuitApiData> {
-        return this.object({
-            circuitId: this.string(),
-            url: this.string(),
-            circuitName: this.string(),
+        return v.object({
+            circuitId: v.string(),
+            url: v.string(),
+            circuitName: v.string(),
             Location: this.location(),
         });
     }
 
     protected team(): ValidatorFunc<ConstructorApiData> {
-        return this.object({
-            constructorId: this.optional(this.integer()),
-            url: this.optional(this.string()),
-            name: this.string(),
-            nationality: this.optional(this.string()),
+        return v.object({
+            constructorId: v.optional(this.integer()),
+            url: v.optional(v.string()),
+            name: v.string(),
+            nationality: v.optional(v.string()),
         });
     }
 
     protected teamStanding(): ValidatorFunc<ConstructorStandingApiData> {
-        return this.object({
-            position: this.optional(this.integer()),
-            positionText: this.string(),
+        return v.object({
+            position: v.optional(this.integer()),
+            positionText: v.string(),
             points: this.integer(),
             wins: this.integer(),
             Constructor: this.team(),
@@ -219,38 +214,38 @@ export class Validate extends BaseValidator {
     }
 
     protected dateTime(): ValidatorFunc<DateTimeApiData> {
-        return this.object({
+        return v.object({
             date: this.date(),
-            time: this.string({ pattern: /^\d{2}:\d{2}:\d{2}Z$/u }),
+            time: v.string({ pattern: /^\d{2}:\d{2}:\d{2}Z$/u }),
         });
     }
 
     protected driver(): ValidatorFunc<DriverApiData> {
-        return this.object({
-            driverId: this.string(),
-            url: this.string(),
-            givenName: this.string(),
-            familyName: this.string(),
+        return v.object({
+            driverId: v.string(),
+            url: v.string(),
+            givenName: v.string(),
+            familyName: v.string(),
             dateOfBirth: this.date(),
-            nationality: this.string(),
-            permanentNumber: this.optional(this.integer()),
-            code: this.optional(this.string()),
+            nationality: v.string(),
+            permanentNumber: v.optional(this.integer()),
+            code: v.optional(v.string()),
         });
     }
 
     protected driverStanding(): ValidatorFunc<DriverStandingApiData> {
-        return this.object({
-            position: this.optional(this.integer()),
-            positionText: this.string(),
+        return v.object({
+            position: v.optional(this.integer()),
+            positionText: v.string(),
             points: this.integer(),
             wins: this.integer(),
             Driver: this.driver(),
-            Constructors: this.array(this.team()),
+            Constructors: v.array(this.team()),
         });
     }
 
     protected fastestLap(): ValidatorFunc<FastestLapApiData> {
-        return this.object({
+        return v.object({
             rank: this.integer(),
             lap: this.integer(),
             Time: this.fastestLapTime(),
@@ -259,137 +254,137 @@ export class Validate extends BaseValidator {
     }
 
     protected fastestLapTime(): ValidatorFunc<FastestLapTimeApiData> {
-        return this.object({
-            time: this.string(), // TODO format
+        return v.object({
+            time: v.string(), // TODO format
         });
     }
 
     protected finishingTime(): ValidatorFunc<FinishingTimeApiData> {
-        return this.object({
+        return v.object({
             millis: this.integer(),
-            time: this.string(), // TODO format
+            time: v.string(), // TODO format
         });
     }
 
     protected lap(): ValidatorFunc<LapApiData> {
-        return this.object({
+        return v.object({
             number: this.integer(),
-            Timings: this.array(this.timing()),
+            Timings: v.array(this.timing()),
         });
     }
 
     protected location(): ValidatorFunc<LocationApiData> {
-        return this.object({
+        return v.object({
             lat: this.decimal(),
             long: this.decimal(),
-            locality: this.string(),
-            country: this.string(),
+            locality: v.string(),
+            country: v.string(),
         });
     }
 
     protected pitStop(): ValidatorFunc<PitStopApiData> {
-        return this.object({
-            driverId: this.string(),
-            lap: this.optional(this.integer()),
-            stop: this.optional(this.integer()),
-            time: this.optional(this.string()), // TODO idk what the format is
+        return v.object({
+            driverId: v.string(),
+            lap: v.optional(this.integer()),
+            stop: v.optional(this.integer()),
+            time: v.optional(v.string()), // TODO idk what the format is
         });
     }
 
     protected qualifyingResult(): ValidatorFunc<QualifyingResultApiData> {
-        return this.object({
+        return v.object({
             number: this.integer(),
-            position: this.optional(this.integer()),
+            position: v.optional(this.integer()),
             Driver: this.driver(),
             Constructor: this.team(),
-            Q1: this.optional(this.string()),
-            Q2: this.optional(this.string()),
-            Q3: this.optional(this.string()),
+            Q1: v.optional(v.string()),
+            Q2: v.optional(v.string()),
+            Q3: v.optional(v.string()),
         });
     }
 
     protected race(): ObjectValidatorFunc<RaceApiData> {
-        return this.object({
+        return v.object({
             season: this.year(),
             round: this.integer(),
-            url: this.optional(this.string()),
-            raceName: this.string(),
+            url: v.optional(v.string()),
+            raceName: v.string(),
             Circuit: this.circuit(),
             date: this.date(),
-            time: this.optional(this.string()), // TODO: Format
-            FirstPractice: this.optional(this.dateTime()),
-            SecondPractice: this.optional(this.dateTime()),
-            ThirdPractice: this.optional(this.dateTime()),
-            Qualifying: this.optional(this.dateTime()),
-            Sprint: this.optional(this.dateTime()),
-            SprintQualifying: this.optional(this.dateTime()),
-            SprintShootout: this.optional(this.dateTime()),
+            time: v.optional(v.string()), // TODO: Format
+            FirstPractice: v.optional(this.dateTime()),
+            SecondPractice: v.optional(this.dateTime()),
+            ThirdPractice: v.optional(this.dateTime()),
+            Qualifying: v.optional(this.dateTime()),
+            Sprint: v.optional(this.dateTime()),
+            SprintQualifying: v.optional(this.dateTime()),
+            SprintShootout: v.optional(this.dateTime()),
         });
     }
 
     protected result(): ValidatorFunc<ResultApiData> {
-        return this.object({
+        return v.object({
             number: this.integer(),
             position: this.integer(),
-            positionText: this.string(),
+            positionText: v.string(),
             points: this.integer(),
             Driver: this.driver(),
-            Constructor: this.optional(this.team()),
-            grid: this.optional(this.integer()),
-            laps: this.optional(this.integer()),
-            status: this.optional(this.enum(StatusType)),
-            FastestLap: this.optional(this.fastestLap()),
-            Time: this.optional(this.finishingTime()),
+            Constructor: v.optional(this.team()),
+            grid: v.optional(this.integer()),
+            laps: v.optional(this.integer()),
+            status: v.optional(v.enumValue(StatusType)),
+            FastestLap: v.optional(this.fastestLap()),
+            Time: v.optional(this.finishingTime()),
         });
     }
 
     protected season(): ValidatorFunc<SeasonApiData> {
-        return this.object({
+        return v.object({
             season: this.year(),
-            url: this.string(),
+            url: v.string(),
         });
     }
 
     protected sprintResult(): ValidatorFunc<SprintResultApiData> {
-        return this.object({
+        return v.object({
             number: this.integer(),
             position: this.integer(),
-            positionText: this.string(),
+            positionText: v.string(),
             points: this.integer(),
             Driver: this.driver(),
-            Constructor: this.optional(this.team()),
-            grid: this.optional(this.integer()),
-            laps: this.optional(this.integer()),
-            status: this.optional(this.enum(StatusType)),
-            Time: this.optional(this.finishingTime()),
-            FastestLap: this.optional(this.fastestLap()),
+            Constructor: v.optional(this.team()),
+            grid: v.optional(this.integer()),
+            laps: v.optional(this.integer()),
+            status: v.optional(v.enumValue(StatusType)),
+            Time: v.optional(this.finishingTime()),
+            FastestLap: v.optional(this.fastestLap()),
         });
     }
 
     protected status(): ValidatorFunc<StatusApiData> {
-        return this.object({
-            statusId: this.enum(StatusType),
+        return v.object({
+            statusId: v.enumValue(StatusType),
             count: this.integer(),
-            status: this.string(),
+            status: v.string(),
         });
     }
 
     protected timing(): ValidatorFunc<TimingApiData> {
-        return this.object({
-            driverId: this.string(),
+        return v.object({
+            driverId: v.string(),
             position: this.integer(),
-            time: this.string(), // TODO: Format
+            time: v.string(), // TODO: Format
         });
     }
 
     protected apiResponse<T extends Record<string, unknown>>(
         dataShape: ObjectShape<T>,
     ): ValidatorFunc<SuccessResponse<T>> {
-        return this.object({
-            MRData: this.object({
-                xmlns: this.literal(''),
-                series: this.literal('f1'),
-                url: this.string(),
+        return v.object({
+            MRData: v.object({
+                xmlns: v.literal(''),
+                series: v.literal('f1'),
+                url: v.string(),
                 limit: this.integer(),
                 offset: this.integer(),
                 total: this.integer(),
@@ -399,18 +394,18 @@ export class Validate extends BaseValidator {
     }
 
     protected year(): ValidatorFunc<`${number}`> {
-        return this.string({ pattern: /^\d{4}$/u }) as ValidatorFunc<`${number}`>;
+        return v.string({ pattern: /^\d{4}$/u }) as ValidatorFunc<`${number}`>;
     }
 
     protected integer(): ValidatorFunc<`${number}`> {
-        return this.string({ pattern: /^-?\d+$/u }) as ValidatorFunc<`${number}`>;
+        return v.string({ pattern: /^-?\d+$/u }) as ValidatorFunc<`${number}`>;
     }
 
     protected decimal(): ValidatorFunc<`${number}`> {
-        return this.string({ pattern: /^-?\d+(\.\d+)?$/u }) as ValidatorFunc<`${number}`>;
+        return v.string({ pattern: /^-?\d+(\.\d+)?$/u }) as ValidatorFunc<`${number}`>;
     }
 
     protected date(): ValidatorFunc<string> {
-        return this.string({ pattern: /^\d{4}-\d{2}\d{2}$/u });
+        return v.string({ pattern: /^\d{4}-\d{2}\d{2}$/u });
     }
 }
