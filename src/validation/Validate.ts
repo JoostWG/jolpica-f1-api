@@ -332,7 +332,7 @@ export class Validate {
             Constructor: v.optional(this.team()),
             grid: v.optional(this.integer()),
             laps: v.optional(this.integer()),
-            status: v.optional(v.enumValue(StatusType)),
+            status: v.optional(v.string()),
             FastestLap: v.optional(this.fastestLap()),
             Time: v.optional(this.finishingTime()),
         });
@@ -355,7 +355,7 @@ export class Validate {
             Constructor: v.optional(this.team()),
             grid: v.optional(this.integer()),
             laps: v.optional(this.integer()),
-            status: v.optional(v.enumValue(StatusType)),
+            status: v.optional(v.string()),
             Time: v.optional(this.finishingTime()),
             FastestLap: v.optional(this.fastestLap()),
         });
