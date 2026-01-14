@@ -196,7 +196,7 @@ export class Validate {
 
     protected team(): ValidatorFunc<ConstructorApiData> {
         return v.object({
-            constructorId: v.optional(this.integer()),
+            constructorId: v.optional(v.string()),
             url: v.optional(v.string()),
             name: v.string(),
             nationality: v.optional(v.string()),
@@ -249,7 +249,7 @@ export class Validate {
             rank: this.integer(),
             lap: this.integer(),
             Time: this.fastestLapTime(),
-            AverageSpeed: this.averageSpeed(),
+            AverageSpeed: v.optional(this.averageSpeed()),
         });
     }
 
@@ -406,6 +406,6 @@ export class Validate {
     }
 
     protected date(): ValidatorFunc<string> {
-        return v.string({ pattern: /^\d{4}-\d{2}\d{2}$/u });
+        return v.string({ pattern: /^\d{4}-\d{2}-\d{2}$/u });
     }
 }
