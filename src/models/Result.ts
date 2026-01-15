@@ -52,7 +52,7 @@ export class Result extends Model {
     /**
      * @experimental
      */
-    public get driverAge(): number {
+    public get driverAge(): number | null {
         return this.driver.ageAt(this.race.dateTime);
     }
 }

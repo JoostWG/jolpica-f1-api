@@ -66,11 +66,11 @@ export interface DateTimeApiData {
  */
 export interface DriverApiData {
     driverId: string;
-    url: string;
     givenName: string;
     familyName: string;
-    dateOfBirth: string;
-    nationality: string;
+    url?: string;
+    dateOfBirth?: string;
+    nationality?: string;
     permanentNumber?: string;
     code?: string;
 }

@@ -216,13 +216,13 @@ export class Validate {
     protected driver(): z.ZodType<DriverApiData> {
         return z.object({
             driverId: z.string(),
-            url: z.string(),
             givenName: z.string(),
             familyName: z.string(),
-            dateOfBirth: this.date(),
-            nationality: z.string(),
+            dateOfBirth: this.date().optional(),
+            nationality: z.string().optional(),
             permanentNumber: this.integer().optional(),
             code: z.string().optional(),
+            url: z.string().optional(),
         });
     }
 

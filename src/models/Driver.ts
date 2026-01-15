@@ -49,11 +49,11 @@ export class Driver extends Model {
     /**
      *  The driver's date of birth
      */
-    public readonly dateOfBirth: Date;
+    public readonly dateOfBirth: Date | null;
     /**
      *  The driver's nationality
      */
-    public readonly nationality: string;
+    public readonly nationality: string | null;
     /**
      *  The driver's racing number
      */
@@ -65,19 +65,19 @@ export class Driver extends Model {
     /**
      *  URL to wikipedia page
      */
-    public readonly wikiUrl: string;
+    public readonly wikiUrl: string | null;
 
     public constructor(data: DriverApiData, api: Api) {
         super(api);
 
         this.id = data.driverId;
-        this.wikiUrl = data.url;
         this.firstName = data.givenName;
         this.lastName = data.familyName;
-        this.dateOfBirth = new Date(data.dateOfBirth);
-        this.nationality = data.nationality;
+        this.dateOfBirth = data.dateOfBirth !== undefined ? new Date(data.dateOfBirth) : null;
+        this.nationality = data.nationality ?? null;
         this.number = data.permanentNumber !== undefined ? Number(data.permanentNumber) : null;
         this.code = data.code ?? null;
+        this.wikiUrl = data.url ?? null;
     }
 
     /**
@@ -94,7 +94,7 @@ export class Driver extends Model {
      *
      * @since 2.1.0
      */
-    public get age(): number {
+    public get age(): number | null {
         return this.ageAt(new Date());
     }
 
@@ -103,7 +103,11 @@ export class Driver extends Model {
      *
      * @since 2.1.0
      */
-    public ageAt(date: Date): number {
+    public ageAt(date: Date): number | null {
+        if (this.dateOfBirth === null) {
+            return null;
+        }
+
         const age = date.getFullYear() - this.dateOfBirth.getFullYear();
 
         if (this.dateOfBirth.getMonth() > date.getMonth()) {
