@@ -1,7 +1,9 @@
 import type { Api } from '../Api';
-import type { RaceApiData } from '../types';
+import type { PendingRequest } from '../PendingRequest';
+import type { Prettify, RaceApiData, ResultOptions } from '../types';
 import { Circuit } from './Circuit';
 import { Model } from './Model';
+import type { Result } from './Result';
 import { SessionDateTime } from './SessionDateTime';
 
 /**
@@ -60,5 +62,38 @@ export class Race extends Model {
 
     public get dateTime(): Date {
         return new Date(this.time !== null ? `${this.date}T${this.time}` : this.date);
+    }
+
+    /**
+     * Fetch all results and calculate circuit length in meters using average speed and lap time
+     *
+     * @since 3.0.0
+     */
+    public async calculateCircuitLength(): Promise<number | null> {
+        const { data: results } = await this.results().get({ limit: 100 });
+
+        const lengths = results
+            .map((result) => result.calculateCircuitLength())
+            .filter((length) => length !== null);
+
+        if (lengths.length === 0) {
+            return null;
+        }
+
+        return lengths.reduce((previous, current) => previous + current, 0) / lengths.length;
+    }
+
+    /**
+     * @since 3.0.0
+     */
+    public results(options?: Prettify<Omit<ResultOptions, 'Race'>>): PendingRequest<Result[]> {
+        return this.api.results(this.getOptions(options));
+    }
+
+    /**
+     * @since 3.0.0
+     */
+    protected getOptions<T>(options: T): T & { season: number; round: number } {
+        return { season: this.season, round: this.round, ...options };
     }
 }
