@@ -57,4 +57,24 @@ export class Result extends Model {
     public get driverAge(): number | null {
         return this.driver.ageAt(this.race.dateTime);
     }
+
+    /**
+     * Calculates the circuit length in meters based of the fastest lap time and average speed.
+     *
+     * @since 3.0.0
+     */
+    public calculateCircuitLength(): number | null {
+        if (!this.fastestLap?.averageSpeed) {
+            return null;
+        }
+
+        const match = this.fastestLap.time.time.match(/(?<minutes>\d+):(?<seconds>\d+.\d+)/u);
+
+        if (!match?.groups) {
+            return null;
+        }
+
+        return (Number(match.groups.minutes) / 60 + Number(match.groups.seconds) / 3600)
+            * this.fastestLap.averageSpeed.kph * 1000;
+    }
 }
