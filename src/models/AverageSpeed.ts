@@ -23,4 +23,26 @@ export class AverageSpeed extends Model {
         this.units = data.units;
         this.speed = Number(data.speed);
     }
+
+    /**
+     * The average speed in kilometers per hour
+     *
+     * @since 3.0.0
+     */
+    public get kph(): number {
+        if (this.units === 'kph') {
+            return this.speed;
+        }
+
+        throw new Error('Invalid speed unit');
+    }
+
+    /**
+     * The average speed in miles per hour
+     *
+     * @since 3.0.0
+     */
+    public get mph(): number {
+        return this.kph * 0.621371192;
+    }
 }
