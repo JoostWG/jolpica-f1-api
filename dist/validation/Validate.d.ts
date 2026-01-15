@@ -1,0 +1,62 @@
+import z from 'zod';
+import { CircuitsResponse, ConstructorsResponse, ConstructorStandingsResponse, DriversResponse, DriverStandingsResponse, LapsResponse, PitStopsResponse, QualifyingResultsResponse, RacesResponse, ResultsResponse, SeasonsResponse, SprintResultsResponse, StatusesResponse, SuccessResponse } from '../types/api/index.d.js';
+import { AverageSpeedApiData, CircuitApiData, ConstructorApiData, ConstructorStandingApiData, DateTimeApiData, DriverApiData, DriverStandingApiData, FastestLapApiData, FastestLapTimeApiData, FinishingTimeApiData, LapApiData, LocationApiData, PitStopApiData, QualifyingResultApiData, ResultApiData, SeasonApiData, SprintResultApiData, StatusApiData, TimingApiData } from '../types/api/data.d.js';
+import '../enums/StatusType.js';
+
+declare class Validate {
+    circuitsResponse(): z.ZodType<CircuitsResponse>;
+    teamsResponse(): z.ZodType<ConstructorsResponse>;
+    teamStandingsResponse(): z.ZodType<ConstructorStandingsResponse>;
+    driversResponse(): z.ZodType<DriversResponse>;
+    driverStandingsResponse(): z.ZodType<DriverStandingsResponse>;
+    lapsResponse(): z.ZodType<LapsResponse>;
+    pitStopsResponse(): z.ZodType<PitStopsResponse>;
+    qualifyingResultsResponse(): z.ZodType<QualifyingResultsResponse>;
+    racesResponse(): z.ZodType<RacesResponse>;
+    resultsResponse(): z.ZodType<ResultsResponse>;
+    seasonsResponse(): z.ZodType<SeasonsResponse>;
+    sprintResultsResponse(): z.ZodType<SprintResultsResponse>;
+    statusesResponse(): z.ZodType<StatusesResponse>;
+    protected averageSpeed(): z.ZodType<AverageSpeedApiData>;
+    protected circuit(): z.ZodType<CircuitApiData>;
+    protected team(): z.ZodType<ConstructorApiData>;
+    protected teamStanding(): z.ZodType<ConstructorStandingApiData>;
+    protected dateTime(): z.ZodType<DateTimeApiData>;
+    protected driver(): z.ZodType<DriverApiData>;
+    protected driverStanding(): z.ZodType<DriverStandingApiData>;
+    protected fastestLap(): z.ZodType<FastestLapApiData>;
+    protected fastestLapTime(): z.ZodType<FastestLapTimeApiData>;
+    protected finishingTime(): z.ZodType<FinishingTimeApiData>;
+    protected lap(): z.ZodType<LapApiData>;
+    protected location(): z.ZodType<LocationApiData>;
+    protected pitStop(): z.ZodType<PitStopApiData>;
+    protected qualifyingResult(): z.ZodType<QualifyingResultApiData>;
+    protected race(): z.ZodObject<{
+        season: z.ZodString;
+        round: z.ZodString;
+        url: z.ZodOptional<z.ZodString>;
+        raceName: z.ZodString;
+        Circuit: z.ZodType<CircuitApiData, unknown, z.core.$ZodTypeInternals<CircuitApiData, unknown>>;
+        date: z.ZodString;
+        time: z.ZodOptional<z.ZodString>;
+        FirstPractice: z.ZodOptional<z.ZodType<DateTimeApiData, unknown, z.core.$ZodTypeInternals<DateTimeApiData, unknown>>>;
+        SecondPractice: z.ZodOptional<z.ZodType<DateTimeApiData, unknown, z.core.$ZodTypeInternals<DateTimeApiData, unknown>>>;
+        ThirdPractice: z.ZodOptional<z.ZodType<DateTimeApiData, unknown, z.core.$ZodTypeInternals<DateTimeApiData, unknown>>>;
+        Qualifying: z.ZodOptional<z.ZodType<DateTimeApiData, unknown, z.core.$ZodTypeInternals<DateTimeApiData, unknown>>>;
+        Sprint: z.ZodOptional<z.ZodType<DateTimeApiData, unknown, z.core.$ZodTypeInternals<DateTimeApiData, unknown>>>;
+        SprintQualifying: z.ZodOptional<z.ZodType<DateTimeApiData, unknown, z.core.$ZodTypeInternals<DateTimeApiData, unknown>>>;
+        SprintShootout: z.ZodOptional<z.ZodType<DateTimeApiData, unknown, z.core.$ZodTypeInternals<DateTimeApiData, unknown>>>;
+    }, z.core.$strip>;
+    protected result(): z.ZodType<ResultApiData>;
+    protected season(): z.ZodType<SeasonApiData>;
+    protected sprintResult(): z.ZodType<SprintResultApiData>;
+    protected status(): z.ZodType<StatusApiData>;
+    protected timing(): z.ZodType<TimingApiData>;
+    protected apiResponse<S extends z.ZodRawShape>(dataShape: S): z.ZodType<SuccessResponse<z.infer<z.ZodObject<S>>>>;
+    protected year(): z.ZodString;
+    protected integer(): z.ZodString;
+    protected decimal(): z.ZodString;
+    protected date(): z.ZodString;
+}
+
+export { Validate };
