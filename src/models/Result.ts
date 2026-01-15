@@ -50,7 +50,9 @@ export class Result extends Model {
     }
 
     /**
-     * @experimental
+     * Returns the driver's age at the time of the race
+     *
+     * @since 3.0.0
      */
     public get driverAge(): number | null {
         return this.driver.ageAt(this.race.dateTime);
