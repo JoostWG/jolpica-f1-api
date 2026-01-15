@@ -174,7 +174,7 @@ export class Validate {
     protected averageSpeed(): z.ZodType<AverageSpeedApiData> {
         return z.object({
             units: z.string(),
-            speed: this.integer(),
+            speed: this.decimal(),
         });
     }
 
