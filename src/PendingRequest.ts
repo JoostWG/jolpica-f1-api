@@ -1,3 +1,4 @@
+import type z from 'zod';
 import type { Api } from './Api';
 import type {
     AnyApiOptions,
@@ -8,7 +9,6 @@ import type {
     Response,
     ResponsesMap,
 } from './types';
-import type { Validator } from './validation';
 
 /**
  * @category Base
@@ -26,7 +26,7 @@ export class PendingRequest<
         public readonly resource: TResource,
         public readonly options: AnyApiOptions,
         protected readonly transform: (data: ResponsesMap[TResource]['MRData']) => TModel[],
-        protected readonly validate: Validator<ResponsesMap[TResource]>,
+        protected readonly validator: z.ZodType<ResponsesMap[TResource]>,
     ) {
         //
     }
@@ -39,7 +39,7 @@ export class PendingRequest<
     }
 
     public async get(pagination?: Pagination): Promise<Response<TModel[]>> {
-        const response = this.validate(await this.api.get(this.getPath(), pagination), 'response');
+        const response = this.validator.parse(await this.api.get(this.getPath(), pagination));
 
         return {
             meta: {

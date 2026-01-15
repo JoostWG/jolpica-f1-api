@@ -136,8 +136,8 @@ export interface LapApiData {
  * @since 1.0.1
  */
 export interface LocationApiData {
-    lat: `${number}`;
-    long: `${number}`;
+    lat: string;
+    long: string;
     locality: string;
     country: string;
 }

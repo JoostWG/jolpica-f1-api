@@ -1,4 +1,4 @@
-import { v, type ObjectShape, type ObjectValidatorFunc, type ValidatorFunc } from 'valicheck';
+import z from 'zod';
 import { StatusType } from '../enums';
 import type {
     AverageSpeedApiData,
@@ -19,12 +19,10 @@ import type {
     LapApiData,
     LapsResponse,
     LocationApiData,
-    MRData,
     PitStopApiData,
     PitStopsResponse,
     QualifyingResultApiData,
     QualifyingResultsResponse,
-    RaceApiData,
     RacesResponse,
     ResultApiData,
     ResultsResponse,
@@ -39,373 +37,369 @@ import type {
 } from '../types';
 
 export class Validate {
-    public circuitsResponse(): ValidatorFunc<CircuitsResponse> {
+    public circuitsResponse(): z.ZodType<CircuitsResponse> {
         return this.apiResponse({
-            CircuitTable: v.object({
-                Circuits: v.array(this.circuit()),
+            CircuitTable: z.object({
+                Circuits: z.array(this.circuit()),
             }),
         });
     }
 
-    public teamsResponse(): ValidatorFunc<ConstructorsResponse> {
+    public teamsResponse(): z.ZodType<ConstructorsResponse> {
         return this.apiResponse({
-            ConstructorTable: v.object({
-                Constructors: v.array(this.team()),
+            ConstructorTable: z.object({
+                Constructors: z.array(this.team()),
             }),
         });
     }
 
-    public teamStandingsResponse(): ValidatorFunc<ConstructorStandingsResponse> {
+    public teamStandingsResponse(): z.ZodType<ConstructorStandingsResponse> {
         return this.apiResponse({
-            StandingsTable: v.object({
-                StandingsLists: v.array(v.object({
+            StandingsTable: z.object({
+                StandingsLists: z.array(z.object({
                     season: this.year(),
                     round: this.integer(),
-                    ConstructorStandings: v.array(this.teamStanding()),
+                    ConstructorStandings: z.array(this.teamStanding()),
                 })),
             }),
         });
     }
 
-    public driversResponse(): ValidatorFunc<DriversResponse> {
+    public driversResponse(): z.ZodType<DriversResponse> {
         return this.apiResponse({
-            DriverTable: v.object({
-                Drivers: v.array(this.driver()),
+            DriverTable: z.object({
+                Drivers: z.array(this.driver()),
             }),
         });
     }
 
-    public driverStandingsResponse(): ValidatorFunc<DriverStandingsResponse> {
+    public driverStandingsResponse(): z.ZodType<DriverStandingsResponse> {
         return this.apiResponse({
-            StandingsTable: v.object({
-                StandingsLists: v.array(v.object({
+            StandingsTable: z.object({
+                StandingsLists: z.array(z.object({
                     season: this.year(),
                     round: this.integer(),
-                    DriverStandings: v.array(this.driverStanding()),
+                    DriverStandings: z.array(this.driverStanding()),
                 })),
             }),
         });
     }
 
-    public lapsResponse(): ValidatorFunc<LapsResponse> {
+    public lapsResponse(): z.ZodType<LapsResponse> {
         return this.apiResponse({
-            RaceTable: v.object({
-                Races: v.array(v.intersect(
-                    this.race(),
-                    v.object({
-                        Laps: v.array(this.lap()),
+            RaceTable: z.object({
+                Races: z.array(
+                    this.race().extend({
+                        Laps: z.array(this.lap()),
                     }),
-                )),
+                ),
             }),
         });
     }
 
-    public pitStopsResponse(): ValidatorFunc<PitStopsResponse> {
+    public pitStopsResponse(): z.ZodType<PitStopsResponse> {
         return this.apiResponse({
-            RaceTable: v.object({
-                Races: v.array(v.intersect(
-                    this.race(),
-                    v.object({
-                        PitStops: v.array(this.pitStop()),
+            RaceTable: z.object({
+                Races: z.array(
+                    this.race().extend({
+                        PitStops: z.array(this.pitStop()),
                     }),
-                )),
+                ),
             }),
         });
     }
 
-    public qualifyingResultsResponse(): ValidatorFunc<QualifyingResultsResponse> {
+    public qualifyingResultsResponse(): z.ZodType<QualifyingResultsResponse> {
         return this.apiResponse({
-            RaceTable: v.object({
-                Races: v.array(v.intersect(
-                    this.race(),
-                    v.object({
-                        QualifyingResults: v.array(this.qualifyingResult()),
+            RaceTable: z.object({
+                Races: z.array(
+                    this.race().extend({
+                        QualifyingResults: z.array(this.qualifyingResult()),
                     }),
-                )),
+                ),
             }),
         });
     }
 
-    public racesResponse(): ValidatorFunc<RacesResponse> {
+    public racesResponse(): z.ZodType<RacesResponse> {
         return this.apiResponse({
-            RaceTable: v.object({
-                Races: v.array(this.race()),
+            RaceTable: z.object({
+                Races: z.array(this.race()),
             }),
         });
     }
 
-    public resultsResponse(): ValidatorFunc<ResultsResponse> {
+    public resultsResponse(): z.ZodType<ResultsResponse> {
         return this.apiResponse({
-            RaceTable: v.object({
-                Races: v.array(v.intersect(
-                    this.race(),
-                    v.object({
-                        Results: v.array(this.result()),
+            RaceTable: z.object({
+                Races: z.array(
+                    this.race().extend({
+                        Results: z.array(this.result()),
                     }),
-                )),
+                ),
             }),
         });
     }
 
-    public seasonsResponse(): ValidatorFunc<SeasonsResponse> {
+    public seasonsResponse(): z.ZodType<SeasonsResponse> {
         return this.apiResponse({
-            SeasonTable: v.object({
-                Seasons: v.array(this.season()),
+            SeasonTable: z.object({
+                Seasons: z.array(this.season()),
             }),
         });
     }
 
-    public sprintResultsResponse(): ValidatorFunc<SprintResultsResponse> {
+    public sprintResultsResponse(): z.ZodType<SprintResultsResponse> {
         return this.apiResponse({
-            RaceTable: v.object({
-                Races: v.array(v.intersect(
-                    this.race(),
-                    v.object({
-                        SprintResults: v.array(this.sprintResult()),
+            RaceTable: z.object({
+                Races: z.array(
+                    this.race().extend({
+                        SprintResults: z.array(this.sprintResult()),
                     }),
-                )),
+                ),
             }),
         });
     }
 
-    public statusesResponse(): ValidatorFunc<StatusesResponse> {
+    public statusesResponse(): z.ZodType<StatusesResponse> {
         return this.apiResponse({
-            StatusTable: v.object({
-                Status: v.array(this.status()),
+            StatusTable: z.object({
+                Status: z.array(this.status()),
             }),
         });
     }
 
     // Models
 
-    protected averageSpeed(): ValidatorFunc<AverageSpeedApiData> {
-        return v.object({
-            units: v.string(),
+    protected averageSpeed(): z.ZodType<AverageSpeedApiData> {
+        return z.object({
+            units: z.string(),
             speed: this.integer(),
         });
     }
 
-    protected circuit(): ValidatorFunc<CircuitApiData> {
-        return v.object({
-            circuitId: v.string(),
-            url: v.string(),
-            circuitName: v.string(),
+    protected circuit(): z.ZodType<CircuitApiData> {
+        return z.object({
+            circuitId: z.string(),
+            url: z.string(),
+            circuitName: z.string(),
             Location: this.location(),
         });
     }
 
-    protected team(): ValidatorFunc<ConstructorApiData> {
-        return v.object({
-            constructorId: v.optional(v.string()),
-            url: v.optional(v.string()),
-            name: v.string(),
-            nationality: v.optional(v.string()),
+    protected team(): z.ZodType<ConstructorApiData> {
+        return z.object({
+            constructorId: z.optional(z.string()),
+            url: z.optional(z.string()),
+            name: z.string(),
+            nationality: z.optional(z.string()),
         });
     }
 
-    protected teamStanding(): ValidatorFunc<ConstructorStandingApiData> {
-        return v.object({
-            position: v.optional(this.integer()),
-            positionText: v.string(),
+    protected teamStanding(): z.ZodType<ConstructorStandingApiData> {
+        return z.object({
+            position: z.optional(this.integer()),
+            positionText: z.string(),
             points: this.integer(),
             wins: this.integer(),
             Constructor: this.team(),
         });
     }
 
-    protected dateTime(): ValidatorFunc<DateTimeApiData> {
-        return v.object({
+    protected dateTime(): z.ZodType<DateTimeApiData> {
+        return z.object({
             date: this.date(),
-            time: v.string({ pattern: /^\d{2}:\d{2}:\d{2}Z$/u }),
+            time: z.string().regex(/^\d{2}:\d{2}:\d{2}Z$/u),
         });
     }
 
-    protected driver(): ValidatorFunc<DriverApiData> {
-        return v.object({
-            driverId: v.string(),
-            url: v.string(),
-            givenName: v.string(),
-            familyName: v.string(),
+    protected driver(): z.ZodType<DriverApiData> {
+        return z.object({
+            driverId: z.string(),
+            url: z.string(),
+            givenName: z.string(),
+            familyName: z.string(),
             dateOfBirth: this.date(),
-            nationality: v.string(),
-            permanentNumber: v.optional(this.integer()),
-            code: v.optional(v.string()),
+            nationality: z.string(),
+            permanentNumber: z.optional(this.integer()),
+            code: z.optional(z.string()),
         });
     }
 
-    protected driverStanding(): ValidatorFunc<DriverStandingApiData> {
-        return v.object({
-            position: v.optional(this.integer()),
-            positionText: v.string(),
+    protected driverStanding(): z.ZodType<DriverStandingApiData> {
+        return z.object({
+            position: z.optional(this.integer()),
+            positionText: z.string(),
             points: this.integer(),
             wins: this.integer(),
             Driver: this.driver(),
-            Constructors: v.array(this.team()),
+            Constructors: z.array(this.team()),
         });
     }
 
-    protected fastestLap(): ValidatorFunc<FastestLapApiData> {
-        return v.object({
+    protected fastestLap(): z.ZodType<FastestLapApiData> {
+        return z.object({
             rank: this.integer(),
             lap: this.integer(),
             Time: this.fastestLapTime(),
-            AverageSpeed: v.optional(this.averageSpeed()),
+            AverageSpeed: z.optional(this.averageSpeed()),
         });
     }
 
-    protected fastestLapTime(): ValidatorFunc<FastestLapTimeApiData> {
-        return v.object({
-            time: v.string(), // TODO format
+    protected fastestLapTime(): z.ZodType<FastestLapTimeApiData> {
+        return z.object({
+            time: z.string(), // TODO format
         });
     }
 
-    protected finishingTime(): ValidatorFunc<FinishingTimeApiData> {
-        return v.object({
+    protected finishingTime(): z.ZodType<FinishingTimeApiData> {
+        return z.object({
             millis: this.integer(),
-            time: v.string(), // TODO format
+            time: z.string(), // TODO format
         });
     }
 
-    protected lap(): ValidatorFunc<LapApiData> {
-        return v.object({
+    protected lap(): z.ZodType<LapApiData> {
+        return z.object({
             number: this.integer(),
-            Timings: v.array(this.timing()),
+            Timings: z.array(this.timing()),
         });
     }
 
-    protected location(): ValidatorFunc<LocationApiData> {
-        return v.object({
+    protected location(): z.ZodType<LocationApiData> {
+        return z.object({
             lat: this.decimal(),
             long: this.decimal(),
-            locality: v.string(),
-            country: v.string(),
+            locality: z.string(),
+            country: z.string(),
         });
     }
 
-    protected pitStop(): ValidatorFunc<PitStopApiData> {
-        return v.object({
-            driverId: v.string(),
-            lap: v.optional(this.integer()),
-            stop: v.optional(this.integer()),
-            time: v.optional(v.string()), // TODO idk what the format is
+    protected pitStop(): z.ZodType<PitStopApiData> {
+        return z.object({
+            driverId: z.string(),
+            lap: z.optional(this.integer()),
+            stop: z.optional(this.integer()),
+            time: z.optional(z.string()), // TODO idk what the format is
         });
     }
 
-    protected qualifyingResult(): ValidatorFunc<QualifyingResultApiData> {
-        return v.object({
+    protected qualifyingResult(): z.ZodType<QualifyingResultApiData> {
+        return z.object({
             number: this.integer(),
-            position: v.optional(this.integer()),
+            position: z.optional(this.integer()),
             Driver: this.driver(),
             Constructor: this.team(),
-            Q1: v.optional(v.string()),
-            Q2: v.optional(v.string()),
-            Q3: v.optional(v.string()),
+            Q1: z.optional(z.string()),
+            Q2: z.optional(z.string()),
+            Q3: z.optional(z.string()),
         });
     }
 
-    protected race(): ObjectValidatorFunc<RaceApiData> {
-        return v.object({
+    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+    protected race() {
+        return z.object({
             season: this.year(),
             round: this.integer(),
-            url: v.optional(v.string()),
-            raceName: v.string(),
+            url: z.optional(z.string()),
+            raceName: z.string(),
             Circuit: this.circuit(),
             date: this.date(),
-            time: v.optional(v.string()), // TODO: Format
-            FirstPractice: v.optional(this.dateTime()),
-            SecondPractice: v.optional(this.dateTime()),
-            ThirdPractice: v.optional(this.dateTime()),
-            Qualifying: v.optional(this.dateTime()),
-            Sprint: v.optional(this.dateTime()),
-            SprintQualifying: v.optional(this.dateTime()),
-            SprintShootout: v.optional(this.dateTime()),
+            time: z.optional(z.string()), // TODO: Format
+            FirstPractice: z.optional(this.dateTime()),
+            SecondPractice: z.optional(this.dateTime()),
+            ThirdPractice: z.optional(this.dateTime()),
+            Qualifying: z.optional(this.dateTime()),
+            Sprint: z.optional(this.dateTime()),
+            SprintQualifying: z.optional(this.dateTime()),
+            SprintShootout: z.optional(this.dateTime()),
         });
     }
 
-    protected result(): ValidatorFunc<ResultApiData> {
-        return v.object({
+    protected result(): z.ZodType<ResultApiData> {
+        return z.object({
             number: this.integer(),
             position: this.integer(),
-            positionText: v.string(),
+            positionText: z.string(),
             points: this.integer(),
             Driver: this.driver(),
-            Constructor: v.optional(this.team()),
-            grid: v.optional(this.integer()),
-            laps: v.optional(this.integer()),
-            status: v.optional(v.string()),
-            FastestLap: v.optional(this.fastestLap()),
-            Time: v.optional(this.finishingTime()),
+            Constructor: z.optional(this.team()),
+            grid: z.optional(this.integer()),
+            laps: z.optional(this.integer()),
+            status: z.optional(z.string()),
+            FastestLap: z.optional(this.fastestLap()),
+            Time: z.optional(this.finishingTime()),
         });
     }
 
-    protected season(): ValidatorFunc<SeasonApiData> {
-        return v.object({
+    protected season(): z.ZodType<SeasonApiData> {
+        return z.object({
             season: this.year(),
-            url: v.string(),
+            url: z.string(),
         });
     }
 
-    protected sprintResult(): ValidatorFunc<SprintResultApiData> {
-        return v.object({
+    protected sprintResult(): z.ZodType<SprintResultApiData> {
+        return z.object({
             number: this.integer(),
             position: this.integer(),
-            positionText: v.string(),
+            positionText: z.string(),
             points: this.integer(),
             Driver: this.driver(),
-            Constructor: v.optional(this.team()),
-            grid: v.optional(this.integer()),
-            laps: v.optional(this.integer()),
-            status: v.optional(v.string()),
-            Time: v.optional(this.finishingTime()),
-            FastestLap: v.optional(this.fastestLap()),
+            Constructor: z.optional(this.team()),
+            grid: z.optional(this.integer()),
+            laps: z.optional(this.integer()),
+            status: z.optional(z.string()),
+            Time: z.optional(this.finishingTime()),
+            FastestLap: z.optional(this.fastestLap()),
         });
     }
 
-    protected status(): ValidatorFunc<StatusApiData> {
-        return v.object({
-            statusId: v.enumValue(StatusType),
+    protected status(): z.ZodType<StatusApiData> {
+        return z.object({
+            statusId: z.enum(StatusType),
             count: this.integer(),
-            status: v.string(),
+            status: z.string(),
         });
     }
 
-    protected timing(): ValidatorFunc<TimingApiData> {
-        return v.object({
-            driverId: v.string(),
+    protected timing(): z.ZodType<TimingApiData> {
+        return z.object({
+            driverId: z.string(),
             position: this.integer(),
-            time: v.string(), // TODO: Format
+            time: z.string(), // TODO: Format
         });
     }
 
-    protected apiResponse<T extends Record<string, unknown>>(
-        dataShape: ObjectShape<T>,
-    ): ValidatorFunc<SuccessResponse<T>> {
-        return v.object({
-            MRData: v.object({
-                xmlns: v.literal(''),
-                series: v.literal('f1'),
-                url: v.string(),
+    protected apiResponse<S extends z.ZodRawShape>(
+        dataShape: S,
+    ): z.ZodType<SuccessResponse<z.infer<z.ZodObject<S>>>> {
+        // @ts-expect-error idk whats wrong
+        return z.object({
+            MRData: z.object({
+                xmlns: z.literal(''),
+                series: z.literal('f1'),
+                url: z.string(),
                 limit: this.integer(),
                 offset: this.integer(),
                 total: this.integer(),
-                ...dataShape,
-            } as ObjectShape<MRData & T>),
+            }).extend(dataShape),
         });
     }
 
-    protected year(): ValidatorFunc<`${number}`> {
-        return v.string({ pattern: /^\d{4}$/u }) as ValidatorFunc<`${number}`>;
+    protected year(): z.ZodString {
+        return z.string().regex(/^\d{4}$/u);
     }
 
-    protected integer(): ValidatorFunc<`${number}`> {
-        return v.string({ pattern: /^-?\d+$/u }) as ValidatorFunc<`${number}`>;
+    protected integer(): z.ZodString {
+        return z.string().regex(/^-?\d+$/u);
     }
 
-    protected decimal(): ValidatorFunc<`${number}`> {
-        return v.string({ pattern: /^-?\d+(\.\d+)?$/u }) as ValidatorFunc<`${number}`>;
+    protected decimal(): z.ZodString {
+        return z.string().regex(/^-?\d+(\.\d+)?$/u);
     }
 
-    protected date(): ValidatorFunc<string> {
-        return v.string({ pattern: /^\d{4}-\d{2}-\d{2}$/u });
+    protected date(): z.ZodString {
+        return z.string().regex(/^\d{4}-\d{2}-\d{2}$/u);
     }
 }
