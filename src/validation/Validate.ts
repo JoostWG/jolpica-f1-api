@@ -189,16 +189,16 @@ export class Validate {
 
     protected team(): z.ZodType<ConstructorApiData> {
         return z.object({
-            constructorId: z.optional(z.string()),
-            url: z.optional(z.string()),
+            constructorId: z.string().optional(),
+            url: z.string().optional(),
             name: z.string(),
-            nationality: z.optional(z.string()),
+            nationality: z.string().optional(),
         });
     }
 
     protected teamStanding(): z.ZodType<ConstructorStandingApiData> {
         return z.object({
-            position: z.optional(this.integer()),
+            position: this.integer().optional(),
             positionText: z.string(),
             points: this.integer(),
             wins: this.integer(),
@@ -221,14 +221,14 @@ export class Validate {
             familyName: z.string(),
             dateOfBirth: this.date(),
             nationality: z.string(),
-            permanentNumber: z.optional(this.integer()),
-            code: z.optional(z.string()),
+            permanentNumber: this.integer().optional(),
+            code: z.string().optional(),
         });
     }
 
     protected driverStanding(): z.ZodType<DriverStandingApiData> {
         return z.object({
-            position: z.optional(this.integer()),
+            position: this.integer().optional(),
             positionText: z.string(),
             points: this.integer(),
             wins: this.integer(),
@@ -242,7 +242,7 @@ export class Validate {
             rank: this.integer(),
             lap: this.integer(),
             Time: this.fastestLapTime(),
-            AverageSpeed: z.optional(this.averageSpeed()),
+            AverageSpeed: this.averageSpeed().optional(),
         });
     }
 
@@ -278,21 +278,21 @@ export class Validate {
     protected pitStop(): z.ZodType<PitStopApiData> {
         return z.object({
             driverId: z.string(),
-            lap: z.optional(this.integer()),
-            stop: z.optional(this.integer()),
-            time: z.optional(z.string()), // TODO idk what the format is
+            lap: this.integer().optional(),
+            stop: this.integer().optional(),
+            time: z.string().optional(), // TODO idk what the format is
         });
     }
 
     protected qualifyingResult(): z.ZodType<QualifyingResultApiData> {
         return z.object({
             number: this.integer(),
-            position: z.optional(this.integer()),
+            position: this.integer().optional(),
             Driver: this.driver(),
             Constructor: this.team(),
-            Q1: z.optional(z.string()),
-            Q2: z.optional(z.string()),
-            Q3: z.optional(z.string()),
+            Q1: z.string().optional(),
+            Q2: z.string().optional(),
+            Q3: z.string().optional(),
         });
     }
 
@@ -301,18 +301,18 @@ export class Validate {
         return z.object({
             season: this.year(),
             round: this.integer(),
-            url: z.optional(z.string()),
+            url: z.string().optional(),
             raceName: z.string(),
             Circuit: this.circuit(),
             date: this.date(),
-            time: z.optional(z.string()), // TODO: Format
-            FirstPractice: z.optional(this.dateTime()),
-            SecondPractice: z.optional(this.dateTime()),
-            ThirdPractice: z.optional(this.dateTime()),
-            Qualifying: z.optional(this.dateTime()),
-            Sprint: z.optional(this.dateTime()),
-            SprintQualifying: z.optional(this.dateTime()),
-            SprintShootout: z.optional(this.dateTime()),
+            time: z.string().optional(), // TODO: Format
+            FirstPractice: this.dateTime().optional(),
+            SecondPractice: this.dateTime().optional(),
+            ThirdPractice: this.dateTime().optional(),
+            Qualifying: this.dateTime().optional(),
+            Sprint: this.dateTime().optional(),
+            SprintQualifying: this.dateTime().optional(),
+            SprintShootout: this.dateTime().optional(),
         });
     }
 
@@ -323,12 +323,12 @@ export class Validate {
             positionText: z.string(),
             points: this.integer(),
             Driver: this.driver(),
-            Constructor: z.optional(this.team()),
-            grid: z.optional(this.integer()),
-            laps: z.optional(this.integer()),
-            status: z.optional(z.string()),
-            FastestLap: z.optional(this.fastestLap()),
-            Time: z.optional(this.finishingTime()),
+            Constructor: this.team().optional(),
+            grid: this.integer().optional(),
+            laps: this.integer().optional(),
+            status: z.string().optional(),
+            FastestLap: this.fastestLap().optional(),
+            Time: this.finishingTime().optional(),
         });
     }
 
@@ -346,12 +346,12 @@ export class Validate {
             positionText: z.string(),
             points: this.integer(),
             Driver: this.driver(),
-            Constructor: z.optional(this.team()),
-            grid: z.optional(this.integer()),
-            laps: z.optional(this.integer()),
-            status: z.optional(z.string()),
-            Time: z.optional(this.finishingTime()),
-            FastestLap: z.optional(this.fastestLap()),
+            Constructor: this.team().optional(),
+            grid: this.integer().optional(),
+            laps: this.integer().optional(),
+            status: z.string().optional(),
+            Time: this.finishingTime().optional(),
+            FastestLap: this.fastestLap().optional(),
         });
     }
 
