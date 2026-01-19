@@ -23,7 +23,7 @@ export class Location extends Model {
     }
 
     public openStreetMapUrl(
-        zoomLevel: number = 14,
+        zoomLevel = 14,
     ): `https://www.openstreetmap.org/#map=${number}/${number}/${number}` {
         return `https://www.openstreetmap.org/#map=${zoomLevel}/${this.latitude}/${this.longitude}`;
     }
