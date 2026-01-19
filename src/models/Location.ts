@@ -22,7 +22,9 @@ export class Location extends Model {
         this.country = data.country;
     }
 
-    public openStreetMapUrl<const TZoom extends number>(zoomLevel: TZoom = 14): `https://www.openstreetmap.org/#map=${TZoom}/${number}/${number}` {
-        return `https://www.openstreetmap.org/#map=${zoomLevel}/${this.latitude}${this.longitude}`;
+    public openStreetMapUrl(
+        zoomLevel: number = 14,
+    ): `https://www.openstreetmap.org/#map=${number}/${number}/${number}` {
+        return `https://www.openstreetmap.org/#map=${zoomLevel}/${this.latitude}/${this.longitude}`;
     }
 }
